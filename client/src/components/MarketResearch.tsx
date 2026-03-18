@@ -248,7 +248,7 @@ const tenReasons = [
   },
   {
     num: "08",
-    title: "Nirmata Holdings Ecosystem = Cross-Sell Flywheel",
+    title: "AntimatterAI Ecosystem = Cross-Sell Flywheel",
     detail: "5 portfolio companies create built-in demand, production validation, reference architectures, and revenue synergies. Near-zero customer acquisition cost for initial deployments.",
   },
   {
@@ -300,10 +300,11 @@ const gtmTimeline = [
 
 const portfolioCompanies = [
   { name: "AntimatterAI", focus: "Core AI Platform", integration: "Powers all portfolio companies", icon: Brain },
-  { name: "THiNGK TaNGK (HumanOS)", focus: "Quantum OS", integration: "Atom AI + HumanOS quantum compute", icon: Sparkles },
-  { name: "RRG.bio", focus: "Stem Cells & Regen Medicine", integration: "Research automation, compliance", icon: Zap },
-  { name: "TryClinixAI", focus: "Clinical Documentation", integration: "78% reduction in documentation time", icon: Users },
+  { name: "ClinixAI", focus: "Clinical Documentation", integration: "78% reduction in documentation time", icon: Users },
   { name: "MoleculeAI", focus: "Molecular Research", integration: "AI orchestration for molecular analysis", icon: Layers },
+  { name: "Vidzee", focus: "AI Video & PropTech", integration: "Automated listing video creation at scale", icon: Sparkles },
+  { name: "ATOM Browser", focus: "AI-Native Browser", integration: "Agent capabilities baked into browsing", icon: Globe },
+  { name: "ATOM Lead Gen", focus: "AI Sales Development", integration: "Cold calls, emails, closes with AI", icon: Target },
 ];
 
 const flywheelEffects = [
@@ -896,7 +897,7 @@ export default function MarketResearch() {
         <Section>
           <div className="text-center mb-12">
             <h3 className="font-display text-3xl md:text-4xl font-bold text-white mb-3">
-              Nirmata Holdings Ecosystem
+              AntimatterAI Ecosystem
             </h3>
             <p className="text-white/50 text-lg">Integrated portfolio with built-in demand generation</p>
           </div>

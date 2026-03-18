@@ -132,7 +132,7 @@ const vehicleTerms: Record<string, { title: string; sections: { heading: string;
       {
         heading: "Vehicle Structure",
         items: [
-          "Entity: Delaware LLC (SPV) managed by Nirmata Capital Management",
+          "Entity: Delaware LLC (SPV) managed by AntimatterAI Capital Management",
           "Management Fee: 2.0% annually on committed capital",
           "Carried Interest: 20% above 8% preferred return (hurdle rate)",
           "Fund Administrator: Carta Fund Admin or Juniper Square",
@@ -150,7 +150,7 @@ const vehicleTerms: Record<string, { title: string; sections: { heading: string;
       {
         heading: "Portfolio Allocation",
         items: [
-          "Concentrated exposure across Nirmata portfolio companies",
+          "Concentrated exposure across AntimatterAI portfolio companies",
           "Co-Investment rights in follow-on rounds",
           "Diversification across MRR, Acquisition, and Hybrid monetization models",
         ],
@@ -259,7 +259,7 @@ const getDefaultFormData = (vehicleId: string): TermSheetFormData => {
 function buildMailtoBody(vehicle: TermSheetProps["vehicle"], form: TermSheetFormData): string {
   const lines = [
     `TERM SHEET — ${vehicle.name.toUpperCase()}`,
-    `Nirmata Holdings, Inc. — Series A Strategic Growth Round`,
+    `AntimatterAI, Inc. — Series A Strategic Growth Round`,
     ``,
     `--- INVESTOR INFORMATION ---`,
     `Investor Name: ${form.investorName || "(Not Provided)"}`,
@@ -282,7 +282,7 @@ function buildMailtoBody(vehicle: TermSheetProps["vehicle"], form: TermSheetForm
     ``,
     form.additionalNotes ? `--- ADDITIONAL NOTES ---\n${form.additionalNotes}` : null,
     ``,
-    `--- GENERATED VIA NIRMATA INVESTOR PORTAL ---`,
+    `--- GENERATED VIA ANTIMATTERAI INVESTOR PORTAL ---`,
     `Date: ${new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}`,
   ]
     .filter(Boolean)
@@ -384,7 +384,7 @@ export default function TermSheet({ vehicle, onClose }: TermSheetProps) {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
               <div>
                 <p className="text-gray-500 text-xs mb-1">Company</p>
-                <p className="text-white font-semibold">Nirmata Holdings, Inc.</p>
+                <p className="text-white font-semibold">AntimatterAI, Inc.</p>
               </div>
               <div>
                 <p className="text-gray-500 text-xs mb-1">Round</p>
@@ -568,7 +568,7 @@ export default function TermSheet({ vehicle, onClose }: TermSheetProps) {
               data-testid="button-send-term-sheet"
             >
               <Send className="w-4 h-4" />
-              {sent ? "Sent! — Check Your Email Client" : "Send to Nirmata Holdings"}
+              {sent ? "Sent! — Check Your Email Client" : "Send to AntimatterAI"}
             </button>
             <button
               onClick={onClose}
