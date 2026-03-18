@@ -1,15 +1,17 @@
 import { useEffect, useRef, useState, useCallback } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import {
   Brain, HeartPulse, Atom, Video, Target, Globe, Shield, Cpu,
   ChevronDown, ArrowRight, Check, Zap, Lock, TrendingUp,
-  BarChart3, Layers, Network, X
+  BarChart3, Layers, Network, X, ExternalLink, Eye, Scale, Search, AlertTriangle
 } from "lucide-react";
 import {
   PieChart, Pie, Cell, AreaChart, Area, XAxis, YAxis,
   CartesianGrid, Tooltip, ResponsiveContainer
 } from "recharts";
 import { PerplexityAttribution } from "@/components/PerplexityAttribution";
+import TermSheet from "@/components/TermSheet";
+import MarketResearch from "@/components/MarketResearch";
 
 /* ─── COMPANY DATA (hardcoded from company-data.json) ─── */
 
@@ -21,14 +23,14 @@ const heroStats = [
 ];
 
 const products = [
-  { name: "AntimatterAI", type: "MRR", desc: "AI Design Studio — GenUI, UX, Agentic AI platform. ~100% margin. Per-user SaaS.", tam: "$50B+", cagr: "34.2%", icon: "brain" },
-  { name: "ClinixAI", type: "MRR", desc: "AI Billing Agent — per-claim revenue, automated medical coding & RCM. $45.4B TAM.", tam: "$45.4B", cagr: "25.4%", icon: "heart-pulse" },
-  { name: "MoleculeAI", type: "Acquisition", desc: "Quantum drug discovery — VQE, ADMET profiling. Built to sell to Big Pharma for 8-9 figures.", tam: "$160B", cagr: "23.2%", icon: "atom" },
-  { name: "Vidzee", type: "Acquisition", desc: "AI video software for real estate — automates listing video creation at scale.", tam: "$185B", cagr: "16.4%", icon: "video" },
-  { name: "ATOM Lead Gen", type: "MRR", desc: "AI SDR agent — cold calls, emails, closes with real-time sentiment analysis.", tam: "$37.5B", cagr: "28.3%", icon: "target" },
-  { name: "ATOM Browser", type: "Hybrid", desc: "AI-native browser challenging Chrome — agent capabilities baked in.", tam: "$76.8B", cagr: "32.8%", icon: "globe" },
-  { name: "Red Team ATOM", type: "MRR", desc: "Adversarial AI security testing. SOC2 compliant, post-quantum cryptography.", tam: "$15.2B", cagr: "36.7%", icon: "shield" },
-  { name: "ATOM LLM", type: "Hybrid", desc: "Proprietary LLM trained on deployment data — moat deepens with every customer.", tam: "$199B", cagr: "43.8%", icon: "cpu" },
+  { name: "AntimatterAI", type: "MRR", desc: "AI Design Studio — GenUI, UX, Agentic AI platform. ~100% margin. Per-user SaaS.", tam: "$50B+", cagr: "34.2%", icon: "brain", url: "https://www.antimatterai.com" },
+  { name: "ClinixAI", type: "MRR", desc: "AI Billing Agent — per-claim revenue, automated medical coding & RCM. $45.4B TAM.", tam: "$45.4B", cagr: "25.4%", icon: "heart-pulse", url: "https://www.antimatterai.com/clinix" },
+  { name: "MoleculeAI", type: "Acquisition", desc: "Quantum drug discovery — VQE, ADMET profiling. Built to sell to Big Pharma for 8-9 figures.", tam: "$160B", cagr: "23.2%", icon: "atom", url: "https://www.antimatterai.com" },
+  { name: "Vidzee", type: "Acquisition", desc: "AI video software for real estate — automates listing video creation at scale.", tam: "$185B", cagr: "16.4%", icon: "video", url: "https://www.antimatterai.com" },
+  { name: "ATOM Lead Gen", type: "MRR", desc: "AI SDR agent — cold calls, emails, closes with real-time sentiment analysis.", tam: "$37.5B", cagr: "28.3%", icon: "target", url: "https://www.antimatterai.com/agentic-ai" },
+  { name: "ATOM Browser", type: "Hybrid", desc: "AI-native browser challenging Chrome — agent capabilities baked in.", tam: "$76.8B", cagr: "32.8%", icon: "globe", url: "https://www.antimatterai.com" },
+  { name: "Red Team ATOM", type: "MRR", desc: "Adversarial AI security testing. SOC2 compliant, post-quantum cryptography.", tam: "$15.2B", cagr: "36.7%", icon: "shield", url: "https://www.antimatterai.com/enterprise-ai" },
+  { name: "ATOM LLM", type: "Hybrid", desc: "Proprietary LLM trained on deployment data — moat deepens with every customer.", tam: "$199B", cagr: "43.8%", icon: "cpu", url: "https://www.antimatterai.com/enterprise-ai" },
 ];
 
 const investmentOptions = [
@@ -76,6 +78,18 @@ const revenueDetails = [
   { label: "Monthly Recurring", pct: 55, color: "#00FFB2", items: ["AntimatterAI SaaS", "ClinixAI Per-Claim", "ATOM Lead Gen", "Red Team Contracts"] },
   { label: "Acquisition & Licensing", pct: 25, color: "#7B61FF", items: ["MoleculeAI → Big Pharma", "Vidzee → PropTech", "IP Licensing"] },
   { label: "Platform + Compute", pct: 20, color: "#00D4FF", items: ["Nervous System Licensing", "Per-User Compute", "ATOM LLM API", "Akamai ~100% Margin"] },
+];
+
+/* ─── ATOM SPINE DATA ─── */
+const spineNodes = [
+  { name: "AntimatterAI", tam: "$50B+", cagr: "34.2%", desc: "AI Design & Agentic Platform", url: "https://www.antimatterai.com", icon: Brain },
+  { name: "ClinixAI", tam: "$45.4B", cagr: "25.4%", desc: "Healthcare RCM & Billing AI", url: "https://www.antimatterai.com/clinix", icon: HeartPulse },
+  { name: "MoleculeAI", tam: "$160B", cagr: "23.2%", desc: "Quantum Drug Discovery", url: "https://www.antimatterai.com", icon: Atom },
+  { name: "Vidzee", tam: "$185B", cagr: "16.4%", desc: "AI Video & PropTech", url: "https://www.antimatterai.com", icon: Video },
+  { name: "ATOM Lead Gen", tam: "$37.5B", cagr: "28.3%", desc: "AI Sales Development", url: "https://www.antimatterai.com/agentic-ai", icon: Target },
+  { name: "ATOM Browser", tam: "$76.8B", cagr: "32.8%", desc: "AI-Native Browser", url: "https://www.antimatterai.com", icon: Globe },
+  { name: "Red Team ATOM", tam: "$15.2B", cagr: "36.7%", desc: "AI Security Testing", url: "https://www.antimatterai.com/enterprise-ai", icon: Shield },
+  { name: "ATOM LLM", tam: "$199B", cagr: "43.8%", desc: "Proprietary Language Model", url: "https://www.antimatterai.com/enterprise-ai", icon: Cpu },
 ];
 
 /* ─── ICON MAP ─── */
@@ -230,11 +244,114 @@ function formatCurrency(n: number): string {
   return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(n);
 }
 
+/* ─── NAVBAR COMPONENT ─── */
+function Navbar({ scrollTo }: { scrollTo: (id: string) => void }) {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled ? "navbar-glass py-3" : "py-5 bg-transparent"
+      }`}
+      data-testid="navbar"
+    >
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+        {/* Logo */}
+        <button onClick={() => scrollTo("hero")} className="flex items-center gap-3 group" data-testid="navbar-logo">
+          <img src="/antimatter-logo.svg" alt="AntimatterAI" className="h-7 md:h-8 transition-opacity group-hover:opacity-80" />
+        </button>
+
+        {/* Nav Links - desktop */}
+        <div className="hidden md:flex items-center gap-8">
+          {[
+            { label: "Thesis", id: "thesis" },
+            { label: "Portfolio", id: "portfolio" },
+            { label: "Research", id: "market-research" },
+            { label: "Investment", id: "investment" },
+            { label: "Returns", id: "roi" },
+          ].map((item) => (
+            <button
+              key={item.id}
+              onClick={() => scrollTo(item.id)}
+              className="text-sm text-gray-400 hover:text-white transition-colors font-medium"
+              data-testid={`nav-${item.id}`}
+            >
+              {item.label}
+            </button>
+          ))}
+        </div>
+
+        {/* CTA */}
+        <button
+          onClick={() => scrollTo("investment")}
+          className="px-5 py-2 text-sm font-semibold rounded-lg transition-all hover:brightness-110"
+          style={{
+            background: "linear-gradient(135deg, #00FFB2, #00cc8e)",
+            color: "#0a0e14",
+          }}
+          data-testid="nav-invest-now"
+        >
+          Invest Now
+        </button>
+      </div>
+    </nav>
+  );
+}
+
+/* ─── ATOM SPINE NODE COMPONENT ─── */
+function SpineNode({ node, index, side }: { node: typeof spineNodes[0]; index: number; side: "left" | "right" }) {
+  const NodeIcon = node.icon;
+  const isLeft = side === "left";
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: isLeft ? -30 : 30 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.08, duration: 0.5 }}
+      className={`flex items-center gap-4 ${isLeft ? "flex-row-reverse text-right" : ""}`}
+    >
+      <a
+        href={node.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block glass rounded-xl p-4 md:p-5 w-[260px] md:w-[300px] animate-node-breathe hover:border-primary/50 transition-colors group cursor-pointer"
+        style={{ animationDelay: `${index * 0.3}s` }}
+        data-testid={`spine-node-${node.name.toLowerCase().replace(/\s/g, "-")}`}
+      >
+        <div className={`flex items-center gap-3 mb-2 ${isLeft ? "justify-end" : ""}`}>
+          <NodeIcon className="w-5 h-5 text-primary" />
+          <h4 className="font-display font-bold text-sm md:text-base text-white">{node.name}</h4>
+          <ExternalLink className="w-3 h-3 text-gray-600 group-hover:text-primary transition-colors" />
+        </div>
+        <p className="text-xs text-gray-500 mb-2">{node.desc}</p>
+        <div className={`flex gap-4 text-xs ${isLeft ? "justify-end" : ""}`}>
+          <span>
+            <span className="text-gray-500">TAM: </span>
+            <span className="text-primary font-bold">{node.tam}</span>
+          </span>
+          <span>
+            <span className="text-gray-500">CAGR: </span>
+            <span className="text-white font-semibold">{node.cagr}</span>
+          </span>
+        </div>
+      </a>
+    </motion.div>
+  );
+}
+
 /* ─── MAIN HOME PAGE ─── */
 export default function Home() {
   const [expandedOption, setExpandedOption] = useState<string | null>(null);
   const [showComparison, setShowComparison] = useState(false);
   const [investAmount, setInvestAmount] = useState(500000);
+  const [termSheetVehicle, setTermSheetVehicle] = useState<string | null>(null);
 
   const scrollTo = useCallback((id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -250,8 +367,18 @@ export default function Home() {
     { year: "Year 5", value: investAmount * 10 },
   ];
 
+  const openTermSheet = useCallback((vehicleId: string) => {
+    setExpandedOption(null);
+    setTermSheetVehicle(vehicleId);
+  }, []);
+
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+
+      {/* ═══════════════════════════════════════════
+          STICKY NAVBAR
+          ═══════════════════════════════════════════ */}
+      <Navbar scrollTo={scrollTo} />
 
       {/* ════════════════════════════════════════════════════
           1. HERO SECTION
@@ -277,15 +404,21 @@ export default function Home() {
             </span>
           </motion.div>
 
-          {/* Title */}
-          <motion.h1
+          {/* Logo + Title */}
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight gradient-text mb-6"
+            className="mb-6"
           >
-            NIRMATA HOLDINGS
-          </motion.h1>
+            <div className="flex items-center justify-center gap-3 mb-3">
+              <span className="text-3xl">⚛</span>
+              <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight gradient-text">
+                NIRMATA HOLDINGS
+              </h1>
+            </div>
+            <p className="text-xs uppercase tracking-[0.3em] text-gray-500 font-medium">A Nirmata Holdings Company · Powered by AntimatterAI</p>
+          </motion.div>
 
           {/* Subtitle */}
           <motion.p
@@ -398,32 +531,88 @@ export default function Home() {
       </Section>
 
       {/* ════════════════════════════════════════════════════
-          3. HYPE VIDEO SECTION
+          3. CINEMATIC VIDEO SECTION (REPLACES YOUTUBE EMBED)
           ════════════════════════════════════════════════════ */}
       <Section id="video" className="py-20 md:py-28">
-        <div className="max-w-5xl mx-auto text-center">
-          <p className="font-display text-2xl md:text-4xl font-bold mb-12 text-foreground">
-            We Don't Build Tools.{" "}
-            <span className="gradient-text">We Build Infrastructure.</span>
-          </p>
+        <div className="max-w-5xl mx-auto">
+          <div className="relative rounded-2xl overflow-hidden glow-combined border border-purple-500/20">
+            <div className="animate-cinematic-gradient relative" style={{ minHeight: "420px" }}>
+              {/* Glow orbs */}
+              <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-purple-600/10 blur-[80px]" />
+              <div className="absolute bottom-1/4 right-1/4 w-48 h-48 rounded-full bg-teal-500/10 blur-[60px]" />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-purple-800/5 blur-[100px]" />
 
-          <div className="relative rounded-2xl overflow-hidden glow-teal-strong border border-primary/20">
-            <div className="aspect-video">
-              <iframe
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                title="Nirmata Holdings — Vision"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="w-full h-full"
-                data-testid="video-embed"
-              />
+              {/* Floating particles */}
+              {[...Array(8)].map((_, i) => (
+                <div
+                  key={i}
+                  className="absolute w-1 h-1 rounded-full bg-primary/40 animate-float-particle"
+                  style={{
+                    left: `${15 + i * 10}%`,
+                    top: `${60 + (i % 3) * 10}%`,
+                    animationDelay: `${i * 0.7}s`,
+                    animationDuration: `${4 + i * 0.5}s`,
+                  }}
+                />
+              ))}
+
+              {/* Content */}
+              <div className="relative z-10 flex flex-col items-center justify-center h-full py-16 md:py-24 px-6 text-center">
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="text-xs uppercase tracking-[0.4em] text-purple-300/60 mb-4"
+                >
+                  The Cinematic Manifesto
+                </motion.p>
+
+                <motion.h3
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1 }}
+                  className="font-display text-3xl md:text-5xl lg:text-6xl font-bold mb-6 gradient-text-purple"
+                >
+                  WAR ROOM CREED — DOMINION
+                </motion.h3>
+
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 }}
+                  className="text-lg md:text-xl text-gray-300/80 italic max-w-xl mb-10 leading-relaxed"
+                >
+                  "Every empire runs on energy. Ours runs on inevitability."
+                </motion.p>
+
+                <motion.a
+                  href="https://www.antimatterai.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.4 }}
+                  className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg font-semibold text-sm transition-all hover:brightness-110"
+                  style={{
+                    background: "linear-gradient(93.92deg, #8587e3 -13.51%, #4c4dac 40.91%, #696aac 113.69%)",
+                    color: "#fff",
+                  }}
+                  data-testid="button-watch-film"
+                >
+                  Watch Full Film
+                  <ArrowRight className="w-4 h-4" />
+                </motion.a>
+              </div>
             </div>
           </div>
         </div>
       </Section>
 
       {/* ════════════════════════════════════════════════════
-          4. PORTFOLIO / PRODUCTS SECTION
+          4. PORTFOLIO / PRODUCTS SECTION (WITH EXPLORE LINKS)
           ════════════════════════════════════════════════════ */}
       <Section id="portfolio" className="py-24 md:py-32 max-w-6xl mx-auto">
         <div className="flex items-center gap-4 mb-4">
@@ -456,15 +645,27 @@ export default function Home() {
                   <TypeBadge type={product.type} />
                 </div>
                 <p className="text-muted-foreground text-sm mb-4 leading-relaxed">{product.desc}</p>
-                <div className="flex gap-6 text-sm">
-                  <div>
-                    <span className="text-muted-foreground">TAM:</span>{" "}
-                    <span className="text-primary font-semibold">{product.tam}</span>
+                <div className="flex items-center justify-between">
+                  <div className="flex gap-6 text-sm">
+                    <div>
+                      <span className="text-muted-foreground">TAM:</span>{" "}
+                      <span className="text-primary font-semibold">{product.tam}</span>
+                    </div>
+                    <div>
+                      <span className="text-muted-foreground">CAGR:</span>{" "}
+                      <span className="text-foreground font-semibold">{product.cagr}</span>
+                    </div>
                   </div>
-                  <div>
-                    <span className="text-muted-foreground">CAGR:</span>{" "}
-                    <span className="text-foreground font-semibold">{product.cagr}</span>
-                  </div>
+                  <a
+                    href={product.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-sm text-primary font-medium hover:text-primary/80 transition-colors"
+                    data-testid={`link-explore-${product.name.toLowerCase().replace(/\s/g, "-")}`}
+                  >
+                    Explore
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </a>
                 </div>
               </motion.div>
             );
@@ -473,7 +674,7 @@ export default function Home() {
       </Section>
 
       {/* ════════════════════════════════════════════════════
-          5. ATOM ARCHITECTURE SECTION
+          5. ATOM SPINE/BRAIN TAM VISUALIZATION
           ════════════════════════════════════════════════════ */}
       <Section id="atom" className="py-24 md:py-32 max-w-6xl mx-auto">
         <div className="flex items-center gap-4 mb-4">
@@ -485,62 +686,104 @@ export default function Home() {
         </p>
 
         <div className="relative flex flex-col items-center">
-          {/* Architecture diagram */}
-          <div className="relative w-full max-w-4xl mx-auto" style={{ minHeight: "400px" }}>
-            {/* Center node */}
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
-              <div className="w-28 h-28 rounded-full bg-primary/20 border-2 border-primary flex items-center justify-center animate-pulse-glow">
-                <div className="text-center">
-                  <Cpu className="w-6 h-6 text-primary mx-auto mb-1" />
-                  <span className="font-display font-bold text-xs text-primary">ATOM CORE</span>
-                </div>
+          {/* ATOM CORE brain node at top */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="relative z-10 mb-8"
+          >
+            <div className="w-32 h-32 md:w-36 md:h-36 rounded-full bg-primary/10 border-2 border-primary flex items-center justify-center animate-spine-pulse">
+              <div className="text-center">
+                <Cpu className="w-8 h-8 text-primary mx-auto mb-1" />
+                <span className="font-display font-bold text-sm text-primary">ATOM CORE</span>
+                <p className="text-[10px] text-gray-500 mt-0.5">Neural Hub</p>
               </div>
             </div>
+          </motion.div>
 
-            {/* SVG connection lines */}
-            <svg className="absolute inset-0 w-full h-full" viewBox="0 0 800 400" fill="none">
-              {/* Left connections */}
-              <line x1="400" y1="200" x2="120" y2="60" stroke="hsl(168,100%,40%)" strokeWidth="1" strokeDasharray="6 4" className="animate-dash" opacity="0.4" />
-              <line x1="400" y1="200" x2="80" y2="160" stroke="hsl(168,100%,40%)" strokeWidth="1" strokeDasharray="6 4" className="animate-dash" opacity="0.4" />
-              <line x1="400" y1="200" x2="80" y2="260" stroke="hsl(168,100%,40%)" strokeWidth="1" strokeDasharray="6 4" className="animate-dash" opacity="0.4" />
-              <line x1="400" y1="200" x2="120" y2="350" stroke="hsl(168,100%,40%)" strokeWidth="1" strokeDasharray="6 4" className="animate-dash" opacity="0.4" />
-              {/* Right connections */}
-              <line x1="400" y1="200" x2="680" y2="60" stroke="hsl(168,100%,40%)" strokeWidth="1" strokeDasharray="6 4" className="animate-dash" opacity="0.4" />
-              <line x1="400" y1="200" x2="720" y2="160" stroke="hsl(168,100%,40%)" strokeWidth="1" strokeDasharray="6 4" className="animate-dash" opacity="0.4" />
-              <line x1="400" y1="200" x2="720" y2="260" stroke="hsl(168,100%,40%)" strokeWidth="1" strokeDasharray="6 4" className="animate-dash" opacity="0.4" />
-              <line x1="400" y1="200" x2="680" y2="350" stroke="hsl(168,100%,40%)" strokeWidth="1" strokeDasharray="6 4" className="animate-dash" opacity="0.4" />
-            </svg>
+          {/* Spine + Nodes */}
+          <div className="relative w-full max-w-3xl">
+            {/* Central spine line */}
+            <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-1 rounded-full animate-spine-glow-line" />
 
-            {/* Left nodes */}
-            {[
-              { name: "ATOM Voice", top: "5%", left: "5%", icon: Target },
-              { name: "ATOM IntentIQ", top: "30%", left: "0%", icon: Brain },
-              { name: "ATOM Atlas", top: "55%", left: "0%", icon: Globe },
-              { name: "ATOM Lead Gen", top: "80%", left: "5%", icon: BarChart3 },
-            ].map((node, i) => (
-              <div key={`l-${i}`} className="absolute" style={{ top: node.top, left: node.left }}>
-                <div className="flex items-center gap-2 px-3 py-2 rounded-lg border border-primary/20 bg-card/80 backdrop-blur-sm hover:border-primary/50 transition-colors">
-                  <node.icon className="w-4 h-4 text-primary" />
-                  <span className="text-xs font-semibold whitespace-nowrap">{node.name}</span>
-                </div>
-              </div>
+            {/* Spine particles */}
+            {[...Array(5)].map((_, i) => (
+              <div
+                key={i}
+                className="absolute left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-primary/60 animate-particle-rise"
+                style={{
+                  bottom: `${i * 20}%`,
+                  animationDelay: `${i * 0.6}s`,
+                  animationDuration: `${2.5 + i * 0.3}s`,
+                }}
+              />
             ))}
 
-            {/* Right nodes */}
-            {[
-              { name: "ATOM Browser", top: "5%", right: "5%", icon: Globe },
-              { name: "ATOM LLM", top: "30%", right: "0%", icon: Cpu },
-              { name: "Red Team ATOM", top: "55%", right: "0%", icon: Shield },
-              { name: "AI Design Studio", top: "80%", right: "5%", icon: Brain },
-            ].map((node, i) => (
-              <div key={`r-${i}`} className="absolute" style={{ top: node.top, right: node.right }}>
-                <div className="flex items-center gap-2 px-3 py-2 rounded-lg border border-primary/20 bg-card/80 backdrop-blur-sm hover:border-primary/50 transition-colors">
-                  <node.icon className="w-4 h-4 text-primary" />
-                  <span className="text-xs font-semibold whitespace-nowrap">{node.name}</span>
-                </div>
-              </div>
-            ))}
+            {/* Nodes alternating left/right */}
+            <div className="relative py-4">
+              {spineNodes.map((node, i) => {
+                const isLeft = i % 2 === 0;
+                return (
+                  <div
+                    key={i}
+                    className={`flex items-center mb-8 last:mb-0 ${
+                      isLeft ? "justify-start" : "justify-end"
+                    }`}
+                  >
+                    {/* Connection line */}
+                    <div
+                      className="absolute left-1/2 -translate-x-1/2 h-px"
+                      style={{
+                        width: "calc(50% - 10px)",
+                        [isLeft ? "right" : "left"]: "50%",
+                        top: `${(i * 100) / spineNodes.length + 100 / (spineNodes.length * 2)}%`,
+                      }}
+                    />
+
+                    {/* SVG dashed connection */}
+                    <svg
+                      className="absolute pointer-events-none"
+                      style={{
+                        left: isLeft ? "0" : "50%",
+                        width: "50%",
+                        top: `${i * 12.5}%`,
+                        height: "40px",
+                      }}
+                    >
+                      <line
+                        x1={isLeft ? "80%" : "0%"}
+                        y1="50%"
+                        x2={isLeft ? "50%" : "50%"}
+                        y2="50%"
+                        stroke="rgba(0, 255, 178, 0.3)"
+                        strokeWidth="1"
+                        strokeDasharray="6 4"
+                        className="animate-dash"
+                      />
+                    </svg>
+
+                    <div className={`w-full flex ${isLeft ? "pr-[52%]" : "pl-[52%]"}`}>
+                      <SpineNode node={node} index={i} side={isLeft ? "left" : "right"} />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
+
+          {/* Combined TAM at bottom */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mt-12 text-center"
+          >
+            <div className="inline-block px-10 py-5 rounded-2xl border border-primary/30 bg-primary/5 glow-teal-strong">
+              <p className="text-xs uppercase tracking-[0.2em] text-gray-500 mb-2">Combined Addressable Market</p>
+              <p className="font-display text-4xl md:text-5xl font-bold gradient-text">$700B+</p>
+            </div>
+          </motion.div>
 
           <p className="text-center text-muted-foreground mt-8 max-w-xl mx-auto">
             Customers pick their brain — <span className="text-primary font-medium">we provide the nervous system + spine.</span>
@@ -549,7 +792,12 @@ export default function Home() {
       </Section>
 
       {/* ════════════════════════════════════════════════════
-          6. INVESTMENT MATRIX SECTION
+          5.5. MARKET RESEARCH & INTELLIGENCE
+          ════════════════════════════════════════════════════ */}
+      <MarketResearch />
+
+      {/* ════════════════════════════════════════════════════
+          6. INVESTMENT MATRIX SECTION (WITH TERM SHEET BUTTONS)
           ════════════════════════════════════════════════════ */}
       <Section id="investment" className="py-24 md:py-32 max-w-6xl mx-auto">
         <div className="flex items-center gap-4 mb-4">
@@ -581,6 +829,7 @@ export default function Home() {
                   <th className="text-left p-4 font-semibold text-muted-foreground">Target Return</th>
                   <th className="text-left p-4 font-semibold text-muted-foreground">Lockup</th>
                   <th className="text-left p-4 font-semibold text-muted-foreground">Risk</th>
+                  <th className="text-left p-4 font-semibold text-muted-foreground">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -600,6 +849,16 @@ export default function Home() {
                         {opt.riskLevel}
                       </span>
                     </td>
+                    <td className="p-4">
+                      <button
+                        onClick={() => openTermSheet(opt.id)}
+                        className="text-xs px-3 py-1.5 rounded-lg font-semibold transition-all hover:brightness-110"
+                        style={{ backgroundColor: `${opt.color}20`, color: opt.color, border: `1px solid ${opt.color}40` }}
+                        data-testid={`button-term-sheet-table-${opt.id}`}
+                      >
+                        Build Term Sheet →
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -612,8 +871,7 @@ export default function Home() {
               <motion.div
                 key={opt.id}
                 whileHover={{ scale: 1.02 }}
-                className="glass rounded-xl overflow-hidden transition-all duration-300 cursor-pointer group"
-                onClick={() => setExpandedOption(expandedOption === opt.id ? null : opt.id)}
+                className="glass rounded-xl overflow-hidden transition-all duration-300 group"
                 data-testid={`card-investment-${opt.id}`}
               >
                 {/* Color header bar */}
@@ -646,7 +904,7 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div className="space-y-1.5">
+                  <div className="space-y-1.5 mb-5">
                     {opt.features.slice(0, 3).map((f, fi) => (
                       <div key={fi} className="flex items-center gap-2 text-sm text-muted-foreground">
                         <Check className="w-3.5 h-3.5 text-primary flex-shrink-0" />
@@ -657,13 +915,28 @@ export default function Home() {
                       <p className="text-xs text-primary mt-1">+{opt.features.length - 3} more features</p>
                     )}
                   </div>
+
+                  {/* TERM SHEET BUTTON */}
+                  <button
+                    onClick={() => openTermSheet(opt.id)}
+                    className="w-full py-2.5 rounded-lg font-semibold text-sm transition-all hover:brightness-110 flex items-center justify-center gap-2"
+                    style={{
+                      backgroundColor: `${opt.color}15`,
+                      color: opt.color,
+                      border: `1px solid ${opt.color}30`,
+                    }}
+                    data-testid={`button-term-sheet-${opt.id}`}
+                  >
+                    Build Term Sheet
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
                 </div>
               </motion.div>
             ))}
           </div>
         )}
 
-        {/* Expanded Detail Overlay */}
+        {/* Expanded Detail Overlay (kept for backward compat) */}
         {expandedOption && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -718,9 +991,10 @@ export default function Home() {
                     </div>
                     <button
                       data-testid="button-request-term-sheet"
+                      onClick={() => openTermSheet(opt.id)}
                       className="w-full py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:brightness-110 transition-all glow-teal"
                     >
-                      Request Term Sheet
+                      Build Term Sheet →
                     </button>
                   </>
                 );
@@ -1001,6 +1275,179 @@ export default function Home() {
       </Section>
 
       {/* ════════════════════════════════════════════════════
+          11.5. OUR COVENANT — AI ETHICS SECTION
+          (Between Moats and Final CTA)
+          ════════════════════════════════════════════════════ */}
+      <Section id="covenant" className="py-24 md:py-32">
+        <div className="max-w-6xl mx-auto">
+          {/* Header */}
+          <div className="text-center mb-16">
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="text-xs uppercase tracking-[0.4em] text-purple-400/60 mb-4"
+            >
+              AI Ethics, Morals & Responsibility
+            </motion.p>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="font-display text-3xl md:text-5xl font-bold mb-4 gradient-text-purple"
+            >
+              OUR COVENANT
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-lg md:text-xl text-gray-400 font-medium"
+            >
+              Ethics Aren't a Feature. They're the Foundation.
+            </motion.p>
+          </div>
+
+          {/* Big philosophical statement */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="max-w-3xl mx-auto mb-20 text-center"
+          >
+            <p className="text-base md:text-lg text-gray-300/80 leading-relaxed italic">
+              "While others abandon their pledges when profit calls, we built our ethics into the architecture — not as constraints, but as competitive advantages. Responsible AI isn't a compliance checkbox. It's the nervous system's immune response."
+            </p>
+          </motion.div>
+
+          {/* THE INDUSTRY vs. US */}
+          <div className="mb-20">
+            <h3 className="font-display text-xl md:text-2xl font-bold text-center mb-10">
+              <span className="text-gray-500">THE INDUSTRY</span>
+              <span className="text-gray-600 mx-4">vs.</span>
+              <span className="text-primary">US</span>
+            </h3>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              {/* Industry (red) */}
+              <div className="rounded-xl border border-red-500/20 p-6 md:p-8 ethics-glow-red bg-red-500/[0.02]">
+                <div className="flex items-center gap-2 mb-5">
+                  <AlertTriangle className="w-5 h-5 text-red-400/70" />
+                  <h4 className="font-display font-bold text-red-400/80 uppercase tracking-wider text-sm">The Industry</h4>
+                </div>
+                <ul className="space-y-4">
+                  {[
+                    "Pledged safety, then raced to ship without guardrails",
+                    "Promised transparency, then black-boxed their models",
+                    "Signed ethics charters, then violated them for market share",
+                    "Built alignment teams, then dissolved them under pressure",
+                  ].map((item, i) => (
+                    <motion.li
+                      key={i}
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.1 }}
+                      className="flex items-start gap-3 text-sm text-red-300/60 leading-relaxed"
+                    >
+                      <X className="w-4 h-4 text-red-500/50 flex-shrink-0 mt-0.5" />
+                      {item}
+                    </motion.li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Nirmata (teal) */}
+              <div className="rounded-xl border border-primary/20 p-6 md:p-8 ethics-glow-teal bg-primary/[0.02]">
+                <div className="flex items-center gap-2 mb-5">
+                  <Shield className="w-5 h-5 text-primary/70" />
+                  <h4 className="font-display font-bold text-primary/80 uppercase tracking-wider text-sm">Nirmata / AntimatterAI</h4>
+                </div>
+                <ul className="space-y-4">
+                  {[
+                    "Ethics are architecturally embedded — not bolted on",
+                    "Explainable-by-design engineering in every ATOM agent",
+                    "Runtime regulation controls that meet audit-grade compliance",
+                    "Data provenance secured — every decision is traceable",
+                    "Red Team ATOM stress-tests our own systems adversarially",
+                    "Post-quantum cryptography protects data sovereignty",
+                  ].map((item, i) => (
+                    <motion.li
+                      key={i}
+                      initial={{ opacity: 0, x: 10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.1 }}
+                      className="flex items-start gap-3 text-sm text-primary/70 leading-relaxed"
+                    >
+                      <Check className="w-4 h-4 text-primary/60 flex-shrink-0 mt-0.5" />
+                      {item}
+                    </motion.li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* 4 Philosophical Pillars */}
+          <div className="grid md:grid-cols-2 gap-5 mb-20">
+            {[
+              {
+                title: "Autonomy With Accountability",
+                desc: "Our agents act independently but every action is logged, traceable, and reversible. Autonomy without accountability is chaos.",
+                icon: Eye,
+              },
+              {
+                title: "Transparency as Architecture",
+                desc: "We don't explain AI after the fact. Explainability is baked into the inference layer. If we can't explain it, we don't ship it.",
+                icon: Search,
+              },
+              {
+                title: "Human Sovereignty",
+                desc: "AI augments human decision-making, it doesn't replace it. The human is always the final arbiter. Period.",
+                icon: Scale,
+              },
+              {
+                title: "Adversarial Self-Testing",
+                desc: "Red Team ATOM exists to break our own systems before anyone else can. We are our own most ruthless critic.",
+                icon: Shield,
+              },
+            ].map((pillar, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                whileHover={{ scale: 1.02 }}
+                className="glass rounded-xl p-6 md:p-8 border-l-2 transition-all duration-300"
+                style={{ borderLeftColor: i % 2 === 0 ? "#8587e3" : "#00FFB2" }}
+                data-testid={`card-pillar-${i}`}
+              >
+                <pillar.icon className="w-7 h-7 mb-4" style={{ color: i % 2 === 0 ? "#8587e3" : "#00FFB2" }} />
+                <h4 className="font-display font-bold text-lg mb-3">{pillar.title}</h4>
+                <p className="text-muted-foreground text-sm leading-relaxed">{pillar.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Closing statement */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center"
+          >
+            <p className="font-display text-xl md:text-2xl font-bold text-gray-300 max-w-2xl mx-auto leading-relaxed">
+              We don't just build AI.{" "}
+              <span className="gradient-text-purple">We build AI that can look humanity in the eye.</span>
+            </p>
+          </motion.div>
+        </div>
+      </Section>
+
+      {/* ════════════════════════════════════════════════════
           12. FINAL CTA / CLOSER
           ════════════════════════════════════════════════════ */}
       <section id="cta" className="relative py-32 md:py-40 overflow-hidden">
@@ -1041,10 +1488,30 @@ export default function Home() {
           ════════════════════════════════════════════════════ */}
       <footer className="border-t border-primary/10 py-8 px-4">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-          <p>Nirmata Holdings, Inc. · Orlando, FL</p>
+          <div className="flex items-center gap-3">
+            <img src="/antimatter-logo.svg" alt="AntimatterAI" className="h-5 opacity-50" />
+            <p>Nirmata Holdings, Inc. · Orlando, FL</p>
+          </div>
           <PerplexityAttribution />
         </div>
       </footer>
+
+      {/* ════════════════════════════════════════════════════
+          TERM SHEET MODAL (full-screen overlay)
+          ════════════════════════════════════════════════════ */}
+      <AnimatePresence>
+        {termSheetVehicle && (() => {
+          const vehicle = investmentOptions.find((o) => o.id === termSheetVehicle);
+          if (!vehicle) return null;
+          return (
+            <TermSheet
+              key={vehicle.id}
+              vehicle={vehicle}
+              onClose={() => setTermSheetVehicle(null)}
+            />
+          );
+        })()}
+      </AnimatePresence>
     </div>
   );
 }

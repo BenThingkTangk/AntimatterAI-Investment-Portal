@@ -235,6 +235,162 @@
   animation: dash-flow 1.5s linear infinite;
 }
 
+/* ── SPINE VISUALIZATION ANIMATIONS ── */
+@keyframes spine-pulse {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(0, 255, 178, 0.4), 0 0 40px rgba(0, 255, 178, 0.15);
+    opacity: 1;
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(0, 255, 178, 0.7), 0 0 80px rgba(0, 255, 178, 0.3);
+    opacity: 0.9;
+  }
+}
+
+.animate-spine-pulse {
+  animation: spine-pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes spine-glow-line {
+  0%, 100% {
+    background: linear-gradient(180deg,
+      rgba(0, 255, 178, 0.8) 0%,
+      rgba(0, 255, 178, 0.3) 30%,
+      rgba(133, 135, 227, 0.3) 70%,
+      rgba(133, 135, 227, 0.8) 100%
+    );
+  }
+  50% {
+    background: linear-gradient(180deg,
+      rgba(133, 135, 227, 0.8) 0%,
+      rgba(0, 255, 178, 0.5) 30%,
+      rgba(0, 255, 178, 0.5) 70%,
+      rgba(133, 135, 227, 0.8) 100%
+    );
+  }
+}
+
+.animate-spine-glow-line {
+  animation: spine-glow-line 4s ease-in-out infinite;
+}
+
+@keyframes particle-rise {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-100%) scale(0.5);
+    opacity: 0;
+  }
+}
+
+.animate-particle-rise {
+  animation: particle-rise 3s ease-out infinite;
+}
+
+@keyframes node-breathe {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(0, 255, 178, 0.15);
+  }
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 0 20px rgba(0, 255, 178, 0.3);
+  }
+}
+
+.animate-node-breathe {
+  animation: node-breathe 3s ease-in-out infinite;
+}
+
+/* ── VIDEO SECTION GRADIENT ── */
+@keyframes cinematic-gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 50% 100%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  75% {
+    background-position: 50% 0%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-cinematic-gradient {
+  background: linear-gradient(-45deg,
+    #000000, #1a0038, #003333, #000000,
+    #0d0025, #002222, #000000
+  );
+  background-size: 400% 400%;
+  animation: cinematic-gradient 12s ease infinite;
+}
+
+/* ── ETHICS SECTION ── */
+@keyframes ethics-line-draw {
+  0% { width: 0; }
+  100% { width: 100%; }
+}
+
+.ethics-glow-red {
+  box-shadow: inset 0 0 20px rgba(239, 68, 68, 0.08);
+  border-color: rgba(239, 68, 68, 0.2);
+}
+
+.ethics-glow-teal {
+  box-shadow: inset 0 0 20px rgba(0, 255, 178, 0.08);
+  border-color: rgba(0, 255, 178, 0.2);
+}
+
+@keyframes float-particle {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0.3;
+  }
+  25% {
+    transform: translate(10px, -20px) rotate(90deg);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate(-5px, -35px) rotate(180deg);
+    opacity: 0.2;
+  }
+  75% {
+    transform: translate(15px, -15px) rotate(270deg);
+    opacity: 0.4;
+  }
+}
+
+.animate-float-particle {
+  animation: float-particle 6s ease-in-out infinite;
+}
+
+/* ── NAVBAR ── */
+.navbar-glass {
+  background: hsla(220, 20%, 4%, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid hsla(180, 50%, 15%, 0.3);
+}
+
+/* ── PURPLE ACCENT GRADIENT ── */
+.gradient-text-purple {
+  background: linear-gradient(135deg, #8587e3 0%, #4c4dac 50%, #00FFB2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glow-combined {
+  box-shadow: 0 0 30px hsla(168, 100%, 40%, 0.2), 0 0 60px hsla(250, 70%, 60%, 0.1);
+}
+
 @layer utilities {
   input[type="search"]::-webkit-search-cancel-button {
     @apply hidden;
