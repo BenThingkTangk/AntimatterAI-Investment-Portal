@@ -34,125 +34,34 @@ interface TermSheetFormData {
 
 /* ─── VEHICLE-SPECIFIC TERMS ─── */
 const vehicleTerms: Record<string, { title: string; sections: { heading: string; items: string[] }[] }> = {
-  tokenized: {
-    title: "Tokenized Equity — Digital Securities Offering",
+  equity: {
+    title: "Series A Preferred Equity — Standard VC Structure",
     sections: [
       {
-        heading: "Token Structure",
+        heading: "Equity Terms",
         items: [
-          "Token Type: ERC-1404 Restricted Security Token",
-          "Blockchain: Ethereum L2 (Polygon PoS) with Ethereum L1 settlement",
-          "Token Standard: Compliant with SEC Regulation D, Rule 506(c)",
-          "Custodian: Anchorage Digital (qualified custodian)",
+          "Pre-Money Valuation: $40M–$75M (negotiable within range)",
+          "Security: Series A Preferred Stock",
+          "Liquidation Preference: 1x non-participating",
+          "Anti-Dilution: Broad-based weighted average",
         ],
       },
       {
-        heading: "Distribution & Liquidity",
+        heading: "Governance & Rights",
         items: [
-          "Distribution Schedule: Quarterly dividend-equivalent distributions via smart contract",
-          "Secondary Market: tZERO ATS or INX regulated secondary trading",
-          "Lock-Up: 6-month holding period per SEC Reg D requirements",
-          "Transfer Restrictions: KYC/AML-verified wallets only; smart contract enforced",
-        ],
-      },
-      {
-        heading: "Governance",
-        items: [
-          "Voting Rights: 1 token = 1 vote on designated matters",
-          "Real-Time Dashboard: NAV, distributions, governance proposals accessible 24/7",
-          "Smart Contract Auditor: OpenZeppelin or CertiK",
-        ],
-      },
-    ],
-  },
-  tranche: {
-    title: "Milestone Tranches — Structured Phase Deployment",
-    sections: [
-      {
-        heading: "Phase Definitions",
-        items: [
-          "Phase 1 (40% of capital): Product-market fit validation — 3+ paying enterprise clients, $500K ARR milestone",
-          "Phase 2 (35% of capital): Growth acceleration — $2M ARR, 3 products generating revenue",
-          "Phase 3 (25% of capital): Scale & expansion — $10M ARR, IPO readiness milestones met",
-        ],
-      },
-      {
-        heading: "Milestone Criteria & Valuation Step-Ups",
-        items: [
-          "Phase 1→2 Step-Up: 1.5x valuation increase upon Phase 1 milestone achievement",
-          "Phase 2→3 Step-Up: 2.0x valuation increase upon Phase 2 milestone achievement",
-          "Verification: Independent third-party audit of milestone claims",
-          "Grace Period: 90-day cure period for missed milestones before tranche renegotiation",
+          "Board Observer Seat for lead investor ($5M+)",
+          "Pro-Rata Rights: Right to participate in subsequent rounds",
+          "Information Rights: Monthly financial reports; quarterly board decks",
+          "Major Investor Rights: Consent required for debt, M&A, new equity",
         ],
       },
       {
         heading: "Investor Protections",
         items: [
-          "Undeployed Capital: Held in escrow with independent fund administrator",
-          "Clawback: Pro-rata return of undeployed capital if milestones permanently unmet",
-          "Reporting: Monthly progress reports; quarterly financial statements",
-        ],
-      },
-    ],
-  },
-  safe: {
-    title: "SAFE + Warrant — Y Combinator Standard with Warrant Coverage",
-    sections: [
-      {
-        heading: "SAFE Terms",
-        items: [
-          "Instrument: Post-Money SAFE (Y Combinator standard)",
-          "Conversion: Converts to Preferred Stock at next Qualified Financing",
-          "MFN (Most Favored Nation): Investor receives most favorable terms of any subsequent SAFE",
-          "No Maturity Date; No Interest Accrual",
-        ],
-      },
-      {
-        heading: "Warrant Coverage",
-        items: [
-          "Warrant Coverage: 20% of SAFE investment amount",
-          "Exercise Period: 7 years from issuance",
-          "Exercise Price: Valuation cap price at SAFE conversion",
-          "Warrant Type: Detachable; exercisable independently of SAFE conversion",
-        ],
-      },
-      {
-        heading: "Conversion Mechanics",
-        items: [
-          "Qualified Financing: Minimum $5M equity raise",
-          "Conversion Price: Lower of (a) Valuation Cap or (b) Discount to next round price",
-          "Pro-Rata: Right to participate in subsequent rounds up to ownership maintenance",
-        ],
-      },
-    ],
-  },
-  spv: {
-    title: "SPV Co-Investment — Institutional Portfolio Vehicle",
-    sections: [
-      {
-        heading: "Vehicle Structure",
-        items: [
-          "Entity: Delaware LLC (SPV) managed by AntimatterAI Capital Management",
-          "Management Fee: 2.0% annually on committed capital",
-          "Carried Interest: 20% above 8% preferred return (hurdle rate)",
-          "Fund Administrator: Carta Fund Admin or Juniper Square",
-        ],
-      },
-      {
-        heading: "Reporting & Governance",
-        items: [
-          "NAV Reporting: Quarterly Net Asset Value statements",
-          "Annual Audit: Performed by independent Big 4 / regional CPA firm",
-          "K-1 Distribution: Annual Schedule K-1 for tax reporting",
-          "LPAC: Limited Partner Advisory Committee for investors >$1M",
-        ],
-      },
-      {
-        heading: "Portfolio Allocation",
-        items: [
-          "Concentrated exposure across AntimatterAI portfolio companies",
-          "Co-Investment rights in follow-on rounds",
-          "Diversification across MRR, Acquisition, and Hybrid monetization models",
+          "Drag-Along / Tag-Along: Standard provisions",
+          "Registration Rights: S-1 demand + piggyback rights",
+          "ROFR & Co-Sale: Right of first refusal on founder transfers",
+          "Protective Provisions: Approval for new classes, dividends, liquidation",
         ],
       },
     ],
@@ -163,7 +72,7 @@ const vehicleTerms: Record<string, { title: string; sections: { heading: string;
       {
         heading: "Revenue Share Structure",
         items: [
-          "Revenue Share: 5-8% of Monthly Recurring Revenue (MRR)",
+          "Revenue Share: 5-8% of ClinixAI Monthly Revenue",
           "Return Cap: 1.5x-3.0x of invested capital (negotiable based on amount)",
           "Payment Frequency: Monthly, within 15 business days of month-end",
           "Minimum Monthly Payment: 1% of outstanding balance",
@@ -172,7 +81,7 @@ const vehicleTerms: Record<string, { title: string; sections: { heading: string;
       {
         heading: "Revenue Tracking",
         items: [
-          "Revenue Verification: Real-time dashboard access to Stripe/billing metrics",
+          "Revenue Verification: Real-time dashboard access to billing metrics",
           "Audit Rights: Annual third-party revenue verification",
           "Reporting: Monthly MRR reports with cohort analysis",
         ],
@@ -183,6 +92,7 @@ const vehicleTerms: Record<string, { title: string; sections: { heading: string;
           "Non-Dilutive: No equity conversion; pure revenue-share instrument",
           "Acceleration Clause: Full repayment upon change of control at 1.0x remaining balance",
           "Subordination: Senior to equity; subordinate to secured debt",
+          "Term: 18-24 months, then converts or terminates at cap",
         ],
       },
     ],
@@ -194,15 +104,15 @@ const vehicleTerms: Record<string, { title: string; sections: { heading: string;
         heading: "Note Terms",
         items: [
           "Interest Rate: 8% per annum (simple interest)",
-          "Maturity: 24 months from issuance",
+          "Maturity: 18 months from issuance",
           "Conversion Discount: 20% to next qualified financing price",
-          "Qualified Financing Threshold: $5M minimum equity raise",
+          "Valuation Cap: $75M",
         ],
       },
       {
         heading: "Conversion Mechanics",
         items: [
-          "Automatic Conversion: Upon Qualified Financing at lower of cap or discount",
+          "Automatic Conversion: Upon Qualified Financing ($5M+ equity raise) at lower of cap or discount",
           "Optional Conversion: At maturity, investor may convert at cap or demand repayment",
           "Maturity Extension: Mutual 12-month extension option",
           "Conversion Security: Series A Preferred Stock with standard preferences",
@@ -214,6 +124,7 @@ const vehicleTerms: Record<string, { title: string; sections: { heading: string;
           "Change of Control: 2.0x repayment premium upon acquisition before conversion",
           "Negative Covenants: Restrictions on additional debt, dividends, asset sales",
           "Information Rights: Monthly financial reports; annual audited statements",
+          "Most Favored Nation: Investor receives most favorable terms of any subsequent note",
         ],
       },
     ],
@@ -224,16 +135,16 @@ const vehicleTerms: Record<string, { title: string; sections: { heading: string;
 const getDefaultFormData = (vehicleId: string): TermSheetFormData => {
   const defaults: Partial<TermSheetFormData> = {};
   switch (vehicleId) {
-    case "safe":
+    case "equity":
       defaults.valuationCap = "$50,000,000";
-      defaults.discountRate = "20%";
+      defaults.discountRate = "";
       break;
     case "convertible":
-      defaults.valuationCap = "$50,000,000";
+      defaults.valuationCap = "$75,000,000";
       defaults.discountRate = "20%";
       break;
-    case "tokenized":
-      defaults.valuationCap = "$50,000,000";
+    case "revenue":
+      defaults.valuationCap = "";
       defaults.discountRate = "";
       break;
     default:
@@ -246,7 +157,7 @@ const getDefaultFormData = (vehicleId: string): TermSheetFormData => {
     investmentAmount: "",
     valuationCap: defaults.valuationCap || "",
     discountRate: defaults.discountRate || "",
-    boardSeat: "None",
+    boardSeat: "Observer",
     proRata: true,
     antiDilution: "Broad-Based Weighted Average",
     informationRights: true,
@@ -391,12 +302,12 @@ export default function TermSheet({ vehicle, onClose }: TermSheetProps) {
                 <p className="text-white font-semibold">Series A</p>
               </div>
               <div>
-                <p className="text-gray-500 text-xs mb-1">Target Raise</p>
-                <p className="font-semibold" style={{ color: vehicle.color }}>$25M–$50M</p>
+                <p className="text-gray-500 text-xs mb-1">Pre-Money Valuation</p>
+                <p className="font-semibold" style={{ color: vehicle.color }}>$40M–$75M</p>
               </div>
               <div>
-                <p className="text-gray-500 text-xs mb-1">Jurisdiction</p>
-                <p className="text-white font-semibold">Delaware, USA</p>
+                <p className="text-gray-500 text-xs mb-1">Headquarters</p>
+                <p className="text-white font-semibold">Atlanta, GA</p>
               </div>
             </div>
           </div>
@@ -474,30 +385,36 @@ export default function TermSheet({ vehicle, onClose }: TermSheetProps) {
               </div>
 
               {/* Valuation Cap */}
-              <div>
-                <label className="block text-xs text-gray-500 uppercase tracking-wider mb-2">Proposed Valuation Cap</label>
-                <input
-                  type="text"
-                  value={form.valuationCap}
-                  onChange={(e) => updateField("valuationCap", e.target.value)}
-                  placeholder="e.g., $50,000,000"
-                  className="w-full px-4 py-3 rounded-lg bg-white/[0.04] border border-white/10 text-white placeholder-gray-600 text-sm focus:outline-none focus:border-[#00FFB2]/50 transition-colors"
-                  data-testid="input-valuation-cap"
-                />
-              </div>
+              {vehicle.id !== "revenue" && (
+                <div>
+                  <label className="block text-xs text-gray-500 uppercase tracking-wider mb-2">
+                    {vehicle.id === "equity" ? "Proposed Pre-Money Valuation" : "Proposed Valuation Cap"}
+                  </label>
+                  <input
+                    type="text"
+                    value={form.valuationCap}
+                    onChange={(e) => updateField("valuationCap", e.target.value)}
+                    placeholder="e.g., $50,000,000"
+                    className="w-full px-4 py-3 rounded-lg bg-white/[0.04] border border-white/10 text-white placeholder-gray-600 text-sm focus:outline-none focus:border-[#00FFB2]/50 transition-colors"
+                    data-testid="input-valuation-cap"
+                  />
+                </div>
+              )}
 
-              {/* Discount Rate */}
-              <div>
-                <label className="block text-xs text-gray-500 uppercase tracking-wider mb-2">Proposed Discount Rate</label>
-                <input
-                  type="text"
-                  value={form.discountRate}
-                  onChange={(e) => updateField("discountRate", e.target.value)}
-                  placeholder="e.g., 20%"
-                  className="w-full px-4 py-3 rounded-lg bg-white/[0.04] border border-white/10 text-white placeholder-gray-600 text-sm focus:outline-none focus:border-[#00FFB2]/50 transition-colors"
-                  data-testid="input-discount-rate"
-                />
-              </div>
+              {/* Discount Rate — only for convertible */}
+              {vehicle.id === "convertible" && (
+                <div>
+                  <label className="block text-xs text-gray-500 uppercase tracking-wider mb-2">Proposed Discount Rate</label>
+                  <input
+                    type="text"
+                    value={form.discountRate}
+                    onChange={(e) => updateField("discountRate", e.target.value)}
+                    placeholder="e.g., 20%"
+                    className="w-full px-4 py-3 rounded-lg bg-white/[0.04] border border-white/10 text-white placeholder-gray-600 text-sm focus:outline-none focus:border-[#00FFB2]/50 transition-colors"
+                    data-testid="input-discount-rate"
+                  />
+                </div>
+              )}
 
               {/* Board Seat */}
               <div>
@@ -517,23 +434,25 @@ export default function TermSheet({ vehicle, onClose }: TermSheetProps) {
                 </div>
               </div>
 
-              {/* Anti-Dilution */}
-              <div className="md:col-span-2">
-                <label className="block text-xs text-gray-500 uppercase tracking-wider mb-2">Anti-Dilution Protection</label>
-                <div className="relative">
-                  <select
-                    value={form.antiDilution}
-                    onChange={(e) => updateField("antiDilution", e.target.value)}
-                    className="w-full px-4 py-3 rounded-lg bg-white/[0.04] border border-white/10 text-white text-sm focus:outline-none focus:border-[#00FFB2]/50 transition-colors appearance-none cursor-pointer"
-                    data-testid="select-anti-dilution"
-                  >
-                    <option value="Broad-Based Weighted Average" className="bg-gray-900">Broad-Based Weighted Average</option>
-                    <option value="Full Ratchet" className="bg-gray-900">Full Ratchet</option>
-                    <option value="None" className="bg-gray-900">None</option>
-                  </select>
-                  <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none" />
+              {/* Anti-Dilution — only for equity/convertible */}
+              {vehicle.id !== "revenue" && (
+                <div className="md:col-span-2">
+                  <label className="block text-xs text-gray-500 uppercase tracking-wider mb-2">Anti-Dilution Protection</label>
+                  <div className="relative">
+                    <select
+                      value={form.antiDilution}
+                      onChange={(e) => updateField("antiDilution", e.target.value)}
+                      className="w-full px-4 py-3 rounded-lg bg-white/[0.04] border border-white/10 text-white text-sm focus:outline-none focus:border-[#00FFB2]/50 transition-colors appearance-none cursor-pointer"
+                      data-testid="select-anti-dilution"
+                    >
+                      <option value="Broad-Based Weighted Average" className="bg-gray-900">Broad-Based Weighted Average</option>
+                      <option value="Full Ratchet" className="bg-gray-900">Full Ratchet</option>
+                      <option value="None" className="bg-gray-900">None</option>
+                    </select>
+                    <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none" />
+                  </div>
                 </div>
-              </div>
+              )}
 
               {/* Toggles */}
               <div className="flex flex-col gap-4 py-2">
