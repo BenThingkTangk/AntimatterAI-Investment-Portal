@@ -788,7 +788,7 @@ function QuantumSection() {
             Quantum <span className="text-[#00FFB2]">Awakening</span>
           </h2>
           <p className="text-white/50 text-lg max-w-2xl mx-auto font-['Satoshi']">
-            Ben O'Leary's philosophical foundation for the future of human-AI civilization
+            AntimatterAI's founding philosophical foundation for the future of human-AI civilization
           </p>
         </RevealDiv>
 
@@ -800,8 +800,7 @@ function QuantumSection() {
               "The paradigm-shifting new quantum world represents a holistic and interconnected perspective of reality inspired by quantum principles such as entanglement, probability, and fluidity. This worldview emphasizes that all elements — individuals, communities, political systems, technologies, and environments — are interconnected and influence each other dynamically."
             </blockquote>
             <div className="mt-6 pl-8 md:pl-12">
-              <div className="text-[#00FFB2] font-semibold font-['Satoshi']">Ben O'Leary</div>
-              <div className="text-white/40 text-sm font-['Satoshi']">Co-Founder & Chief Quantum Officer, AntimatterAI</div>
+              <div className="text-[#00FFB2] font-semibold font-['Satoshi']">AntimatterAI Founders</div>
             </div>
           </div>
         </RevealDiv>
@@ -874,7 +873,7 @@ function CompanySection() {
       color: "#00FFB2",
       bg: "from-[#00FFB2]/10 to-transparent",
       initials: "BO",
-      bio: "Visionary behind the quantum philosophy and ATOM architecture. Architect of the 25/25 vendor framework and AntimatterAI's ethical AI covenant.",
+      bio: "An Autistic Savant Visionary & Visionary behind the quantum philosophy. Architect of AntimatterAI's ethical AI covenant.",
     },
     {
       name: "Paul Wallace",
@@ -894,15 +893,7 @@ function CompanySection() {
       initials: "MB",
       bio: "Brings Fortune 500 enterprise sales execution and CMO-level market strategy. The commercial engine driving $4M+ ClinixAI pipeline.",
     },
-    {
-      name: "Jacob Mandt",
-      role: "Head of Product",
-      subtitle: "Product Architecture & UX",
-      color: "#FFD700",
-      bg: "from-[#FFD700]/10 to-transparent",
-      initials: "JM",
-      bio: "Leads product roadmap and user experience across the ATOM platform. Translates quantum philosophy into intuitive enterprise interfaces.",
-    },
+
   ];
 
   const clients = ["Lowe's", "Cognizant", "Trimble", "E2open", "Toyota", "OWASP", "Injazat"];
@@ -2254,8 +2245,7 @@ function EthicsSection() {
               "This quantum-inspired symbiosis of technology, emotion, and ethics is fundamental for humanity to adapt and keep pace with the exponential changes brought by human+AI collaboration, unlocking near-infinite possibilities by harmonizing human creativity and machine intelligence dynamically. Regarding technosocialism versus technofeudalism — technology should democratically empower all individuals with equitable access to resources, innovation, and governance guided by transparency, ethics, and collective responsibility."
             </blockquote>
             <div className="pl-8 md:pl-12">
-              <div className="text-[#8587e3] font-semibold font-['Satoshi']">Ben O'Leary</div>
-              <div className="text-white/30 text-sm font-['Satoshi']">Founder, AntimatterAI</div>
+              <div className="text-[#8587e3] font-semibold font-['Satoshi']">AntimatterAI Founders</div>
             </div>
           </div>
         </RevealDiv>
