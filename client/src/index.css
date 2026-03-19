@@ -577,3 +577,50 @@
     inset: -1px;
   }
 }
+
+/* ═══ Thesys C1 GenUI Chat Overrides ═══ */
+.c1-chat-container {
+  height: 100%;
+  overflow: hidden;
+}
+
+.c1-chat-container [data-testid],
+.c1-chat-container > div {
+  height: 100% !important;
+  max-height: 100% !important;
+}
+
+/* Dark theme overrides for Crayon UI */
+.c1-chat-container {
+  --crayon-bg: #0a0a0a;
+  --crayon-surface: #111111;
+  --crayon-border: rgba(255, 255, 255, 0.08);
+  --crayon-text: #e5e5e5;
+  --crayon-text-secondary: #888;
+  --crayon-primary: #00FFB2;
+  --crayon-primary-foreground: #000000;
+  color-scheme: dark;
+}
+
+.c1-chat-container input,
+.c1-chat-container textarea {
+  background: #111 !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #e5e5e5 !important;
+}
+
+.c1-chat-container input::placeholder,
+.c1-chat-container textarea::placeholder {
+  color: #666 !important;
+}
+
+.c1-chat-container button[type="submit"],
+.c1-chat-container [data-slot="send-button"] {
+  background: #00FFB2 !important;
+  color: #000 !important;
+}
+
+.c1-chat-container [role="presentation"],
+.c1-chat-container [data-slot="message-list"] {
+  background: transparent !important;
+}

@@ -15,6 +15,7 @@ import {
 import { PerplexityAttribution } from "@/components/PerplexityAttribution";
 import TermSheet from "@/components/TermSheet";
 import MarketResearch from "@/components/MarketResearch";
+import C1Assistant from "@/components/C1Assistant";
 
 /* ══════════════════════════════════════════════════════════════════
    DATA
@@ -1633,6 +1634,9 @@ export default function Home() {
           />
         )}
       </AnimatePresence>
+
+      {/* C1 Gen UI AI Assistant */}
+      <C1Assistant />
     </div>
   );
 }
