@@ -1017,24 +1017,6 @@ function CompanySection() {
           ))}
         </div>
 
-        {/* Complementary Skills */}
-        <RevealDiv delay={0.3} className="mb-12">
-          <div className="p-6 rounded-2xl border border-[#8587e3]/20 bg-[#8587e3]/5">
-            <h3 className="font-['Clash_Display'] font-bold text-white text-xl mb-4 text-center">Complementary Skills</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {[
-                { name: "Ben O'Leary", skill: "Vision / Architecture / Ethics", color: "#00FFB2" },
-                { name: "Paul Wallace", skill: "Enterprise Delivery / Infra / Security", color: "#8587e3" },
-                { name: "Matt Bravo", skill: "Design / UX / GenUI", color: "#00D4FF" },
-              ].map((f) => (
-                <div key={f.name} className="text-center p-4 rounded-xl border border-white/5 bg-white/2">
-                  <div className="font-['Clash_Display'] font-bold text-white text-sm mb-1">{f.name}</div>
-                  <div className="text-xs font-['Satoshi']" style={{ color: f.color }}>{f.skill}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </RevealDiv>
 
         {/* Extended Team & Advisors */}
         <RevealDiv delay={0.35} className="mb-12">
