@@ -1,26 +1,31 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageSquare, X, Sparkles, Send, Loader2, Bot, User } from "lucide-react";
+import { MessageSquare, X, Sparkles, Send, Loader2, Bot, User, Globe, Microscope, ExternalLink } from "lucide-react";
 
 interface ChatMessage {
   role: "user" | "assistant";
   content: string;
   id: string;
+  citations?: string[];
+  related?: string[];
+  model?: string;
 }
+
+type SearchMode = "quick" | "deep";
 
 // Simple markdown renderer
 function renderMarkdown(text: string): string {
   return text
     .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
     .replace(/\*(.*?)\*/g, '<em>$1</em>')
-    .replace(/`(.*?)`/g, '<code class="bg-white/10 px-1.5 py-0.5 rounded text-[#8587e3] text-xs">$1</code>')
+    .replace(/`(.*?)`/g, '<code class="bg-white/10 px-1.5 py-0.5 rounded text-[#00e6d3] text-xs">$1</code>')
     .replace(/\n\n/g, '</p><p class="mt-2.5">')
     .replace(/\n/g, '<br/>');
 }
 
 const SUGGESTIONS = [
-  "What is AntimatterAI's valuation?",
-  "Explain the ATOM platform",
+  "What is Nirmata Holdings' valuation?",
+  "Explain the ΔTOM platform",
   "What is the competitive moat?",
   "Tell me about the Series A terms",
 ];
@@ -30,6 +35,8 @@ export default function C1Assistant() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [loadingPhase, setLoadingPhase] = useState<"searching" | "reasoning">("searching");
+  const [searchMode, setSearchMode] = useState<SearchMode>("quick");
   const [threadId] = useState(() => `thread-${Date.now()}-${Math.random().toString(36).slice(2)}`);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -53,6 +60,14 @@ export default function C1Assistant() {
     }
   }, [input]);
 
+  // Cycle loading phase for deep mode
+  useEffect(() => {
+    if (!isLoading) return;
+    setLoadingPhase("searching");
+    const timer = setTimeout(() => setLoadingPhase("reasoning"), searchMode === "deep" ? 8000 : 3000);
+    return () => clearTimeout(timer);
+  }, [isLoading, searchMode]);
+
   const sendMessage = async (messageText?: string) => {
     const text = (messageText || input).trim();
     if (!text || isLoading) return;
@@ -74,14 +89,16 @@ export default function C1Assistant() {
     setInput("");
     setIsLoading(true);
 
+    const endpoint = searchMode === "deep" ? "/api/research" : "/api/chat";
+
     try {
-      const res = await fetch("/api/chat", {
+      const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           prompt: { role: "user", content: text },
           threadId,
-          responseId,
+          mode: searchMode,
         }),
       });
 
@@ -91,10 +108,13 @@ export default function C1Assistant() {
 
       const data = await res.json();
       const responseText = data.content || "I'm processing your request...";
+      const citations: string[] = data.citations || [];
+      const related: string[] = data.related || [];
+      const model: string = data.model || "sonar-pro";
 
       setMessages((prev) =>
         prev.map((m) =>
-          m.id === responseId ? { ...m, content: responseText } : m
+          m.id === responseId ? { ...m, content: responseText, citations, related, model } : m
         )
       );
     } catch (error: any) {
@@ -129,7 +149,7 @@ export default function C1Assistant() {
             exit={{ scale: 0, opacity: 0 }}
             transition={{ type: "spring", stiffness: 260, damping: 20 }}
             onClick={() => setIsOpen(true)}
-            className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-gradient-to-br from-[#8587e3] to-[#6c6eb8] text-white flex items-center justify-center shadow-[0_0_30px_rgba(133,135,227,0.3)] hover:shadow-[0_0_50px_rgba(133,135,227,0.5)] hover:scale-110 transition-all duration-300"
+            className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-gradient-to-br from-[#00e6d3] to-[#00a89e] text-white flex items-center justify-center shadow-[0_0_30px_rgba(0,230,211,0.3)] hover:shadow-[0_0_50px_rgba(0,230,211,0.5)] hover:scale-110 transition-all duration-300"
             data-testid="btn-open-ai-assistant"
             aria-label="Open AI Investment Assistant"
           >
@@ -146,22 +166,22 @@ export default function C1Assistant() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="fixed bottom-6 right-6 z-50 w-[420px] h-[600px] max-w-[calc(100vw-2rem)] max-h-[calc(100vh-4rem)] rounded-2xl overflow-hidden shadow-[0_0_60px_rgba(133,135,227,0.15)] border border-white/10 flex flex-col"
+            className="fixed bottom-6 right-6 z-50 w-[420px] h-[600px] max-w-[calc(100vw-2rem)] max-h-[calc(100vh-4rem)] rounded-2xl overflow-hidden shadow-[0_0_60px_rgba(0,230,211,0.15)] border border-white/10 flex flex-col"
             style={{ background: "#0a0a0a" }}
             data-testid="panel-ai-assistant"
           >
             {/* Header */}
             <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 bg-black/60 backdrop-blur-xl shrink-0">
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#8587e3] to-[#6c6eb8] flex items-center justify-center">
+                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#00e6d3] to-[#00a89e] flex items-center justify-center">
                   <MessageSquare className="w-4 h-4 text-black" />
                 </div>
                 <div>
                   <h3 className="text-sm font-bold text-white font-display tracking-wide">
-                    ATOM Intelligence
+                    ΔTOM AI
                   </h3>
                   <p className="text-[10px] text-gray-500 tracking-wider uppercase">
-                    Powered by Thesys C1
+                    Powered by Perplexity Sonar
                   </p>
                 </div>
               </div>
@@ -175,6 +195,36 @@ export default function C1Assistant() {
               </button>
             </div>
 
+            {/* Mode toggle */}
+            <div className="px-4 py-2 border-b border-white/5 bg-black/40 shrink-0">
+              <div className="flex items-center gap-1.5 bg-white/5 rounded-lg p-0.5">
+                <button
+                  onClick={() => setSearchMode("quick")}
+                  className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-all duration-200 ${
+                    searchMode === "quick"
+                      ? "bg-[#00e6d3]/15 text-[#00e6d3] border border-[#00e6d3]/30"
+                      : "text-gray-500 hover:text-gray-300"
+                  }`}
+                  data-testid="mode-quick"
+                >
+                  <Globe className="w-3 h-3" />
+                  Quick
+                </button>
+                <button
+                  onClick={() => setSearchMode("deep")}
+                  className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-all duration-200 ${
+                    searchMode === "deep"
+                      ? "bg-[#00e6d3]/15 text-[#00e6d3] border border-[#00e6d3]/30"
+                      : "text-gray-500 hover:text-gray-300"
+                  }`}
+                  data-testid="mode-deep"
+                >
+                  <Microscope className="w-3 h-3" />
+                  Deep Research
+                </button>
+              </div>
+            </div>
+
             {/* Messages area */}
             <div
               ref={chatBodyRef}
@@ -186,21 +236,21 @@ export default function C1Assistant() {
             >
               {messages.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full text-center px-4">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#8587e3]/20 to-[#6c6eb8]/10 flex items-center justify-center mb-4 border border-[#8587e3]/20">
-                    <Bot className="w-7 h-7 text-[#8587e3]" />
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#00e6d3]/20 to-[#00a89e]/10 flex items-center justify-center mb-4 border border-[#00e6d3]/20">
+                    <Bot className="w-7 h-7 text-[#00e6d3]" />
                   </div>
                   <h4 className="text-white text-sm font-semibold mb-1 font-display">
-                    ATOM Intelligence Assistant
+                    ΔTOM AI Assistant
                   </h4>
                   <p className="text-gray-500 text-xs leading-relaxed mb-6 max-w-[280px]">
-                    Ask me anything about AntimatterAI — our technology, valuation, competitive advantages, or investment opportunity.
+                    Ask me anything about Nirmata Holdings — powered by real-time web search and deep research.
                   </p>
                   <div className="grid grid-cols-1 gap-2 w-full">
                     {SUGGESTIONS.map((s, i) => (
                       <button
                         key={i}
                         onClick={() => sendMessage(s)}
-                        className="text-left text-xs text-gray-400 hover:text-white px-3 py-2.5 rounded-xl border border-white/5 hover:border-[#8587e3]/30 hover:bg-[#8587e3]/5 transition-all duration-200"
+                        className="text-left text-xs text-gray-400 hover:text-white px-3 py-2.5 rounded-xl border border-white/5 hover:border-[#00e6d3]/30 hover:bg-[#00e6d3]/5 transition-all duration-200"
                         data-testid={`suggestion-${i}`}
                       >
                         {s}
@@ -210,45 +260,92 @@ export default function C1Assistant() {
                 </div>
               ) : (
                 messages.map((msg) => (
-                  <div
-                    key={msg.id}
-                    className={`flex gap-3 ${msg.role === "user" ? "justify-end" : "justify-start"}`}
-                  >
-                    {msg.role === "assistant" && (
-                      <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#8587e3]/20 to-[#6c6eb8]/10 flex items-center justify-center shrink-0 mt-0.5 border border-[#8587e3]/20">
-                        <Bot className="w-3.5 h-3.5 text-[#8587e3]" />
-                      </div>
-                    )}
+                  <div key={msg.id}>
                     <div
-                      className={`max-w-[85%] rounded-2xl px-3.5 py-2.5 text-[13px] leading-relaxed ${
-                        msg.role === "user"
-                          ? "bg-gradient-to-r from-[#8587e3] via-[#4c4dac] to-[#696aac] text-white shadow-[0_0_10px_#696aac] font-medium rounded-br-md"
-                          : "bg-white/5 text-gray-200 border border-white/5 rounded-bl-md"
-                      }`}
+                      className={`flex gap-3 ${msg.role === "user" ? "justify-end" : "justify-start"}`}
                     >
-                      {msg.role === "assistant" && msg.content ? (
-                        <div
-                          className="c1-response [&_strong]:text-[#8587e3] [&_strong]:font-semibold [&_code]:text-[11px] [&_p]:leading-relaxed"
-                          dangerouslySetInnerHTML={{
-                            __html: `<p>${renderMarkdown(msg.content)}</p>`,
-                          }}
-                        />
-                      ) : msg.role === "assistant" && !msg.content ? (
-                        <div className="flex items-center gap-2 text-gray-400 py-1">
-                          <div className="flex gap-1">
-                            <span className="w-1.5 h-1.5 bg-[#8587e3] rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
-                            <span className="w-1.5 h-1.5 bg-[#8587e3] rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
-                            <span className="w-1.5 h-1.5 bg-[#8587e3] rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
-                          </div>
-                          <span className="text-xs text-gray-500">Analyzing...</span>
+                      {msg.role === "assistant" && (
+                        <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#00e6d3]/20 to-[#00a89e]/10 flex items-center justify-center shrink-0 mt-0.5 border border-[#00e6d3]/20">
+                          <Bot className="w-3.5 h-3.5 text-[#00e6d3]" />
                         </div>
-                      ) : (
-                        msg.content
+                      )}
+                      <div
+                        className={`max-w-[85%] rounded-2xl px-3.5 py-2.5 text-[13px] leading-relaxed ${
+                          msg.role === "user"
+                            ? "bg-gradient-to-r from-[#00e6d3] via-[#00a7ff] to-[#00a89e] text-white shadow-[0_0_24px_rgba(0,230,211,0.32)] font-medium rounded-br-md"
+                            : "bg-white/5 text-gray-200 border border-white/5 rounded-bl-md"
+                        }`}
+                      >
+                        {msg.role === "assistant" && msg.content ? (
+                          <div
+                            className="c1-response [&_strong]:text-[#00e6d3] [&_strong]:font-semibold [&_code]:text-[11px] [&_p]:leading-relaxed"
+                            dangerouslySetInnerHTML={{
+                              __html: `<p>${renderMarkdown(msg.content)}</p>`,
+                            }}
+                          />
+                        ) : msg.role === "assistant" && !msg.content ? (
+                          <div className="flex items-center gap-2 text-gray-400 py-1">
+                            <div className="flex gap-1">
+                              <span className="w-1.5 h-1.5 bg-[#00e6d3] rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
+                              <span className="w-1.5 h-1.5 bg-[#00e6d3] rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
+                              <span className="w-1.5 h-1.5 bg-[#00e6d3] rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+                            </div>
+                            <span className="text-xs text-gray-500">
+                              {loadingPhase === "searching" ? "Searching the web..." : "Reasoning..."}
+                            </span>
+                          </div>
+                        ) : (
+                          msg.content
+                        )}
+                      </div>
+                      {msg.role === "user" && (
+                        <div className="w-7 h-7 rounded-lg bg-white/10 flex items-center justify-center shrink-0 mt-0.5">
+                          <User className="w-3.5 h-3.5 text-white" />
+                        </div>
                       )}
                     </div>
-                    {msg.role === "user" && (
-                      <div className="w-7 h-7 rounded-lg bg-white/10 flex items-center justify-center shrink-0 mt-0.5">
-                        <User className="w-3.5 h-3.5 text-white" />
+
+                    {/* Citations */}
+                    {msg.role === "assistant" && msg.citations && msg.citations.length > 0 && (
+                      <div className="ml-10 mt-2 space-y-1">
+                        <p className="text-[10px] text-gray-500 uppercase tracking-wider font-medium">Sources</p>
+                        <div className="flex flex-wrap gap-1.5">
+                          {msg.citations.slice(0, 5).map((url, i) => {
+                            let hostname = "";
+                            try { hostname = new URL(url).hostname.replace("www.", ""); } catch { hostname = url.slice(0, 30); }
+                            return (
+                              <a
+                                key={i}
+                                href={url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-white/5 border border-white/5 text-[10px] text-gray-400 hover:text-[#00e6d3] hover:border-[#00e6d3]/30 transition-colors"
+                              >
+                                <ExternalLink className="w-2.5 h-2.5" />
+                                {hostname}
+                              </a>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Related questions */}
+                    {msg.role === "assistant" && msg.related && msg.related.length > 0 && msg.content && (
+                      <div className="ml-10 mt-2 space-y-1">
+                        <p className="text-[10px] text-gray-500 uppercase tracking-wider font-medium">Related</p>
+                        <div className="flex flex-wrap gap-1.5">
+                          {msg.related.slice(0, 3).map((q, i) => (
+                            <button
+                              key={i}
+                              onClick={() => sendMessage(q)}
+                              disabled={isLoading}
+                              className="text-left text-[10px] text-gray-400 hover:text-white px-2 py-1 rounded-md bg-white/5 border border-white/5 hover:border-[#00e6d3]/30 hover:bg-[#00e6d3]/5 transition-all disabled:opacity-50"
+                            >
+                              {q}
+                            </button>
+                          ))}
+                        </div>
                       </div>
                     )}
                   </div>
@@ -259,13 +356,13 @@ export default function C1Assistant() {
 
             {/* Input area */}
             <div className="shrink-0 border-t border-white/10 bg-black/40 backdrop-blur-xl p-3">
-              <div className="flex items-end gap-2 bg-white/5 rounded-xl border border-white/10 focus-within:border-[#8587e3]/40 transition-colors px-3 py-2">
+              <div className="flex items-end gap-2 bg-white/5 rounded-xl border border-white/10 focus-within:border-[#00e6d3]/40 transition-colors px-3 py-2">
                 <textarea
                   ref={textareaRef}
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={handleKeyDown}
-                  placeholder="Ask about AntimatterAI..."
+                  placeholder="Ask about Nirmata Holdings..."
                   rows={1}
                   className="flex-1 bg-transparent text-white text-sm placeholder-gray-500 resize-none outline-none min-h-[24px] max-h-[120px] leading-relaxed"
                   data-testid="input-chat-message"
@@ -274,7 +371,7 @@ export default function C1Assistant() {
                 <button
                   onClick={() => sendMessage()}
                   disabled={!input.trim() || isLoading}
-                  className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed bg-gradient-to-r from-[#8587e3] to-[#696aac] hover:shadow-[0_0_25px_#696aac] text-white"
+                  className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed bg-gradient-to-r from-[#00e6d3] to-[#00a89e] hover:shadow-[0_0_32px_rgba(0,230,211,0.45)] text-white"
                   data-testid="btn-send-message"
                   aria-label="Send message"
                 >
@@ -286,7 +383,7 @@ export default function C1Assistant() {
                 </button>
               </div>
               <p className="text-[9px] text-gray-600 text-center mt-1.5 tracking-wide">
-                ATOM Intelligence · AntimatterAI Investment Portal
+                ΔTOM AI · Powered by Perplexity Sonar · Nirmata Holdings
               </p>
             </div>
           </motion.div>
