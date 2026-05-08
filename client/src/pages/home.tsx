@@ -1014,8 +1014,8 @@ function CompanySection() {
       color: "#ffd166",
       bg: "from-[#ffd166]/10 to-transparent",
       initials: "JM",
-      bio: "The von Clausewitz of startup sales and growth. Josh runs the playbook that turned ClinixAI into $4M+ qualified pipeline in 180 days. Built the GTM motion that takes Nirmata from pre-revenue to category leader, applying military-grade strategy to enterprise revenue acceleration.",
-      shipped: ["ClinixAI $4M+ pipeline (180 days)", "GTM motion design", "Enterprise sales playbook", "Channel partnerships"],
+      bio: "The von Clausewitz of startup sales and growth. Josh's genius is turning complex anything — physics, AI infrastructure, agentic systems, regulated workflows — into simple, understandable, sellable, high-adoption stories that close. He architects the GTM motion that takes Nirmata from pre-revenue obscurity to category-defining inevitability. Where most CROs sell features, Josh sells worldviews. Where most pipelines stall, his accelerate. Mic. Drop.",
+      shipped: ["Sub-90-day pipeline acceleration playbook", "Complexity→Clarity narrative engine", "Enterprise category-creation GTM", "Channel & strategic partnerships", "Revenue battle plans for all 15 products"],
     },
 
   ];
