@@ -331,7 +331,7 @@ export default function TermSheet({ vehicle, onClose }: TermSheetProps) {
               { label: "Company", value: "Nirmata Holdings, Inc." },
               { label: "Round", value: "Series A" },
               { label: "Pre-Money", value: "$60M–$100M", highlight: true },
-              { label: "HQ", value: "Atlanta, GA" },
+              { label: "HQ", value: "Mars" },
             ].map((s) => (
               <div key={s.label} className="p-3 rounded-lg bg-white/[0.03] border border-white/5">
                 <p className="text-gray-500 text-xs font-['Satoshi'] mb-1">{s.label}</p>

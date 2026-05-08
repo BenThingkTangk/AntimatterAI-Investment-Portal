@@ -271,7 +271,7 @@ const gapAnalysis = [
   { gap: "Funding Gap", issue: "Self-funded limits growth speed", mitigation: "$50-150M strategic investment round", investment: "$50-150M", severity: "red" },
   { gap: "Enterprise GTM", issue: "No dedicated sales force", mitigation: "VP Sales + 10-person BDR/AE team", investment: "—", severity: "red" },
   { gap: "Browser Maturity", issue: "Early access, not shipping yet", mitigation: "GA within 6-9 months of funding", investment: "—", severity: "amber" },
-  { gap: "Geographic Footprint", issue: "Atlanta HQ, limited global presence", mitigation: "SF, London, Singapore expansion", investment: "—", severity: "amber" },
+  { gap: "Geographic Footprint", issue: "Mars HQ, limited terrestrial presence", mitigation: "SF, London, Singapore expansion", investment: "—", severity: "amber" },
 ];
 
 const gtmTimeline = [

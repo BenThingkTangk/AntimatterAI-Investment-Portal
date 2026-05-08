@@ -845,7 +845,7 @@ function HeroSection() {
           transition={{ delay: 1.1 }}
           className="text-white/40 text-sm font-['Satoshi'] mb-10"
         >
-          Self-Funded &nbsp;·&nbsp; Pre-Revenue &nbsp;·&nbsp; Atlanta, GA &nbsp;·&nbsp; March 2026
+          Self-Funded &nbsp;·&nbsp; Pre-Revenue &nbsp;·&nbsp; Mars &nbsp;·&nbsp; March 2026
         </motion.p>
 
         {/* CTA buttons */}
@@ -1024,7 +1024,7 @@ function CompanySection() {
 
   const coreIdentity = [
     { label: "Founded", value: "July 2024" },
-    { label: "Headquarters", value: "Atlanta, GA 30326" },
+    { label: "Headquarters", value: "Mars" },
     { label: "Funding", value: "100% Self-Funded" },
     { label: "Projects Delivered", value: "99+" },
     { label: "Client Satisfaction", value: "99%+" },
@@ -2637,7 +2637,7 @@ function Footer() {
               </a>
               <div className="flex items-center gap-2 text-white/30 text-sm font-['Satoshi']">
                 <MapPin size={12} />
-                Atlanta, GA 30326
+                Mars
               </div>
             </div>
           </div>
