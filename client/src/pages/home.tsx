@@ -1752,15 +1752,47 @@ function GTMSection() {
    ══════════════════════════════════════════════════════════════════ */
 
 function RevenueSection() {
-  const [activeTier, setActiveTier] = useState(1);
+  const [scrubMonth, setScrubMonth] = useState(12);
 
-  const rule78Data = [
-    { month: "M1", cumulative: 8.5 },
-    { month: "M3", cumulative: 76.5 },
-    { month: "M6", cumulative: 306 },
-    { month: "M9", cumulative: 688.5 },
-    { month: "M12", cumulative: 1224 },
-  ].map(d => ({ ...d, cumulative: d.cumulative / 100 }));
+  // 3 flagship products driving the Y1 Rule of 78
+  const flywheelProducts = [
+    { name: "ΔTOM Sales Dominator", color: "#00e6d3", mrrAdd: 50, badge: "22.5x LTV:CAC • $36K ACV", icon: Megaphone },
+    { name: "Red Team ΔTOM", color: "#ff6b8b", mrrAdd: 30, badge: "SOC2 / FedRAMP / EU AI Act", icon: Shield },
+    { name: "ΔTOM Game Console", color: "#74c0fc", mrrAdd: 25, badge: "$799-$1099 HW + $19.99/mo AI", icon: Gamepad2 },
+  ];
+
+  // Build month-by-month cumulative revenue (in $K) for each product
+  // Cumulative recognized revenue at month M = mrrAdd * (M * (M+1) / 2)
+  const rule78Stacked = Array.from({ length: 13 }, (_, i) => {
+    const m = i; // 0..12
+    const triangle = (m * (m + 1)) / 2;
+    const sales = flywheelProducts[0].mrrAdd * triangle;
+    const red = flywheelProducts[1].mrrAdd * triangle;
+    const consoleRev = flywheelProducts[2].mrrAdd * triangle;
+    return {
+      month: m === 0 ? "M0" : `M${m}`,
+      monthNum: m,
+      Sales: sales,
+      RedTeam: red,
+      Console: consoleRev,
+      total: sales + red + consoleRev,
+    };
+  });
+
+  const scrubData = rule78Stacked[scrubMonth];
+  const totalAtM12 = rule78Stacked[12].total; // 8190 ($K)
+
+  // Comparison: linear (no compounding) vs Rule-of-78
+  const linearVsCompound = Array.from({ length: 13 }, (_, i) => {
+    const m = i;
+    const totalNewMRR = flywheelProducts.reduce((s, p) => s + p.mrrAdd, 0); // 105K/mo new MRR
+    return {
+      month: `M${m}`,
+      monthNum: m,
+      Linear: totalNewMRR * m, // straight-line, no compounding
+      RuleOf78: totalNewMRR * ((m * (m + 1)) / 2), // compounding
+    };
+  });
 
   return (
     <div id="revenue" className="bg-black py-32 px-4 relative overflow-hidden">
@@ -1783,81 +1815,198 @@ function RevenueSection() {
               <p className="text-white/70 font-['Satoshi'] text-xs">$30K/mo new MRR × 12 = <span className="text-[#ff6b8b] font-bold">$2.34M Y1</span> (not $360K)</p>
               <p className="text-white/40 text-[10px] font-['Satoshi'] mt-1 italic">SOC2 / FedRAMP / EU AI Act</p>
             </div>
-            <div className="p-4 rounded-xl border border-[#FF6B9D]/20 bg-[#FF6B9D]/5 text-center">
-              <p className="text-[#FF6B9D] font-bold font-['Satoshi'] text-sm mb-1">ClinixAI</p>
-              <p className="text-white/70 font-['Satoshi'] text-xs">$25K/mo new MRR × 12 = <span className="text-[#FF6B9D] font-bold">$1.95M Y1</span> (not $300K)</p>
-              <p className="text-white/40 text-[10px] font-['Satoshi'] mt-1 italic">$4M+ qualified pipeline</p>
+            <div className="p-4 rounded-xl border border-[#74c0fc]/20 bg-[#74c0fc]/5 text-center">
+              <p className="text-[#74c0fc] font-bold font-['Satoshi'] text-sm mb-1">ΔTOM Game Console</p>
+              <p className="text-white/70 font-['Satoshi'] text-xs">$25K/mo new MRR × 12 = <span className="text-[#74c0fc] font-bold">$1.95M Y1</span> (not $300K)</p>
+              <p className="text-white/40 text-[10px] font-['Satoshi'] mt-1 italic">$799-$1099 HW + $19.99/mo AI</p>
             </div>
           </div>
-          <div className="max-w-2xl mx-auto mb-4 mt-4">
+          <div className="max-w-3xl mx-auto mb-4 mt-4">
             <div className="p-5 rounded-xl border border-[#00e6d3]/30 bg-gradient-to-r from-[#00e6d3]/10 to-[#00a7ff]/10 text-center">
-              <p className="text-white font-bold font-['Satoshi'] text-base mb-1">Combined Y1 Rule-of-78 (illustrative): <span className="text-[#00e6d3]">$8.19M+ recognized revenue</span></p>
+              <p className="text-white font-bold font-['Satoshi'] text-base mb-1">Combined Y1 Rule-of-78: <span className="text-[#00e6d3]">$8.19M annual recognized revenue</span></p>
               <p className="text-white/50 text-sm font-['Satoshi']">From just 3 of 15 products. The flywheel compounds across the rest.</p>
+              <p className="text-white/40 text-[11px] font-['Satoshi'] italic mt-2">Annual figure (Y1 cumulative). Not monthly. $105K of new MRR added each month × 78 MRR-months (1+2+...+12) = $8.19M recognized revenue in Year 1.</p>
             </div>
           </div>
           <p className="text-white/50 text-sm font-['Satoshi'] italic">Illustrating SaaS compounding across the ΔTOM portfolio — not current revenue. Self-funded, pre-revenue at the platform level.</p>
         </RevealDiv>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-16">
-          {/* ATOM Tiers */}
-          <RevealDiv>
-            <h3 className="font-['Satoshi'] font-bold text-white text-2xl mb-2">ATOM Platform</h3>
-            <p className="text-white/40 text-xs font-['Satoshi'] mb-5 italic">Pricing reflects intended tiers and target margin profile. We are currently finalizing ATOM pricing with design partners.</p>
-            <div className="space-y-3">
-              {ATOM_TIERS.map((tier, i) => (
-                <motion.div
-                  key={tier.name}
-                  className="flex items-center justify-between p-4 rounded-xl border cursor-pointer transition-all"
-                  style={{
-                    borderColor: activeTier === i ? `${tier.color}50` : "rgba(255,255,255,0.08)",
-                    backgroundColor: activeTier === i ? `${tier.color}08` : "transparent",
-                  }}
-                  onClick={() => setActiveTier(i)}
-                  whileHover={{ scale: 1.01 }}
+        {/* Interactive Y1 simulator - 3 product flywheels with month scrubber */}
+        <RevealDiv className="mb-16">
+          <div className="p-6 md:p-8 rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.03] to-white/[0.01]">
+            <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
+              <div>
+                <p className="text-[10px] uppercase tracking-[0.3em] text-[#00e6d3] font-['Satoshi'] font-semibold mb-2">Live Simulator</p>
+                <h3 className="font-['Cabinet_Grotesk'] font-bold text-white text-2xl md:text-3xl">The 3-Product Flywheel</h3>
+                <p className="text-white/50 text-sm font-['Satoshi'] mt-1">Drag to scrub through the year. Watch the Rule of 78 compound in real time.</p>
+              </div>
+              <div className="text-right">
+                <p className="text-[10px] uppercase tracking-widest text-white/40 font-['Satoshi'] mb-1">Recognized at <span className="text-[#00e6d3] font-bold">{scrubData.month}</span></p>
+                <motion.p
+                  key={scrubData.total}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-3xl md:text-4xl font-['Cabinet_Grotesk'] font-bold text-[#00e6d3]"
                 >
-                  <div>
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="font-['Satoshi'] font-bold text-white text-sm">{tier.name}</span>
-                      <span className="text-xs px-2 py-0.5 rounded-full font-['Satoshi']"
-                        style={{ backgroundColor: `${tier.color}20`, color: tier.color }}>
-                        {tier.gm} GM
-                      </span>
-                    </div>
-                    <p className="text-white/40 text-xs font-['Satoshi']">{tier.desc}</p>
-                  </div>
-                  <div className="text-right">
-                    <div className="font-bold font-['Satoshi']" style={{ color: tier.color }}>{tier.price}</div>
-                  </div>
-                </motion.div>
-              ))}
+                  ${(scrubData.total / 1000).toFixed(2)}M
+                </motion.p>
+                <p className="text-white/40 text-[10px] font-['Satoshi'] italic">cumulative annual recognized revenue</p>
+              </div>
             </div>
-          </RevealDiv>
 
-          {/* ClinixAI Tiers */}
-          <RevealDiv delay={0.15}>
-            <h3 className="font-['Satoshi'] font-bold text-white text-2xl mb-2">ClinixAI Healthcare</h3>
-            <p className="text-white/40 text-xs font-['Satoshi'] mb-5 italic">ClinixAI pricing reflects target ranges for design partner discussions.</p>
-            <div className="space-y-3">
-              {CLINIX_TIERS.map((tier, i) => (
-                <div key={tier.name} className="flex items-center justify-between p-4 rounded-xl border border-white/8 bg-white/2 transition-all hover:border-[#FF6B9D]/30">
-                  <div>
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="font-['Satoshi'] font-bold text-white text-sm">{tier.name}</span>
-                      <span className="text-xs px-2 py-0.5 rounded-full font-['Satoshi']"
-                        style={{ backgroundColor: `${tier.color}20`, color: tier.color }}>
-                        {tier.gm} GM
-                      </span>
-                    </div>
-                    <p className="text-white/40 text-xs font-['Satoshi']">{tier.desc}</p>
-                  </div>
-                  <div className="text-right">
-                    <div className="font-bold font-['Satoshi']" style={{ color: tier.color }}>{tier.price}</div>
-                  </div>
-                </div>
-              ))}
+            {/* Month scrubber */}
+            <div className="mb-6">
+              <input
+                type="range"
+                min={0}
+                max={12}
+                value={scrubMonth}
+                onChange={(e) => setScrubMonth(Number(e.target.value))}
+                className="w-full h-2 rounded-full appearance-none bg-white/10 cursor-pointer accent-[#00e6d3]"
+                style={{
+                  background: `linear-gradient(to right, #00e6d3 0%, #00e6d3 ${(scrubMonth / 12) * 100}%, rgba(255,255,255,0.08) ${(scrubMonth / 12) * 100}%, rgba(255,255,255,0.08) 100%)`,
+                }}
+              />
+              <div className="flex justify-between text-[10px] text-white/30 font-['Satoshi'] mt-2 px-1">
+                {["M0","M1","M2","M3","M4","M5","M6","M7","M8","M9","M10","M11","M12"].map(l => <span key={l}>{l}</span>)}
+              </div>
             </div>
-          </RevealDiv>
-        </div>
+
+            {/* 3 product cards (live values from scrubber) */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-8">
+              {flywheelProducts.map((p, idx) => {
+                const PIcon = p.icon;
+                const live = idx === 0 ? scrubData.Sales : idx === 1 ? scrubData.RedTeam : scrubData.Console;
+                const annual = idx === 0 ? rule78Stacked[12].Sales : idx === 1 ? rule78Stacked[12].RedTeam : rule78Stacked[12].Console;
+                const pct = (live / annual) * 100;
+                return (
+                  <motion.div
+                    key={p.name}
+                    className="p-4 rounded-xl border bg-white/[0.02] relative overflow-hidden"
+                    style={{ borderColor: `${p.color}33` }}
+                    whileHover={{ scale: 1.02, borderColor: `${p.color}66` }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center gap-2">
+                        <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: `${p.color}15`, border: `1px solid ${p.color}30` }}>
+                          <PIcon size={14} style={{ color: p.color }} />
+                        </div>
+                        <span className="font-['Satoshi'] font-bold text-white text-sm">{p.name}</span>
+                      </div>
+                      <span className="text-[10px] font-['JetBrains_Mono'] text-white/30">+${p.mrrAdd}K/mo</span>
+                    </div>
+                    <motion.p
+                      key={live}
+                      initial={{ opacity: 0.6 }}
+                      animate={{ opacity: 1 }}
+                      className="text-2xl font-['Cabinet_Grotesk'] font-bold mb-1"
+                      style={{ color: p.color }}
+                    >
+                      ${(live / 1000).toFixed(2)}M
+                    </motion.p>
+                    <p className="text-white/40 text-[10px] font-['Satoshi'] italic mb-3">{p.badge}</p>
+                    {/* Progress bar to Y1 target */}
+                    <div className="w-full h-1 rounded-full bg-white/5 overflow-hidden">
+                      <motion.div
+                        className="h-full rounded-full"
+                        style={{ backgroundColor: p.color }}
+                        animate={{ width: `${pct}%` }}
+                        transition={{ duration: 0.3 }}
+                      />
+                    </div>
+                    <p className="text-[9px] text-white/30 font-['JetBrains_Mono'] mt-1.5">{pct.toFixed(0)}% of ${(annual / 1000).toFixed(2)}M Y1 target</p>
+                  </motion.div>
+                );
+              })}
+            </div>
+
+            {/* Stacked area chart - revenue compounding by product */}
+            <div className="p-4 rounded-xl border border-white/10 bg-black/30">
+              <p className="text-[10px] uppercase tracking-widest text-white/40 font-['Satoshi'] mb-3">Cumulative Recognized Revenue Build (Stacked, $K)</p>
+              <div className="h-64">
+                <ResponsiveContainer width="100%" height="100%">
+                  <AreaChart data={rule78Stacked} margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
+                    <defs>
+                      <linearGradient id="gradSales" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#00e6d3" stopOpacity={0.85} />
+                        <stop offset="100%" stopColor="#00e6d3" stopOpacity={0.15} />
+                      </linearGradient>
+                      <linearGradient id="gradRed" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#ff6b8b" stopOpacity={0.85} />
+                        <stop offset="100%" stopColor="#ff6b8b" stopOpacity={0.15} />
+                      </linearGradient>
+                      <linearGradient id="gradConsole" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#74c0fc" stopOpacity={0.85} />
+                        <stop offset="100%" stopColor="#74c0fc" stopOpacity={0.15} />
+                      </linearGradient>
+                    </defs>
+                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
+                    <XAxis dataKey="month" tick={{ fill: "rgba(255,255,255,0.4)", fontSize: 11 }} axisLine={false} tickLine={false} />
+                    <YAxis tick={{ fill: "rgba(255,255,255,0.4)", fontSize: 11 }} axisLine={false} tickLine={false} tickFormatter={(v) => `$${(v/1000).toFixed(1)}M`} />
+                    <Tooltip
+                      contentStyle={{ backgroundColor: "rgba(10,12,15,0.95)", border: "1px solid rgba(0,230,211,0.3)", borderRadius: 8, fontFamily: "Satoshi" }}
+                      labelStyle={{ color: "#00e6d3" }}
+                      formatter={(v: any, name: string) => [`$${(Number(v) / 1000).toFixed(2)}M`, name === "Sales" ? "ΔTOM Sales Dominator" : name === "RedTeam" ? "Red Team ΔTOM" : "ΔTOM Game Console"]}
+                    />
+                    <Area type="monotone" dataKey="Sales" stackId="1" stroke="#00e6d3" strokeWidth={2} fill="url(#gradSales)" />
+                    <Area type="monotone" dataKey="RedTeam" stackId="1" stroke="#ff6b8b" strokeWidth={2} fill="url(#gradRed)" />
+                    <Area type="monotone" dataKey="Console" stackId="1" stroke="#74c0fc" strokeWidth={2} fill="url(#gradConsole)" />
+                  </AreaChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+          </div>
+        </RevealDiv>
+
+        {/* Linear vs Rule-of-78 comparison chart */}
+        <RevealDiv delay={0.1} className="mb-16">
+          <div className="p-6 md:p-8 rounded-2xl border border-[#00e6d3]/20 bg-gradient-to-br from-[#00e6d3]/4 to-[#00a7ff]/4">
+            <div className="flex flex-wrap items-end justify-between gap-4 mb-6">
+              <div>
+                <p className="text-[10px] uppercase tracking-[0.3em] text-[#00e6d3] font-['Satoshi'] font-semibold mb-2">The Compounding Gap</p>
+                <h3 className="font-['Cabinet_Grotesk'] font-bold text-white text-2xl md:text-3xl">Why $1.26M Becomes $8.19M</h3>
+                <p className="text-white/50 text-sm font-['Satoshi'] mt-1">Same MRR added each month. The Rule of 78 is the multiplier most founders forget.</p>
+              </div>
+              <div className="flex gap-4 text-right">
+                <div>
+                  <p className="text-[10px] uppercase tracking-widest text-white/40 font-['Satoshi']">Linear (no compounding)</p>
+                  <p className="text-xl font-['Cabinet_Grotesk'] font-bold text-white/60">$1.26M</p>
+                </div>
+                <div className="w-px bg-white/10" />
+                <div>
+                  <p className="text-[10px] uppercase tracking-widest text-[#00e6d3] font-['Satoshi']">Rule of 78</p>
+                  <p className="text-xl font-['Cabinet_Grotesk'] font-bold text-[#00e6d3]">$8.19M</p>
+                </div>
+                <div className="w-px bg-white/10" />
+                <div>
+                  <p className="text-[10px] uppercase tracking-widest text-[#ffd166] font-['Satoshi']">Multiplier</p>
+                  <p className="text-xl font-['Cabinet_Grotesk'] font-bold text-[#ffd166]">6.5x</p>
+                </div>
+              </div>
+            </div>
+            <div className="h-72">
+              <ResponsiveContainer width="100%" height="100%">
+                <ReLineChart data={linearVsCompound} margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
+                  <XAxis dataKey="month" tick={{ fill: "rgba(255,255,255,0.4)", fontSize: 11 }} axisLine={false} tickLine={false} />
+                  <YAxis tick={{ fill: "rgba(255,255,255,0.4)", fontSize: 11 }} axisLine={false} tickLine={false} tickFormatter={(v) => `$${(v/1000).toFixed(1)}M`} />
+                  <Tooltip
+                    contentStyle={{ backgroundColor: "rgba(10,12,15,0.95)", border: "1px solid rgba(0,230,211,0.3)", borderRadius: 8 }}
+                    labelStyle={{ color: "#00e6d3" }}
+                    formatter={(v: any) => `$${(Number(v) / 1000).toFixed(2)}M`}
+                  />
+                  <Legend formatter={(v) => <span style={{ color: "rgba(255,255,255,0.6)", fontSize: 12, fontFamily: "Satoshi" }}>{v === "Linear" ? "Linear (no compounding)" : "Rule of 78 (compounding)"}</span>} />
+                  <Line type="monotone" dataKey="Linear" stroke="#9ca8ad" strokeWidth={2} strokeDasharray="5 5" dot={false} />
+                  <Line type="monotone" dataKey="RuleOf78" stroke="#00e6d3" strokeWidth={3} dot={{ fill: "#00e6d3", r: 4 }} />
+                </ReLineChart>
+              </ResponsiveContainer>
+            </div>
+            <p className="text-white/40 text-xs font-['Satoshi'] italic mt-4 text-center">
+              Same $105K of new MRR added every month for 12 months. Linear maths says $1.26M. SaaS reality (Rule of 78) says <span className="text-[#00e6d3] font-bold">$8.19M annual recognized revenue</span> — because each dollar of MRR earns from the month it lands.
+            </p>
+          </div>
+        </RevealDiv>
 
         {/* Rule of 78 explainer */}
         <RevealDiv delay={0.2}>
