@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageSquare, X, Sparkles, Send, Loader2, Bot, User, Globe, Microscope, ExternalLink } from "lucide-react";
+import { askAtomAI } from "@/lib/perplexityClient";
 
 interface ChatMessage {
   role: "user" | "assistant";
@@ -37,7 +38,6 @@ export default function C1Assistant() {
   const [isLoading, setIsLoading] = useState(false);
   const [loadingPhase, setLoadingPhase] = useState<"searching" | "reasoning">("searching");
   const [searchMode, setSearchMode] = useState<SearchMode>("quick");
-  const [threadId] = useState(() => `thread-${Date.now()}-${Math.random().toString(36).slice(2)}`);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const chatBodyRef = useRef<HTMLDivElement>(null);
@@ -89,32 +89,14 @@ export default function C1Assistant() {
     setInput("");
     setIsLoading(true);
 
-    const endpoint = searchMode === "deep" ? "/api/research" : "/api/chat";
-
     try {
-      const res = await fetch(endpoint, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          prompt: { role: "user", content: text },
-          threadId,
-          mode: searchMode,
-        }),
-      });
-
-      if (!res.ok) {
-        throw new Error(`API error: ${res.status}`);
-      }
-
-      const data = await res.json();
-      const responseText = data.content || "I'm processing your request...";
-      const citations: string[] = data.citations || [];
-      const related: string[] = data.related || [];
-      const model: string = data.model || "sonar-pro";
+      const data = await askAtomAI(text, searchMode);
 
       setMessages((prev) =>
         prev.map((m) =>
-          m.id === responseId ? { ...m, content: responseText, citations, related, model } : m
+          m.id === responseId
+            ? { ...m, content: data.content, citations: data.citations, related: data.related, model: data.model }
+            : m
         )
       );
     } catch (error: any) {
@@ -122,7 +104,7 @@ export default function C1Assistant() {
       setMessages((prev) =>
         prev.map((m) =>
           m.id === responseId
-            ? { ...m, content: "I'm sorry, I encountered an error. Please try again." }
+            ? { ...m, content: `I'm sorry, I encountered an error: ${error.message || "Please try again."}` }
             : m
         )
       );
