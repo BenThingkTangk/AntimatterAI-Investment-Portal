@@ -416,14 +416,19 @@ const MOAT_LAYERS = [
 ];
 
 const TAM_MARKETS = [
-  { name: "Sales Engagement + AI Sales", now: 30, future: 100, cagr: "23.7%", product: "ΔTOM Sales Dominator", color: "#00e6d3" },
+  { name: "AI Sales Automation", now: 19.6, future: 100, cagr: "23.7%", product: "ΔTOM Sales Dominator", color: "#00e6d3" },
+  { name: "Gaming Console Hardware", now: 34.07, future: 51.15, cagr: "7.6%", product: "ΔTOM Game Console (HW)", color: "#74c0fc" },
+  { name: "AI in Gaming", now: 4.4, future: 66.84, cagr: "34%", product: "ΔTOM Game Console (AI)", color: "#b987ff" },
   { name: "Healthcare RCM", now: 72.9, future: 195.9, cagr: "11.6%", product: "ClinixAI", color: "#FF6B9D" },
-  { name: "AI Security / Red Team", now: 1.75, future: 6.17, cagr: "28.5%", product: "ΔTOM Red Team", color: "#ff6b8b" },
+  { name: "AI Red Teaming", now: 1.75, future: 18.6, cagr: "28.5%", product: "ΔTOM Red Team", color: "#ff6b8b" },
   { name: "Remote Patient Monitoring", now: 16.65, future: 47.34, cagr: "16.1%", product: "PhysioPS / HumanOS", color: "#72f2a1" },
-  { name: "AI Gaming", now: 4.4, future: 59, cagr: "34%", product: "ΔTOM Game Console", color: "#74c0fc" },
+  { name: "Digital Health & Wellness", now: 352, future: 720, cagr: "15.5%", product: "PhysioPS / HumanOS", color: "#00a89e" },
+  { name: "Stem Cell Therapy", now: 22.89, future: 97.50, cagr: "~17%", product: "RRG.bio", color: "#ffd166" },
   { name: "Agentic AI", now: 9.87, future: 52.6, cagr: "46.3%", product: "ΔTOM Enterprise + Agentic", color: "#00e6d3" },
-  { name: "Enterprise AI Platforms", now: 31.5, future: 155.2, cagr: "37.6%", product: "ΔTOM Framework", color: "#00e6d3" },
+  { name: "Enterprise AI Platforms", now: 31.5, future: 175, cagr: "37.6%", product: "ΔTOM Framework", color: "#00a7ff" },
   { name: "Drug Discovery AI", now: 2.5, future: 12.0, cagr: "~30%", product: "MoleculeAI", color: "#A855F7" },
+  { name: "Conversational AI", now: 12.06, future: 49.9, cagr: "32.7%", product: "ΔTOM Voice Agent", color: "#74c0fc" },
+  { name: "Cybersecurity (Quantum)", now: 240, future: 500, cagr: "~13%", product: "ΔTOM Quantum Layer", color: "#ff6b8b" },
 ];
 
 const ATOM_TIERS = [
@@ -1079,28 +1084,7 @@ function CompanySection() {
         </div>
 
 
-        {/* Extended Team & Advisors */}
-        <RevealDiv delay={0.35} className="mb-12">
-          <h3 className="font-['Satoshi'] font-bold text-white text-xl mb-4">Extended Team & Advisors</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {[
-              { title: "Head of Engineering", desc: "Seasoned engineering leader to scale platform architecture and manage distributed team execution across ATOM and vertical products.", color: "#00e6d3" },
-              { title: "Clinical / Healthcare Advisor", desc: "Physician or health system executive to guide ClinixAI product-market fit, clinical validation, and regulatory pathway.", color: "#FF6B9D" },
-              { title: "Security / Compliance Advisor", desc: "Enterprise security specialist with SOC2/HIPAA/FedRAMP experience to strengthen compliance posture for regulated deployments.", color: "#00e6d3" },
-            ].map((a) => (
-              <div key={a.title} className="p-5 rounded-xl border border-white/10 bg-white/3">
-                <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-3" style={{ backgroundColor: `${a.color}15`, border: `1px solid ${a.color}30` }}>
-                  <Users size={18} style={{ color: a.color }} />
-                </div>
-                <div className="font-['Satoshi'] font-bold text-white text-sm mb-1">{a.title}</div>
-                <span className="text-[10px] font-['Satoshi'] font-semibold px-2 py-0.5 rounded-full border mb-2 inline-block" style={{ borderColor: `${a.color}40`, color: a.color }}>Recruiting</span>
-                <p className="text-white/50 text-xs font-['Satoshi'] leading-relaxed mt-2">{a.desc}</p>
-              </div>
-            ))}
-          </div>
-        </RevealDiv>
-
-        {/* Core Identity Table + Clients */}
+        {/* Core Identity Table + Confidential Enterprise Clients */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-16">
           <RevealDiv>
             <h3 className="font-['Satoshi'] font-bold text-white text-2xl mb-6">Core Identity</h3>
@@ -1115,17 +1099,23 @@ function CompanySection() {
           </RevealDiv>
 
           <RevealDiv delay={0.15}>
-            <h3 className="font-['Satoshi'] font-bold text-white text-2xl mb-6">Enterprise Clients</h3>
-            <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 mb-6">
-              {clients.map((client) => (
-                <div key={client} className="flex items-center justify-center p-3 rounded-xl border border-white/10 bg-white/3 hover:border-[#00e6d3]/30 transition-all">
-                  <span className="text-white/70 text-xs font-semibold font-['Satoshi'] text-center">{client}</span>
+            <h3 className="font-['Satoshi'] font-bold text-white text-2xl mb-6">Major Enterprise Clients</h3>
+            <div className="p-6 rounded-2xl border border-[#00e6d3]/20 bg-gradient-to-br from-[#00e6d3]/5 to-transparent mb-4">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-lg bg-[#00e6d3]/15 border border-[#00e6d3]/30 flex items-center justify-center">
+                  <Lock size={18} className="text-[#00e6d3]" />
                 </div>
-              ))}
-            </div>
-            <div className="p-5 rounded-xl border border-[#00e6d3]/20 bg-[#00e6d3]/5">
-              <p className="text-[#00e6d3] font-bold text-sm font-['Satoshi'] mb-1">Fortune 500 Ready</p>
-              <p className="text-white/60 text-sm font-['Satoshi']">99+ enterprise projects delivered with consistently high satisfaction. The deployment knowledge, referenceability, and trust we now encode directly into the ATOM platform.</p>
+                <div>
+                  <p className="text-[#00e6d3] font-bold text-sm font-['Satoshi'] uppercase tracking-wider">Confidential</p>
+                  <p className="text-white/40 text-xs font-['Satoshi']">99+ enterprise projects delivered</p>
+                </div>
+              </div>
+              <p className="text-white/70 text-sm font-['Satoshi'] leading-relaxed">
+                Major Fortune 500 enterprise clients spanning retail, manufacturing, telecom, healthcare, public sector, and global IT services. <span className="text-[#00e6d3] font-semibold">Specific names available upon mutual NDA and qualified investor request.</span>
+              </p>
+              <p className="text-white/50 text-xs font-['Satoshi'] italic mt-3">
+                Deployment knowledge, referenceability, and trust — now encoded directly into the ΔTOM platform.
+              </p>
             </div>
           </RevealDiv>
         </div>
@@ -1372,12 +1362,12 @@ function ProductsSection() {
             </div>
             <div className="w-px bg-white/10 hidden md:block" />
             <div className="text-center">
-              <div className="text-3xl font-bold text-[#00e6d3] font-['Satoshi']">11</div>
+              <div className="text-3xl font-bold text-[#00e6d3] font-['Satoshi']">15</div>
               <div className="text-white/40 text-xs uppercase tracking-widest font-['Satoshi'] mt-1">Products in Portfolio</div>
             </div>
             <div className="w-px bg-white/10 hidden md:block" />
             <div className="text-center">
-              <div className="text-3xl font-bold text-[#00D4FF] font-['Satoshi']">7</div>
+              <div className="text-3xl font-bold text-[#00D4FF] font-['Satoshi']">13</div>
               <div className="text-white/40 text-xs uppercase tracking-widest font-['Satoshi'] mt-1">In Production Today</div>
             </div>
           </div>
@@ -1504,8 +1494,8 @@ function MarketSection() {
           <h2 className="font-['Cabinet_Grotesk'] font-bold text-white text-5xl md:text-6xl mb-6">
             Market <span className="text-[#00e6d3]">Opportunity</span>
           </h2>
-          <p className="text-white/50 text-lg max-w-2xl mx-auto font-['Satoshi']">
-            $124B+ combined TAM today, expanding to $500B+ by 2030. Multiple massive markets, one integrated platform.
+          <p className="text-white/50 text-lg max-w-3xl mx-auto font-['Satoshi']">
+            <span className="text-[#00e6d3] font-bold">$636B+ combined TAM today (2026)</span> across 15 verticals, expanding to <span className="text-[#00e6d3] font-bold">$2T+ by 2030</span>. Sourced from Crunchbase, Grand View Research, InsightAce, Research &amp; Markets, Verdantix &amp; Gartner. We don't have a total addressable market — we have a total addressable civilization.
           </p>
         </RevealDiv>
 
@@ -1772,15 +1762,32 @@ function RevenueSection() {
         <RevealDiv className="text-center mb-20">
           <SectionLabel>Revenue Architecture</SectionLabel>
           <h2 className="font-['Cabinet_Grotesk'] font-bold text-white text-5xl md:text-6xl mb-6">
-            The Rule of <span className="text-[#00e6d3]">78</span>
+            The Rule of <span className="text-[#00e6d3]">78</span> — Across <span className="text-[#00e6d3]">15 Products</span>
           </h2>
-          <div className="max-w-2xl mx-auto mb-4">
-            <div className="p-5 rounded-xl border border-[#00e6d3]/20 bg-[#00e6d3]/5 text-center">
-              <p className="text-[#00e6d3] font-bold font-['Satoshi'] text-lg mb-1">$10K/mo new MRR = $780K Year 1</p>
-              <p className="text-white/50 text-sm font-['Satoshi']">Not $120K. The 6.5x compounding multiplier that makes SaaS magical.</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 max-w-5xl mx-auto mb-4">
+            <div className="p-4 rounded-xl border border-[#00e6d3]/20 bg-[#00e6d3]/5 text-center">
+              <p className="text-[#00e6d3] font-bold font-['Satoshi'] text-sm mb-1">ΔTOM Sales Dominator</p>
+              <p className="text-white/70 font-['Satoshi'] text-xs">$50K/mo new MRR × 12 = <span className="text-[#00e6d3] font-bold">$3.9M Y1</span> (not $600K)</p>
+              <p className="text-white/40 text-[10px] font-['Satoshi'] mt-1 italic">22.5x LTV:CAC • $36K ACV</p>
+            </div>
+            <div className="p-4 rounded-xl border border-[#ff6b8b]/20 bg-[#ff6b8b]/5 text-center">
+              <p className="text-[#ff6b8b] font-bold font-['Satoshi'] text-sm mb-1">Red Team ΔTOM</p>
+              <p className="text-white/70 font-['Satoshi'] text-xs">$30K/mo new MRR × 12 = <span className="text-[#ff6b8b] font-bold">$2.34M Y1</span> (not $360K)</p>
+              <p className="text-white/40 text-[10px] font-['Satoshi'] mt-1 italic">SOC2 / FedRAMP / EU AI Act</p>
+            </div>
+            <div className="p-4 rounded-xl border border-[#FF6B9D]/20 bg-[#FF6B9D]/5 text-center">
+              <p className="text-[#FF6B9D] font-bold font-['Satoshi'] text-sm mb-1">ClinixAI</p>
+              <p className="text-white/70 font-['Satoshi'] text-xs">$25K/mo new MRR × 12 = <span className="text-[#FF6B9D] font-bold">$1.95M Y1</span> (not $300K)</p>
+              <p className="text-white/40 text-[10px] font-['Satoshi'] mt-1 italic">$4M+ qualified pipeline</p>
             </div>
           </div>
-          <p className="text-white/50 text-sm font-['Satoshi'] italic">Illustrating SaaS compounding — not current revenue. We are currently self-funded and pre-revenue at the platform level.</p>
+          <div className="max-w-2xl mx-auto mb-4 mt-4">
+            <div className="p-5 rounded-xl border border-[#00e6d3]/30 bg-gradient-to-r from-[#00e6d3]/10 to-[#00a7ff]/10 text-center">
+              <p className="text-white font-bold font-['Satoshi'] text-base mb-1">Combined Y1 Rule-of-78 (illustrative): <span className="text-[#00e6d3]">$8.19M+ recognized revenue</span></p>
+              <p className="text-white/50 text-sm font-['Satoshi']">From just 3 of 15 products. The flywheel compounds across the rest.</p>
+            </div>
+          </div>
+          <p className="text-white/50 text-sm font-['Satoshi'] italic">Illustrating SaaS compounding across the ΔTOM portfolio — not current revenue. Self-funded, pre-revenue at the platform level.</p>
         </RevealDiv>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-16">
