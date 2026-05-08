@@ -23,6 +23,10 @@ import TermSheet from "@/components/TermSheet";
 import MarketResearch from "@/components/MarketResearch";
 import StateOfDisruption from "@/components/StateOfDisruption";
 import C1Assistant from "@/components/C1Assistant";
+import DeltaDoctrine from "@/components/DeltaDoctrine";
+import FortressMoat from "@/components/FortressMoat";
+import InvasionPlan from "@/components/InvasionPlan";
+import TheAsk from "@/components/TheAsk";
 
 /* ══════════════════════════════════════════════════════════════════
    UTILITY HOOKS
@@ -189,13 +193,17 @@ const NAV_SECTIONS = [
   { id: "company", label: "Company" },
   { id: "matrix", label: "25/25" },
   { id: "products", label: "Products" },
+  { id: "doctrine", label: "Doctrine" },
   { id: "moat", label: "Moat" },
+  { id: "fortress", label: "Fortress" },
   { id: "market", label: "Market" },
   { id: "gtm", label: "GTM" },
+  { id: "invasion", label: "Invasion" },
   { id: "revenue", label: "Revenue" },
   { id: "financials", label: "Financials" },
   { id: "valuation", label: "Valuation" },
   { id: "investment", label: "Investment" },
+  { id: "ask", label: "The Ask" },
   { id: "disruption", label: "Disruption" },
   { id: "ethics", label: "Ethics" },
   { id: "gaps", label: "Gaps" },
@@ -2697,13 +2705,17 @@ export default function Home() {
       <CompanySection />
       <VendorMatrixSection />
       <ProductsSection />
+      <DeltaDoctrine />
       <MoatSection />
+      <FortressMoat />
       <MarketSection />
       <GTMSection />
+      <InvasionPlan />
       <RevenueSection />
       <FinancialsSection />
       <ValuationSection />
       <InvestmentSection />
+      <TheAsk />
       <StateOfDisruption />
       <EthicsSection />
       <HonestGapAnalysis />
