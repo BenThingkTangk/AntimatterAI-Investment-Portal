@@ -238,8 +238,8 @@ const tenReasons = [
   },
   {
     num: "06",
-    title: "Self-Funded = Capital Discipline + No Dilution",
-    detail: "Built without VC burn. Every dollar has been efficient. New investment goes to growth, not paying down technical debt or supporting bloated teams.",
+    title: "$3.2M Closed = Capital Discipline + Minimal Dilution",
+    detail: "Built with radical efficiency — $3.2M closed, 2 ATOM Pro deals converting. Every dollar has been efficient. New investment goes to growth, not paying down technical debt or supporting bloated teams.",
   },
   {
     num: "07",
@@ -268,7 +268,7 @@ const gapAnalysis = [
   { gap: "Revenue Disclosure", issue: "No public ARR metrics", mitigation: "Establish verifiable milestones, transparent reporting", investment: "—", severity: "amber" },
   { gap: "Analyst Coverage", issue: "No Gartner/Forrester coverage", mitigation: "Engage analysts, target MQ inclusion by H2 2027", investment: "—", severity: "amber" },
   { gap: "Team Scale", issue: "Leaner than Sierra's 359+", mitigation: "50-80 strategic hires in 12 months", investment: "—", severity: "amber" },
-  { gap: "Funding Gap", issue: "Self-funded limits growth speed", mitigation: "$50-150M strategic investment round", investment: "$50-150M", severity: "red" },
+  { gap: "Funding Gap", issue: "$3.2M closed — scaling requires Series A", mitigation: "$25-50M Series A round", investment: "$25-50M", severity: "red" },
   { gap: "Enterprise GTM", issue: "No dedicated sales force", mitigation: "VP Sales + 10-person BDR/AE team", investment: "—", severity: "red" },
   { gap: "Browser Maturity", issue: "Early access, not shipping yet", mitigation: "GA within 6-9 months of funding", investment: "—", severity: "amber" },
   { gap: "Geographic Footprint", issue: "Mars HQ, limited terrestrial presence", mitigation: "SF, London, Singapore expansion", investment: "—", severity: "amber" },
@@ -1008,7 +1008,7 @@ export default function MarketResearch() {
             ))}
           </div>
 
-          {/* Self-funded + 24/7 cards */}
+          {/* Funding + 24/7 cards */}
           <div className="grid md:grid-cols-2 gap-4 md:gap-6 mb-12">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -1021,8 +1021,8 @@ export default function MarketResearch() {
                 <DollarSign className="w-7 h-7 text-[#00e6d3]" />
               </div>
               <div>
-                <p className="text-white font-semibold text-xl">Self-Funded</p>
-                <p className="text-white/40 text-sm">Capital discipline, zero dilution to date</p>
+                <p className="text-white font-semibold text-xl">$3.2M Closed</p>
+                <p className="text-white/40 text-sm">Capital discipline, minimal dilution, active ARR</p>
               </div>
             </motion.div>
             <motion.div

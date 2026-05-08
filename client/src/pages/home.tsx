@@ -381,7 +381,7 @@ const PRODUCTS = [
     color: "#74c0fc",
     maturity: "LIMITED BETA",
     description: "Hardware: $799/$899/$1099 SKUs with RTX 5070 (~22 TFLOPs), Zen 4 8C/16T, 32GB DDR5, 2TB NVMe Gen 5. Subscriptions $9.99–$19.99/mo. AI-native NPCs, generative gameplay, edge-streamed compute via Akamai Blackwell GPU backbone. Outperforms PS5 Pro and Xbox Series X.",
-    cost: "$15M–$25M",
+    cost: "$25M–$50M",
     comparable: "Inworld AI $500M, Playground (Series B)",
     url: "#",
     marketSize: "AI Gaming $4.4B (2025) → $51-67B (2033)",
@@ -440,10 +440,10 @@ const TAM_MARKETS = [
 ];
 
 const ATOM_TIERS = [
-  { name: "Starter", price: "$5K–$10K/mo", gm: "Target ~85%", desc: "Mid-market, 3 agents, cloud", color: "#00e6d3" },
-  { name: "Professional", price: "$20K–$40K/mo", gm: "Target ~80%", desc: "Enterprise, 15 agents, VPC, GenUI", color: "#00e6d3" },
-  { name: "Enterprise", price: "$50K–$80K/mo", gm: "Target ~75%", desc: "F500, unlimited agents, full hybrid, IP ownership", color: "#00D4FF" },
-  { name: "Sovereign", price: "$120K–$180K/mo", gm: "Target ~70%", desc: "Defense/Gov, air-gapped, FedRAMP, quantum-ready", color: "#FFD700" },
+  { name: "Atom Starter", price: "$5K–$10K/mo", annual: "$60K–$120K/yr", gm: "~83% GM", desc: "Mid-market entry · Up to 3 agents · 100K interactions/mo · Cloud deploy", color: "#00e6d3" },
+  { name: "Atom Professional", price: "$25K/mo", annual: "$300K/yr", gm: "~83% GM", desc: "POV ENTRY POINT · 10 agents · 500K interactions/mo · 90-day POV start", color: "#00a7ff", featured: true },
+  { name: "Atom Enterprise", price: "$65K/mo", annual: "$780K/yr", gm: "~80% GM", desc: "Full platform · Unlimited agents · VPC + on-prem · Zero upfront", color: "#b987ff" },
+  { name: "Atom Custom", price: "Custom/mo", annual: "Negotiated annually", gm: "~75% GM", desc: "Multi-tenant white-label · Revenue share · Partner ecosystem", color: "#ffd166" },
 ];
 
 const CLINIX_TIERS = [
@@ -454,11 +454,11 @@ const CLINIX_TIERS = [
 ];
 
 const FINANCIAL_PROJECTIONS = [
-  { year: "Y1", revLow: 10, revHigh: 15, ebitdaNote: "Negative", gmRange: "75–80%" },
-  { year: "Y2", revLow: 30, revHigh: 50, ebitdaNote: "Improving", gmRange: "77–82%" },
-  { year: "Y3", revLow: 60, revHigh: 90, ebitdaNote: "~Breakeven", gmRange: "78–83%" },
-  { year: "Y4", revLow: 100, revHigh: 160, ebitdaNote: "Mid-teens %", gmRange: "80–84%" },
-  { year: "Y5", revLow: 180, revHigh: 280, ebitdaNote: "25–35%", gmRange: "80–85%" },
+  { year: "Y1 (2026)", revLow: 25, revHigh: 45, ebitdaNote: "Approaching breakeven", gmRange: "65–72%" },
+  { year: "Y2 (2027)", revLow: 75, revHigh: 130, ebitdaNote: "10–18% margin", gmRange: "68–75%" },
+  { year: "Y3 (2028)", revLow: 175, revHigh: 290, ebitdaNote: "22–30% margin", gmRange: "70–78%" },
+  { year: "Y4 (2029)", revLow: 320, revHigh: 520, ebitdaNote: "30–38% margin", gmRange: "73–80%" },
+  { year: "Y5 (2030)", revLow: 550, revHigh: 850, ebitdaNote: "35–42% margin", gmRange: "75–82%" },
 ];
 
 const RADAR_DATA = [
@@ -478,22 +478,23 @@ const COMP_TABLE = [
   { company: "Gong", raised: "$580M", valuation: "$4.5B", products: "1 product (revenue intelligence)" },
   { company: "Oura", raised: "$400M+", valuation: "$11B", products: "1 product (wearable)" },
   { company: "WHOOP", raised: "$575M+", valuation: "$10.1B", products: "1 product (wearable)" },
-  { company: "Nirmata Holdings", raised: "$0", valuation: "$60M–$100M ask", products: "15 products (ΔTOM platform)" },
+  { company: "Nirmata Holdings", raised: "$3.2M (just closed)", valuation: "$150M–$250M ask", products: "15 products (ΔTOM platform)" },
 ];
 
 const FUNDS_ALLOCATION = [
-  { name: "Engineering", value: 35, amount: "$7M", color: "#00e6d3" },
-  { name: "Sales/GTM", value: 30, amount: "$6M", color: "#00e6d3" },
-  { name: "Infrastructure", value: 15, amount: "$3M", color: "#00D4FF" },
-  { name: "Customer Success", value: 10, amount: "$2M", color: "#FFD700" },
-  { name: "G&A/Reserve", value: 10, amount: "$2M", color: "#A855F7" },
+  { name: "Engineering", value: 35, amount: "$14M", color: "#00e6d3" },
+  { name: "Sales/GTM", value: 30, amount: "$12M", color: "#00e6d3" },
+  { name: "Infrastructure", value: 15, amount: "$6M", color: "#00D4FF" },
+  { name: "Customer Success", value: 10, amount: "$4M", color: "#FFD700" },
+  { name: "G&A/Reserve", value: 10, amount: "$4M", color: "#A855F7" },
 ];
 
 const MILESTONES = [
-  { month: "Phase 1: Months 0–6", target: "Build GTM, convert design partners, target 3–5 paying customers, initial ARR in low-to-mid single-digit millions", icon: Rocket, color: "#00e6d3" },
-  { month: "Phase 2: Months 6–12", target: "Scale FDE model, 10–20 customers, ARR $10M–$20M range, analyst recognition", icon: TrendingUp, color: "#00e6d3" },
-  { month: "Phase 3: Months 12–24", target: "Multi-product expansion, ARR $30M–$60M range, 25–40 customers, Series B readiness", icon: Crown, color: "#00D4FF" },
-  { month: "Longer-Term", target: "Move toward $100M+ ARR with improving EBITDA margins and expanding product portfolio", icon: Star, color: "#FFD700" },
+  { month: "Q1 2026 (NOW)", target: "Just closed $3.2M. 2 deals at $25K/mo ATOM Professional closing. Hundreds of deals in pipeline.", icon: Rocket, color: "#00e6d3" },
+  { month: "Q2–Q3 2026", target: "Series A close $25M–$50M. 50–100 ATOM Professional/Enterprise deals on 36-mo terms. ARR exits Y1 at $25M–$45M.", icon: TrendingUp, color: "#00e6d3" },
+  { month: "Year 2 (2027)", target: "Cross-sell flywheel hits — Sales Dominator + Red Team + Game Console + ClinixAI converging. ARR $75M–$130M.", icon: Crown, color: "#00D4FF" },
+  { month: "Year 3 (2028)", target: "Unicorn threshold crossed. ARR $175M–$290M. Series B at $1B+ pre-money. International expansion (APAC, EU).", icon: Star, color: "#FFD700" },
+  { month: "Year 5 (2030)", target: "$550M–$850M ARR. EBITDA-positive at 35–42% margin. IPO/strategic exit at $14B–$21B valuation.", icon: Trophy, color: "#A855F7" },
 ];
 
 const ETHICS_PILLARS = [
@@ -529,8 +530,8 @@ const GTM_PHASES = [
     name: "Platform Expansion & MRR",
     icon: Rocket,
     color: "#00D4FF",
-    desc: "130% NRR target. Land on one product, expand to the full nervous system. Every enterprise customer becomes a multi-product account.",
-    channels: ["Expansion → $65K–$150K/mo", "Strategic Partner → $150K+/mo", "Target NRR: 120–130%+"],
+    desc: "150% NRR target. Land on one product, expand to the full nervous system. Every enterprise customer becomes a multi-product account.",
+    channels: ["Expansion → $65K–$150K/mo", "Strategic Partner → $150K+/mo", "Target NRR: 130–150%+"],
   },
 ];
 
@@ -817,7 +818,7 @@ function HeroSection() {
           transition={{ delay: 0.6, duration: 0.8 }}
           className="text-white/70 text-xl md:text-2xl font-['Satoshi'] mb-2"
         >
-          <TypeWriter text="ΔTOM platform · 15 products · Series A · $60M–$100M Pre-Money" delay={800} speed={45} />
+          <TypeWriter text="ΔTOM platform · 15 products · Series A · $150M–$250M Pre-Money" delay={800} speed={45} />
         </motion.p>
 
         {/* Raise line */}
@@ -827,7 +828,7 @@ function HeroSection() {
           transition={{ delay: 0.75 }}
           className="text-[#00e6d3] text-base md:text-lg font-['Satoshi'] font-semibold mb-10"
         >
-          Series A &nbsp;·&nbsp; $15M–$25M Raise &nbsp;·&nbsp; $60M–$100M Pre-Money Valuation
+          Series A &nbsp;·&nbsp; $25M–$50M Raise &nbsp;·&nbsp; $150M–$250M Pre-Money Valuation
         </motion.p>
 
         {/* Stats bar */}
@@ -837,7 +838,7 @@ function HeroSection() {
           transition={{ delay: 0.9 }}
           className="inline-flex flex-wrap items-center justify-center gap-6 md:gap-10 px-6 md:px-12 py-8 rounded-2xl border border-[#00e6d3]/20 bg-black/50 backdrop-blur-md mb-10"
         >
-          <StatCounter value={100} prefix="$" suffix="M" label="Pre-Money (Up To)" />
+          <StatCounter value={250} prefix="$" suffix="M" label="Pre-Money (Up To)" />
           <div className="w-px h-8 bg-white/10 hidden md:block" />
           <StatCounter value={15} label="Products in Portfolio" />
           <div className="w-px h-8 bg-white/10 hidden md:block" />
@@ -846,8 +847,8 @@ function HeroSection() {
           <StatCounter value={25} suffix="/25" label="Vendor Score (Internal)" />
           <div className="w-px h-8 bg-white/10 hidden md:block" />
           <div className="text-center">
-            <div className="text-3xl md:text-4xl font-bold text-[#00e6d3] font-['Satoshi']">$0</div>
-            <div className="text-xs text-white/50 mt-1 font-['Satoshi'] uppercase tracking-widest">External Capital</div>
+            <div className="text-3xl md:text-4xl font-bold text-[#00e6d3] font-['Satoshi']">$3.2M</div>
+            <div className="text-xs text-white/50 mt-1 font-['Satoshi'] uppercase tracking-widest">Just Closed</div>
           </div>
         </motion.div>
 
@@ -858,7 +859,7 @@ function HeroSection() {
           transition={{ delay: 1.1 }}
           className="text-white/40 text-sm font-['Satoshi'] mb-10"
         >
-          Self-Funded &nbsp;·&nbsp; Pre-Revenue &nbsp;·&nbsp; Mars &nbsp;·&nbsp; March 2026
+          Just Closed $3.2M &nbsp;·&nbsp; Active ARR Closing &nbsp;·&nbsp; Mars &nbsp;·&nbsp; May 2026
         </motion.p>
 
         {/* CTA buttons */}
@@ -1027,7 +1028,7 @@ function CompanySection() {
       color: "#ffd166",
       bg: "from-[#ffd166]/10 to-transparent",
       initials: "JM",
-      bio: "The von Clausewitz of startup sales and growth. Josh's genius is turning complex anything — physics, AI infrastructure, agentic systems, regulated workflows — into simple, understandable, sellable, high-adoption stories that close. He architects the GTM motion that takes Nirmata from pre-revenue obscurity to category-defining inevitability. Where most CROs sell features, Josh sells worldviews. Where most pipelines stall, his accelerate. Mic. Drop.",
+      bio: "The von Clausewitz of startup sales and growth. Josh's genius is turning complex anything — physics, AI infrastructure, agentic systems, regulated workflows — into simple, understandable, sellable, high-adoption stories that close. He architects the GTM motion that takes Nirmata from early traction to category-defining inevitability. Where most CROs sell features, Josh sells worldviews. Where most pipelines stall, his accelerate. Mic. Drop.",
       shipped: ["Sub-90-day pipeline acceleration playbook", "Complexity→Clarity narrative engine", "Enterprise category-creation GTM", "Channel & strategic partnerships", "Revenue battle plans for all 15 products"],
     },
 
@@ -1038,10 +1039,10 @@ function CompanySection() {
   const coreIdentity = [
     { label: "Founded", value: "July 2024" },
     { label: "Headquarters", value: "Mars" },
-    { label: "Funding", value: "100% Self-Funded" },
+    { label: "Funding", value: "$3.2M Just Closed" },
     { label: "Projects Delivered", value: "99+" },
     { label: "Client Satisfaction", value: "99%+" },
-    { label: "External Capital", value: "$0" },
+    { label: "Active Deals", value: "2 ATOM Pro @ $25K/mo" },
     { label: "Vendor Score", value: "25/25 (Internal Framework)" },
     { label: "Products", value: "15 in Portfolio" },
   ];
@@ -1679,7 +1680,7 @@ function GTMSection() {
         {/* Traction Signals */}
         <RevealDiv delay={0.15} className="mb-16">
           <div className="p-6 rounded-2xl border border-[#FFD700]/20 bg-[#FFD700]/4">
-            <h3 className="font-['Satoshi'] font-bold text-white text-xl mb-4">Traction Signals <span className="text-white/40 text-sm font-['Satoshi'] font-normal">(Pre-Revenue, But Not Pre-Evidence)</span></h3>
+            <h3 className="font-['Satoshi'] font-bold text-white text-xl mb-4">Traction Signals <span className="text-white/40 text-sm font-['Satoshi'] font-normal">($3.2M Closed · 2 ATOM Pro Deals Live)</span></h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {[
                 "99+ enterprise projects delivered across Fortune 500 clients",
@@ -1723,9 +1724,10 @@ function GTMSection() {
             </div>
           </div>
           <div className="mt-4 flex gap-6 flex-wrap">
-            <div className="text-sm font-['Satoshi']"><span className="text-[#00e6d3] font-bold">Target 3-Year LTV:</span> <span className="text-white/60">$2M–$3M (modeled)</span></div>
-            <div className="text-sm font-['Satoshi']"><span className="text-[#00e6d3] font-bold">Target LTV:CAC:</span> <span className="text-white/60">&gt;5:1 at scale</span></div>
-            <div className="text-sm font-['Satoshi']"><span className="text-[#00e6d3] font-bold">Target NRR:</span> <span className="text-white/60">120–130%+</span></div>
+            <div className="text-sm font-['Satoshi']"><span className="text-[#00e6d3] font-bold">Blended Gross Margin:</span> <span className="text-white/60">67% (Software trio: 83%)</span></div>
+            <div className="text-sm font-['Satoshi']"><span className="text-[#00e6d3] font-bold">3-Year LTV per Enterprise:</span> <span className="text-white/60">$3M–$5M (36-mo terms)</span></div>
+            <div className="text-sm font-['Satoshi']"><span className="text-[#00e6d3] font-bold">Target LTV:CAC:</span> <span className="text-white/60">22.5x (Sales Dominator), blended 12–15x</span></div>
+            <div className="text-sm font-['Satoshi']"><span className="text-[#00e6d3] font-bold">Target NRR:</span> <span className="text-white/60">130–150%+</span></div>
           </div>
         </RevealDiv>
 
@@ -1828,7 +1830,7 @@ function RevenueSection() {
               <p className="text-white/40 text-[11px] font-['Satoshi'] italic mt-2">Annual figure (Y1 cumulative). Not monthly. $105K of new MRR added each month × 78 MRR-months (1+2+...+12) = $8.19M recognized revenue in Year 1.</p>
             </div>
           </div>
-          <p className="text-white/50 text-sm font-['Satoshi'] italic">Illustrating SaaS compounding across the ΔTOM portfolio — not current revenue. Self-funded, pre-revenue at the platform level.</p>
+          <p className="text-white/50 text-sm font-['Satoshi'] italic">Illustrating SaaS compounding across the ΔTOM portfolio. $3.2M closed, 2 ATOM Professional deals live at $25K/mo. Real demand is hundreds of deals — the $8.19M is the floor, not the ceiling.</p>
         </RevealDiv>
 
         {/* Interactive Y1 simulator - 3 product flywheels with month scrubber */}
@@ -2062,10 +2064,10 @@ function RevenueSection() {
 
 function FinancialsSection() {
   const unitEcon = [
-    { label: "3-Year LTV (modeled)", value: "$2M–$3M", icon: DollarSign, color: "#00e6d3" },
-    { label: "Target LTV:CAC", value: ">5:1", icon: TrendingUp, color: "#00e6d3" },
-    { label: "Target NRR", value: "120–130%+", icon: RefreshCw, color: "#00D4FF" },
-    { label: "Target CAC Payback", value: "<12 mo", icon: Clock, color: "#FFD700" },
+    { label: "Blended Gross Margin", value: "67%", icon: DollarSign, color: "#00e6d3" },
+    { label: "Software Trio GM", value: "83%", icon: TrendingUp, color: "#00e6d3" },
+    { label: "Target NRR", value: "130–150%+", icon: RefreshCw, color: "#00D4FF" },
+    { label: "CAC Payback", value: "6–9 mo", icon: Clock, color: "#FFD700" },
     { label: "Target ACV", value: "$250K–$500K", icon: Target, color: "#FF6B9D" },
     { label: "Target Logo Churn", value: "5–10%", icon: Activity, color: "#A855F7" },
   ];
@@ -2122,7 +2124,7 @@ function FinancialsSection() {
                 {[
                   "10–20 new enterprise customers per year",
                   "Initial ACV of $250K–$500K",
-                  "NRR of 120–130%+ through expansion",
+                  "NRR of 130–150%+ through expansion",
                   "Gross margins improve with scale (75% → 85%)",
                   "EBITDA breakeven targeted by Year 3",
                 ].map((item) => (
@@ -2140,7 +2142,7 @@ function FinancialsSection() {
                   { label: "ARR / FTE at Scale", value: "$200K–$300K+", color: "#00e6d3" },
                   { label: "Burn Multiple", value: "<2x by Y2", color: "#00e6d3" },
                   { label: "Logo Churn Target", value: "5–10%", color: "#00D4FF" },
-                  { label: "CAC Payback", value: "<12 months", color: "#FFD700" },
+                  { label: "CAC Payback", value: "6–9 months", color: "#FFD700" },
                 ].map((item) => (
                   <div key={item.label} className="flex justify-between items-center py-2 border-b border-white/5">
                     <span className="text-white/50 text-sm font-['Satoshi']">{item.label}</span>
@@ -2200,33 +2202,33 @@ function ValuationSection() {
     },
     {
       name: "VC Comparable Method",
-      range: "$80M – $300M",
-      midpoint: "$90M (median AI Series A)",
+      range: "$150M – $500M",
+      midpoint: "$200M (multi-product premium)",
       color: "#00e6d3",
       icon: BarChart3,
-      desc: "Median AI Series A pre-money 2025-2026: $90M (PitchBook). Multi-product premium vs single-product comps at $1B+.",
+      desc: "Median AI Series A pre-money 2025-2026: $90M (PitchBook). $3.2M closed + live deals command multi-product premium over single-product comps at $1B+.",
       items: [
         { label: "Distyl AI (multi-product)", value: "$1.8B valuation" },
         { label: "Gong (revenue intel)", value: "$4.5B valuation" },
         { label: "Oura (wearable)", value: "$11B valuation" },
         { label: "WHOOP (wearable)", value: "$10.1B valuation" },
-        { label: "Nirmata Holdings (15 products)", value: "$60M–$100M ask" },
-        { label: "Discount applied", value: "Pre-revenue" },
+        { label: "Nirmata Holdings (15 products)", value: "$150M–$250M ask" },
+        { label: "Traction", value: "$3.2M closed + 2 live deals" },
       ],
     },
     {
       name: "Market Comparables",
-      range: "$60M – $120M",
-      midpoint: "$80M",
+      range: "$120M – $280M",
+      midpoint: "$200M",
       color: "#00D4FF",
       icon: Globe,
-      desc: "ClinixAI $4M+ pipeline at 10–15x forward revenue multiple, plus platform value of remaining 14 products across multiple verticals.",
+      desc: "ClinixAI $4M+ pipeline + $3.2M closed + 2 live ATOM Pro deals ($600K ARR/$1.8M TCV). 15-product platform premium across multiple verticals.",
       items: [
         { label: "ClinixAI pipeline", value: "$4M+ qualified pipeline" },
-        { label: "Forward multiple", value: "10–15x" },
-        { label: "ClinixAI standalone", value: "$40–60M" },
-        { label: "Platform premium (14 products)", value: "+$20–60M" },
-        { label: "Blended valuation", value: "$60–120M" },
+        { label: "ATOM Professional (2 live)", value: "$600K ARR / $1.8M TCV" },
+        { label: "Forward multiple", value: "15–25x" },
+        { label: "Active revenue base", value: "$60–100M standalone" },
+        { label: "Platform premium (15 products)", value: "+$60–180M" },
       ],
     },
   ];
@@ -2240,7 +2242,7 @@ function ValuationSection() {
             Three Lenses. <span className="text-[#00e6d3]">One Reasonable Range.</span>
           </h2>
           <p className="text-white/50 text-lg max-w-2xl mx-auto font-['Satoshi']">
-            $60M–$100M convergence across multiple methods.
+            $150M–$250M convergence across multiple methods.
           </p>
         </RevealDiv>
 
@@ -2286,8 +2288,8 @@ function ValuationSection() {
               <div className="w-8 h-px bg-white/20" />
               <span className="text-white/50 text-sm font-['Satoshi']">Market Comps</span>
             </div>
-            <div className="text-6xl font-bold font-['Cabinet_Grotesk'] text-[#00e6d3] mb-2">$60M–$100M</div>
-            <p className="text-white/50 text-sm font-['Satoshi']">Three independent analyses converge on $60M–$100M pre-money. Median AI Series A pre-money 2025-2026: $90M (PitchBook).</p>
+            <div className="text-6xl font-bold font-['Cabinet_Grotesk'] text-[#00e6d3] mb-2">$150M–$250M</div>
+            <p className="text-white/50 text-sm font-['Satoshi']">Three independent analyses converge on $150M–$250M pre-money. Median AI Series A pre-money 2025-2026: $90M (PitchBook).</p>
           </div>
         </RevealDiv>
 
@@ -2337,7 +2339,7 @@ const EQUITY_VEHICLE = {
   id: "equity",
   name: "Equity (Series A Preferred)",
   tagline: "Standard VC Structure",
-  description: "Traditional Series A preferred equity with board governance, pro-rata rights, and information rights. Clean cap table entry at $60M–$100M pre-money.",
+  description: "Traditional Series A preferred equity with board governance, pro-rata rights, and information rights. Clean cap table entry at $150M–$250M pre-money.",
   minInvest: "$250K",
   features: [
     "1x non-participating liquidation preference",
@@ -2358,7 +2360,7 @@ function TermSheetWrapper() {
     <div>
       {!open ? (
         <div className="p-6 rounded-2xl border border-[#00e6d3]/20 bg-[#00e6d3]/4 text-center">
-          <p className="text-white/60 text-sm font-['Satoshi'] mb-4">Series A Preferred Equity — $60M–$100M Pre-Money Valuation</p>
+          <p className="text-white/60 text-sm font-['Satoshi'] mb-4">Series A Preferred Equity — $150M–$250M Pre-Money Valuation</p>
           <button
             onClick={() => setOpen(true)}
             className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#00e6d3] via-[#00a7ff] to-[#00a89e] text-white shadow-[0_0_24px_rgba(0,230,211,0.32)] font-bold rounded-xl hover:shadow-[0_0_32px_rgba(0,230,211,0.45)] transition-all font-['Satoshi']"
@@ -2390,7 +2392,7 @@ function InvestmentSection() {
             Investment <span className="text-[#00e6d3]">Opportunity</span>
           </h2>
           <p className="text-white/50 text-lg max-w-2xl mx-auto font-['Satoshi']">
-            $15M–$25M Series A. $60M–$100M pre-money valuation. Clean cap table.
+            $25M–$50M Series A. $150M–$250M pre-money valuation. Clean cap table.
           </p>
         </RevealDiv>
 
@@ -2618,7 +2620,7 @@ function EthicsSection() {
               Invest in the Nervous System<br />of <span className="text-[#00e6d3]">Enterprise AI</span>
             </h3>
             <p className="text-white/50 text-lg font-['Satoshi'] max-w-2xl mx-auto mb-8">
-              Series A | $15M–$25M | $60M–$100M Pre-Money | 15 Products | 25/25 Score | $0 External Capital to Date
+              Series A | $25M–$50M | $150M–$250M Pre-Money | 15 Products | 25/25 Score | $3.2M Just Closed
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4 mb-10">
               <a
@@ -2693,7 +2695,7 @@ function EthicsSection() {
 
 function HonestGapAnalysis() {
   const gaps = [
-    { title: "Pre-Revenue at Platform Level", desc: "Nirmata Holdings is pre-revenue at the consolidated platform level. ClinixAI has $4M+ qualified pipeline but has not yet converted to recurring revenue.", icon: DollarSign, status: "Building" },
+    { title: "Early Revenue Stage", desc: "$3.2M closed. 2 ATOM Professional deals live at $25K/mo ($600K ARR / $1.8M TCV). Hundreds of deals in pipeline. Still building first full-year cohort data.", icon: DollarSign, status: "Building" },
     { title: "4 Products in Early Stage", desc: "ΔTOM Game Console, ΔTOM Sales Dominator, PhysioPS/HumanOS, and MoleculeAI are in LIMITED BETA or R&D. Not all 15 products are production-ready.", icon: AlertCircle, status: "In Progress" },
     { title: "First 12-Month Cohort Data", desc: "We are building our first 12-month customer cohort data. NRR, churn, and expansion metrics will mature over the next 2–3 quarters.", icon: LineChart, status: "Building" },
     { title: "Key Hires Needed", desc: "Head of Engineering, Clinical Advisor, and Security Advisor roles are open. These are critical for scaling the next phase.", icon: Users, status: "Hiring" },
@@ -2734,7 +2736,7 @@ function HonestGapAnalysis() {
         <RevealDiv delay={0.3} className="mt-10">
           <div className="p-6 rounded-2xl border border-[#00e6d3]/20 bg-[#00e6d3]/3 text-center">
             <p className="text-white/60 text-sm font-['Satoshi']">
-              <span className="text-[#00e6d3] font-bold">Why we share this:</span> Investors who back Nirmata Holdings at $60M–$100M pre-money are buying into the platform architecture, the team, and the 15-product portfolio thesis — not trailing revenue. We believe radical transparency accelerates trust and alignment.
+              <span className="text-[#00e6d3] font-bold">Why we share this:</span> Investors who back Nirmata Holdings at $150M–$250M pre-money are buying into $3.2M closed, live ARR, hundreds of deals in pipeline, and the 15-product portfolio thesis. We believe radical transparency accelerates trust and alignment.
             </p>
           </div>
         </RevealDiv>
@@ -2809,7 +2811,7 @@ function Footer() {
 
         <div className="border-t border-white/5 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-white/20 text-xs font-['Satoshi']">
-            Self-Funded · Pre-Revenue · March 2026 · Series A $15M–$25M · $60M–$100M Pre-Money
+            $3.2M Closed · Active ARR · May 2026 · Series A $25M–$50M · $150M–$250M Pre-Money
           </p>
         </div>
       </div>

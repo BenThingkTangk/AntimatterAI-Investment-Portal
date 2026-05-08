@@ -55,7 +55,7 @@ function useCountUp(target: number, duration: number = 1500, inView: boolean = t
 const VC_DIMENSIONS = [
   {
     name: "Team",
-    score: 8,
+    score: 9,
     weight: 25,
     icon: Users,
     detail: "3 complementary founders, 99+ shipped enterprise projects, 100+ years combined experience",
@@ -66,7 +66,7 @@ const VC_DIMENSIONS = [
     score: 9,
     weight: 20,
     icon: Target,
-    detail: "$124B+ combined TAM today → $500B+ by 2030, 6 addressable markets",
+    detail: "$636B combined TAM today → $2T+ by 2030, 15 addressable markets",
     color: "#00D4FF",
   },
   {
@@ -79,18 +79,18 @@ const VC_DIMENSIONS = [
   },
   {
     name: "Traction & PMF",
-    score: 7,
+    score: 9,
     weight: 20,
     icon: TrendingUp,
-    detail: "$4M+ ClinixAI qualified pipeline in 180 days, 99+ projects delivered, Fortune 500 clients",
+    detail: "$3.2M closed, 2 ATOM Pro deals live ($25K/mo), hundreds in pipeline, $4M+ ClinixAI pipeline",
     color: "#FFD700",
   },
   {
     name: "Economics",
-    score: 7,
+    score: 8,
     weight: 10,
     icon: BarChart3,
-    detail: "Target 75-85% GM, scenario-based $120-180M Y5, self-funded to date",
+    detail: "83% GM on software trio, 67% blended, $550-850M Y5, $3.2M closed",
     color: "#FF6B9D",
   },
   {
@@ -119,7 +119,7 @@ const VEHICLES = [
     recommended: true,
     color: "#00e6d3",
     terms: [
-      { label: "Pre-Money Valuation", value: "$60M–$100M range" },
+      { label: "Pre-Money Valuation", value: "$150M–$250M range" },
       { label: "Security", value: "Series A Preferred Stock" },
       { label: "Liquidation Preference", value: "1x non-participating" },
       { label: "Anti-Dilution", value: "Broad-based weighted average" },
@@ -135,7 +135,7 @@ const VEHICLES = [
     recommended: false,
     color: "#00D4FF",
     terms: [
-      { label: "Valuation Cap", value: "$75M" },
+      { label: "Valuation Cap", value: "$200M" },
       { label: "Discount", value: "20% to next qualified financing" },
       { label: "Interest", value: "8% simple, 18-month maturity" },
       { label: "Auto-Convert", value: "At qualified financing ($5M+ raise)" },
@@ -165,10 +165,10 @@ const VEHICLES = [
 
 /* ─── RETURN SCENARIOS ─── */
 const RETURN_SCENARIOS = [
-  { label: "Bear (IP Floor)", valuation: 60, multiple: "1.2x", color: "#FF6B9D" },
-  { label: "Base (18mo)", valuation: 100, multiple: "2x", color: "#FFD700" },
-  { label: "Bull (24mo)", valuation: 250, multiple: "5x+", color: "#00D4FF" },
-  { label: "Moon (Series B)", valuation: 500, multiple: "10x+", color: "#00e6d3" },
+  { label: "Bear (Series B)", valuation: 200, multiple: "1.3–2x", color: "#FF6B9D" },
+  { label: "Base (Y3)", valuation: 1000, multiple: "5–8x", color: "#FFD700" },
+  { label: "Bull (Y3–Y4)", valuation: 5000, multiple: "25–50x", color: "#00D4FF" },
+  { label: "Moon (Y5 IPO)", valuation: 14000, multiple: "80–140x", color: "#00e6d3" },
 ];
 
 /* ─── FORTUNE 500 TRUST LOGOS ─── */
@@ -177,15 +177,15 @@ const TRUST_CLIENTS = ["Lowe's", "Cognizant", "Trimble", "E2open", "Toyota", "OW
 /* ─── FORMAT MAILTO BODY ─── */
 function buildMailtoBody(vehicleId: string, amount: number): string {
   const vehicle = VEHICLES.find((v) => v.id === vehicleId) || VEHICLES[0];
-  const ownership = ((amount / 50_000_000) * 100).toFixed(2);
+  const ownership = ((amount / 250_000_000) * 100).toFixed(2);
   return [
-    `TERM SHEET INTEREST — ANTIMATTERAI, INC.`,
+    `TERM SHEET INTEREST — NIRMATA HOLDINGS`,
     `Series A Strategic Growth Round`,
     ``,
     `--- INVESTMENT DETAILS ---`,
     `Vehicle: ${vehicle.label}`,
     `Amount: $${(amount / 1_000_000).toFixed(1)}M`,
-    `Estimated Ownership: ${ownership}% (at $60M–$100M pre-money)`,
+    `Estimated Ownership: ${ownership}% (at $150M–$250M pre-money)`,
     ``,
     `--- VEHICLE TERMS ---`,
     ...vehicle.terms.map((t) => `${t.label}: ${t.value}`),
@@ -195,7 +195,7 @@ function buildMailtoBody(vehicleId: string, amount: number): string {
       (s) => `${s.label}: $${s.valuation}M valuation → ${s.multiple} return`
     ),
     ``,
-    `--- GENERATED VIA ANTIMATTERAI INVESTOR PORTAL ---`,
+    `--- GENERATED VIA NIRMATA HOLDINGS INVESTOR PORTAL ---`,
     `Date: ${new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}`,
   ].join("\n");
 }
@@ -240,19 +240,19 @@ function CustomRadarTooltip({ active, payload }: { active?: boolean; payload?: A
 /* ─── MAIN COMPONENT ─── */
 export default function TermSheet({ vehicle, onClose }: TermSheetProps) {
   const [activeVehicle, setActiveVehicle] = useState(vehicle.id || "equity");
-  const [investAmount, setInvestAmount] = useState(2_000_000);
+  const [investAmount, setInvestAmount] = useState(5_000_000);
   const [sent, setSent] = useState(false);
   const [expandedDim, setExpandedDim] = useState<string | null>(null);
   const compositeAnimated = useCountUp(COMPOSITE_SCORE, 1800, true);
 
-  const ownership = useMemo(() => ((investAmount / 50_000_000) * 100), [investAmount]);
+  const ownership = useMemo(() => ((investAmount / 250_000_000) * 100), [investAmount]);
 
   const returnScenarios = useMemo(
     () =>
       RETURN_SCENARIOS.map((s) => ({
         ...s,
-        investorReturn: (investAmount * s.valuation) / 50,
-        returnMultiple: s.valuation / 50,
+        investorReturn: (investAmount * s.valuation) / 200,
+        returnMultiple: s.valuation / 200,
       })),
     [investAmount]
   );
@@ -330,7 +330,7 @@ export default function TermSheet({ vehicle, onClose }: TermSheetProps) {
             {[
               { label: "Company", value: "Nirmata Holdings, Inc." },
               { label: "Round", value: "Series A" },
-              { label: "Pre-Money", value: "$60M–$100M", highlight: true },
+              { label: "Pre-Money", value: "$150M–$250M", highlight: true },
               { label: "HQ", value: "Mars" },
             ].map((s) => (
               <div key={s.label} className="p-3 rounded-lg bg-white/[0.03] border border-white/5">
@@ -468,28 +468,28 @@ export default function TermSheet({ vehicle, onClose }: TermSheetProps) {
                 </div>
                 <input
                   type="range"
-                  min={250_000}
-                  max={20_000_000}
-                  step={250_000}
+                  min={500_000}
+                  max={50_000_000}
+                  step={500_000}
                   value={investAmount}
                   onChange={(e) => setInvestAmount(Number(e.target.value))}
                   className="w-full h-2 rounded-full appearance-none cursor-pointer"
                   style={{
-                    background: `linear-gradient(to right, #00D4FF ${((investAmount - 250_000) / (20_000_000 - 250_000)) * 100}%, rgba(255,255,255,0.06) ${((investAmount - 250_000) / (20_000_000 - 250_000)) * 100}%)`,
+                    background: `linear-gradient(to right, #00D4FF ${((investAmount - 500_000) / (50_000_000 - 500_000)) * 100}%, rgba(255,255,255,0.06) ${((investAmount - 500_000) / (50_000_000 - 500_000)) * 100}%)`,
                   }}
                 />
                 <div className="flex justify-between text-xs text-gray-600 mt-2 font-['Satoshi']">
-                  <span>$250K</span>
-                  <span>$5M</span>
+                  <span>$500K</span>
                   <span>$10M</span>
-                  <span>$20M</span>
+                  <span>$25M</span>
+                  <span>$50M</span>
                 </div>
               </div>
 
               {/* Ownership */}
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
                 <div className="p-4 rounded-lg bg-white/[0.03] border border-white/5">
-                  <p className="text-gray-500 text-xs font-['Satoshi'] mb-1">Ownership at $80M Pre-Money</p>
+                  <p className="text-gray-500 text-xs font-['Satoshi'] mb-1">Ownership at $200M Pre-Money</p>
                   <p className="text-[#00e6d3] font-['Satoshi'] text-2xl font-bold">
                     {ownership.toFixed(2)}%
                   </p>
@@ -497,13 +497,13 @@ export default function TermSheet({ vehicle, onClose }: TermSheetProps) {
                 <div className="p-4 rounded-lg bg-white/[0.03] border border-white/5">
                   <p className="text-gray-500 text-xs font-['Satoshi'] mb-1">Post-Money Valuation</p>
                   <p className="text-white font-['Satoshi'] text-2xl font-bold">
-                    ${((50_000_000 + investAmount) / 1_000_000).toFixed(1)}M
+                    ${((200_000_000 + investAmount) / 1_000_000).toFixed(1)}M
                   </p>
                 </div>
                 <div className="p-4 rounded-lg bg-white/[0.03] border border-white/5 col-span-2 md:col-span-1">
-                  <p className="text-gray-500 text-xs font-['Satoshi'] mb-1">Prior Dilution</p>
-                  <p className="text-[#00e6d3] font-['Satoshi'] text-2xl font-bold">$0</p>
-                  <p className="text-gray-500 text-xs font-['Satoshi']">Clean cap table</p>
+                  <p className="text-gray-500 text-xs font-['Satoshi'] mb-1">Closed Funding</p>
+                  <p className="text-[#00e6d3] font-['Satoshi'] text-2xl font-bold">$3.2M</p>
+                  <p className="text-gray-500 text-xs font-['Satoshi']">Near-clean cap table</p>
                 </div>
               </div>
 
@@ -623,10 +623,10 @@ export default function TermSheet({ vehicle, onClose }: TermSheetProps) {
               {/* Key statement */}
               <div className="text-center mb-8">
                 <p className="text-white font-['Satoshi'] text-lg md:text-xl font-bold mb-3">
-                  Self-funded. Pre-revenue. Clean cap table. $0 prior dilution.
+                  $3.2M closed. 2 ATOM Pro deals live. Near-clean cap table. Early revenue stage.
                 </p>
                 <p className="text-gray-400 text-sm font-['Satoshi'] max-w-2xl mx-auto">
-                  The window to invest at pre-revenue pricing closes the moment the first contract signs.
+                  The window to invest at early-revenue pricing closes as ARR scales. Two ATOM Pro contracts are converting now.
                 </p>
               </div>
 
@@ -644,7 +644,7 @@ export default function TermSheet({ vehicle, onClose }: TermSheetProps) {
                       transition={{ duration: 2, repeat: Infinity }}
                     />
                     <span className="text-[#FFD700] font-semibold mt-2">You Are Here</span>
-                    <span className="text-gray-500">Pre-Revenue</span>
+                    <span className="text-gray-500">Early Revenue</span>
                   </div>
                   <span className="text-gray-500">First Contract</span>
                   <span className="text-gray-500">Series B</span>

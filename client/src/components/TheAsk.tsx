@@ -4,9 +4,9 @@ import { Calendar, Lock, FileText } from "lucide-react";
 
 const SNAPSHOT = [
   { label: "Round", value: "Series A" },
-  { label: "Pre-Money", value: "$60M–$100M" },
-  { label: "Raise", value: "$15M–$25M" },
-  { label: "Lead Allocation", value: "$5M–$10M" },
+  { label: "Pre-Money", value: "$150M–$250M" },
+  { label: "Raise", value: "$25M–$50M" },
+  { label: "Lead Allocation", value: "$10M–$20M" },
 ];
 
 const ACTIONS = [

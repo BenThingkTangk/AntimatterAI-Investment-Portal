@@ -422,7 +422,7 @@ function UnicornLandscape() {
         <div className="flex items-center justify-center gap-3 mt-2">
           <div className="w-4 h-4 rounded-full bg-[#00e6d3] border-2 border-[#00e6d3]/50 animate-pulse" />
           <span className="text-[#00e6d3] text-sm font-bold font-['Satoshi'] tracking-wider">
-            YOU ARE HERE — 15 Products, $60M–$100M Ask
+            YOU ARE HERE — 15 Products, $150M–$250M Ask
           </span>
         </div>
       </div>
@@ -431,7 +431,7 @@ function UnicornLandscape() {
         <div className="p-5 rounded-xl border border-[#00e6d3]/20 bg-[#00e6d3]/4">
           <p className="text-[#00e6d3] text-sm font-bold font-['Satoshi'] mb-1">The Asymmetry</p>
           <p className="text-white/60 text-sm font-['Satoshi']">
-            Every company in the chart above has fewer products and has raised significantly more capital. Nirmata Holdings' 15-product portfolio at a $60M–$100M ask represents maximum product breadth at minimum valuation entry.
+            Every company in the chart above has fewer products and has raised significantly more capital. Nirmata Holdings' 15-product portfolio at a $150M–$250M ask — with $3.2M closed and active ARR — represents maximum product breadth at a compelling valuation entry.
           </p>
         </div>
       </RevealDiv>
@@ -778,7 +778,7 @@ function CompetitivePosition() {
               <span className="text-xs font-['Satoshi'] px-2 py-0.5 rounded-full border border-[#00e6d3]/40 text-[#00e6d3] font-bold">15</span>
             </div>
             <div className="col-span-2">
-              <span className="text-[#00e6d3] text-xs font-bold font-['Satoshi']">$60M–$100M ask</span>
+              <span className="text-[#00e6d3] text-xs font-bold font-['Satoshi']">$150M–$250M ask</span>
             </div>
             <div className="col-span-7">
               <span className="text-[#00e6d3]/70 text-xs font-['Satoshi']">Full-stack platform: GenUI + governance + deploy-anywhere + agentic + compliance-native</span>
