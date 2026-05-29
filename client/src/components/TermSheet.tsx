@@ -74,7 +74,7 @@ const VC_DIMENSIONS = [
     score: 9,
     weight: 20,
     icon: Shield,
-    detail: "25/25 vendor framework, GenUI exclusivity, 15 products, $95M–$165M replication cost",
+    detail: "25/25 vendor framework, GenUI exclusivity, 9 products (4 flagship), $95M–$165M replication cost",
     color: "#00e6d3",
   },
   {
@@ -82,7 +82,7 @@ const VC_DIMENSIONS = [
     score: 9,
     weight: 20,
     icon: TrendingUp,
-    detail: "$3.2M closed, 2 ATOM Pro deals live ($25K/mo), hundreds in pipeline, $4M+ ClinixAI pipeline",
+    detail: "$3.2M closed, 2 ATOM Pro deals live ($25K/mo), hundreds in pipeline, copious enterprise demand",
     color: "#FFD700",
   },
   {
@@ -147,11 +147,11 @@ const VEHICLES = [
   },
   {
     id: "revenue",
-    label: "Revenue-Based (ClinixAI)",
+    label: "Revenue-Based (ATOM Platform)",
     recommended: false,
     color: "#FFD700",
     terms: [
-      { label: "Revenue Share", value: "5-8% of ClinixAI monthly revenue" },
+      { label: "Revenue Share", value: "5-8% of ATOM platform monthly revenue" },
       { label: "Return Cap", value: "1.5-3x invested capital" },
       { label: "Payment", value: "Monthly, within 15 business days" },
       { label: "Dilution", value: "Non-dilutive — pure revenue share" },
@@ -707,7 +707,7 @@ export default function TermSheet({ vehicle, onClose }: TermSheetProps) {
                   { label: "Investor Deck", href: "/antimatterai_investor_deck.pdf" },
                   { label: "State of Disruption", href: "/antimatterai_state_of_disruption.pdf" },
                   { label: "ATOM Architecture", href: "/atom_technical_architecture.pdf" },
-                  { label: "ClinixAI Overview", href: "/clinixai_overview.pdf" },
+                  { label: "The Investor Strike Brief", href: "/antimatterai_investor_hype.pdf" },
                 ].map((doc) => (
                   <a
                     key={doc.label}

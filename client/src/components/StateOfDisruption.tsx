@@ -431,7 +431,7 @@ function UnicornLandscape() {
         <div className="p-5 rounded-xl border border-[#00e6d3]/20 bg-[#00e6d3]/4">
           <p className="text-[#00e6d3] text-sm font-bold font-['Satoshi'] mb-1">The Asymmetry</p>
           <p className="text-white/60 text-sm font-['Satoshi']">
-            Every company in the chart above has fewer products and has raised significantly more capital. Nirmata Holdings' 15-product portfolio at a $150M–$250M ask — with $3.2M closed and active ARR — represents maximum product breadth at a compelling valuation entry.
+            Every company in the chart above has fewer products and has raised significantly more capital. Nirmata Holdings' 4-flagship product portfolio at a $150M–$250M ask — with $3.2M closed and active ARR — represents maximum product breadth at a compelling valuation entry.
           </p>
         </div>
       </RevealDiv>
@@ -513,94 +513,6 @@ function NervousSystemAnalogy() {
               </div>
             </div>
           ))}
-        </div>
-      </RevealDiv>
-    </RevealDiv>
-  );
-}
-
-/* ══════════════════════════════════════════════════════════════════
-   SECTION 6: CLINIXAI PIPELINE VELOCITY
-   ══════════════════════════════════════════════════════════════════ */
-
-function ClinixPipeline() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true });
-
-  const metrics = [
-    { label: "Time to $1M Pipeline", clinix: "90 days", top: "6–9 mo", industry: "12–18 mo", clinixPct: 15, topPct: 45, industryPct: 90 },
-    { label: "Time to $4M Pipeline", clinix: "180 days", top: "12–18 mo", industry: "24–36 mo", clinixPct: 20, topPct: 55, industryPct: 95 },
-    { label: "Demo → POC Rate", clinix: "62%", top: "40–50%", industry: "25–30%", clinixPct: 62, topPct: 45, industryPct: 28 },
-    { label: "Sales Cycle Length", clinix: "45 days", top: "60–75 days", industry: "90–120 days", clinixPct: 20, topPct: 40, industryPct: 70 },
-  ];
-
-  return (
-    <RevealDiv className="mb-24">
-      <div className="text-center mb-12">
-        <SectionLabel>ClinixAI: Disrupting Healthcare</SectionLabel>
-        <h3 className="font-['Satoshi'] font-bold text-white text-4xl md:text-5xl mb-4">
-          Pipeline Velocity: <span className="text-[#FF6B9D]">3–5x Faster</span>
-        </h3>
-        <p className="text-white/50 text-lg max-w-2xl mx-auto font-['Satoshi']">
-          ClinixAI is outperforming top-quartile health-tech across every go-to-market metric.
-        </p>
-      </div>
-
-      <div ref={ref} className="space-y-6 mb-8">
-        {metrics.map((m, idx) => (
-          <RevealDiv key={m.label} delay={idx * 0.1}>
-            <div className="p-5 rounded-xl border border-white/10 bg-white/2">
-              <div className="text-white/70 text-sm font-bold font-['Satoshi'] mb-3">{m.label}</div>
-              <div className="space-y-2">
-                {/* ClinixAI */}
-                <div className="flex items-center gap-3">
-                  <span className="w-20 text-xs text-[#FF6B9D] font-bold font-['Satoshi'] text-right">ClinixAI</span>
-                  <div className="flex-1 h-7 bg-white/5 rounded-md overflow-hidden relative">
-                    <motion.div
-                      className="h-full rounded-md bg-gradient-to-r from-[#FF6B9D] to-[#FF6B9D]/60 flex items-center justify-end pr-2"
-                      initial={{ width: 0 }}
-                      animate={inView ? { width: `${m.clinixPct}%` } : {}}
-                      transition={{ duration: 1, delay: idx * 0.15, ease: "easeOut" }}
-                    >
-                      <span className="text-black text-xs font-bold font-['Satoshi']">{m.clinix}</span>
-                    </motion.div>
-                  </div>
-                </div>
-                {/* Top Quartile */}
-                <div className="flex items-center gap-3">
-                  <span className="w-20 text-xs text-white/40 font-['Satoshi'] text-right">Top Quartile</span>
-                  <div className="flex-1 h-5 bg-white/5 rounded-md overflow-hidden">
-                    <motion.div
-                      className="h-full rounded-md bg-white/15"
-                      initial={{ width: 0 }}
-                      animate={inView ? { width: `${m.topPct}%` } : {}}
-                      transition={{ duration: 1, delay: idx * 0.15 + 0.2, ease: "easeOut" }}
-                    />
-                  </div>
-                  <span className="text-white/30 text-xs font-['Satoshi'] w-16">{m.top}</span>
-                </div>
-                {/* Industry */}
-                <div className="flex items-center gap-3">
-                  <span className="w-20 text-xs text-white/30 font-['Satoshi'] text-right">Industry Avg</span>
-                  <div className="flex-1 h-5 bg-white/5 rounded-md overflow-hidden">
-                    <motion.div
-                      className="h-full rounded-md bg-white/8"
-                      initial={{ width: 0 }}
-                      animate={inView ? { width: `${m.industryPct}%` } : {}}
-                      transition={{ duration: 1, delay: idx * 0.15 + 0.4, ease: "easeOut" }}
-                    />
-                  </div>
-                  <span className="text-white/20 text-xs font-['Satoshi'] w-16">{m.industry}</span>
-                </div>
-              </div>
-            </div>
-          </RevealDiv>
-        ))}
-      </div>
-
-      <RevealDiv delay={0.4}>
-        <div className="p-5 rounded-xl border border-[#FF6B9D]/20 bg-[#FF6B9D]/4 text-center">
-          <p className="text-[#FF6B9D] font-bold font-['Satoshi'] text-lg">3–5x faster than top quartile across every metric</p>
         </div>
       </RevealDiv>
     </RevealDiv>
@@ -883,7 +795,6 @@ export default function StateOfDisruption() {
         <AgenticExplosion />
         <UnicornLandscape />
         <NervousSystemAnalogy />
-        <ClinixPipeline />
         <SpeedOfMoney />
         <FiveForces />
         <CompetitivePosition />

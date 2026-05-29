@@ -27,7 +27,7 @@ const MOAT_LAYERS = [
   },
   {
     name: "Regulatory Moat in Healthcare",
-    description: "ClinixAI and RRG.bio operate in the most regulated, most defensible sectors. First-mover regulatory relationships in AI clinical decision support and stem cell therapy are years-long advantages.",
+    description: "ATOM Red Team and PhysioPS operate in the most regulated, most defensible sectors. First-mover regulatory relationships in AI governance (EU AI Act) and clinical ANS intelligence are years-long advantages.",
     icon: Heart,
   },
   {

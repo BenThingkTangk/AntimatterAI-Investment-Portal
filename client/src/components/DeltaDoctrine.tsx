@@ -4,19 +4,19 @@ import { motion, useInView, useScroll, useTransform } from "framer-motion";
 const DOCTRINES = [
   { product: "ΔTOM Sales Dominator", text: "doesn't help your sales team. It replaces the ones who aren't closing." },
   { product: "Red Team ΔTOM", text: "doesn't find your vulnerabilities. It finds them before nation-state actors do." },
-  { product: "The ΔTOM Gaming Console", text: "is the first device that learns how you play and rewires itself to make you unstoppable." },
   { product: "HumanOS", text: "doesn't track your health. It predicts and prevents the version of you that gets sick." },
-  { product: "RRG.bio", text: "isn't a stem cell company. It's the edit button on human degradation." },
-  { product: "ClinixAI", text: "doesn't assist doctors. It gives every human on Earth access to a board-certified AI physician." },
-  { product: "ΔTOM Voice Agent", text: "doesn't answer your phones. It closes your deals at 3am." },
-  { product: "Thingk Tangk", text: "isn't a platform. It's the operating system for human potential." },
   { product: "AntimatterAI", text: "isn't a startup. It's the intelligence layer the Fortune 500 forgot to build." },
+  { product: "ΔTOM Voice Agent", text: "doesn't answer your phones. It closes your deals at 3am." },
   { product: "ΔTOM Lead Gen", text: "doesn't find leads. It finds the ones who are already thinking about buying." },
   { product: "ΔTOM Prospect Engine", text: "doesn't qualify leads. It eliminates the ones that were never going to close." },
   { product: "ΔTOM Quantum Layer", text: "isn't a security tool. It's a post-quantum immune system for your enterprise." },
   { product: "ΔTOM Industrial", text: "doesn't automate factories. It turns manufacturing floors into thinking organisms." },
   { product: "ΔTOM FinanceOS", text: "doesn't process transactions. It rewrites the rules of capital allocation in real time." },
   { product: "ΔTOM EdgeOS", text: "doesn't deploy AI to the edge. It puts a supercomputer in every device on earth." },
+  { product: "Akamai + Blackwell", text: "isn't a partnership. It's a 4,400-node nervous system running at 86% of hyperscaler cost." },
+  { product: "PhysioPS", text: "doesn't tell veterans they're broken. It shows them, in real-time biometric data, exactly what's recoverable." },
+  { product: "ATOM Sales Dominator", text: "runs on metered Stripe billing — every voice minute, phone reveal, and War Room credit billed at margin we own." },
+  { product: "The ΔTOM Doctrine", text: "We don't pitch potential. We pitch scarcity. The demand is interstellar. The constraint is capital." },
 ];
 
 function DoctrineCard({ doctrine, index }: { doctrine: typeof DOCTRINES[0]; index: number }) {
@@ -130,7 +130,7 @@ export default function DeltaDoctrine() {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="text-gray-500 text-lg font-['Satoshi']"
           >
-            15 Products. 15 Verticals. 15 Inevitabilities.
+            15 Lines. 4 Pillars. 1 Inevitability.
           </motion.p>
         </div>
 

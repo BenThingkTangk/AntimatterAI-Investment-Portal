@@ -27,6 +27,10 @@ import DeltaDoctrine from "@/components/DeltaDoctrine";
 import FortressMoat from "@/components/FortressMoat";
 import InvasionPlan from "@/components/InvasionPlan";
 import TheAsk from "@/components/TheAsk";
+import FourPillars from "@/components/FourPillars";
+import InfrastructureMoatSection from "@/components/InfrastructureMoatSection";
+import InstitutionalTailwind from "@/components/InstitutionalTailwind";
+import DemandCurve from "@/components/DemandCurve";
 
 /* ══════════════════════════════════════════════════════════════════
    UTILITY HOOKS
@@ -189,15 +193,19 @@ function RevealDiv({ children, delay = 0, className = "" }: { children: React.Re
 
 const NAV_SECTIONS = [
   { id: "hero", label: "Overview" },
+  { id: "pillars", label: "4 Pillars" },
   { id: "quantum", label: "Vision" },
   { id: "company", label: "Company" },
   { id: "matrix", label: "25/25" },
   { id: "products", label: "Products" },
   { id: "doctrine", label: "Doctrine" },
+  { id: "infra-moat", label: "Infra Moat" },
   { id: "moat", label: "Moat" },
   { id: "fortress", label: "Fortress" },
+  { id: "tailwind", label: "Tailwind" },
   { id: "market", label: "Market" },
   { id: "gtm", label: "GTM" },
+  { id: "demand", label: "Demand" },
   { id: "invasion", label: "Invasion" },
   { id: "revenue", label: "Revenue" },
   { id: "financials", label: "Financials" },
@@ -296,42 +304,6 @@ const PRODUCTS = [
     url: "https://www.nirmataholdings.com/resources/vendor-matrix",
   },
   {
-    name: "ClinixAI Healthcare",
-    slug: "clinix",
-    tagline: "Ambient Scribe + Full RCM",
-    icon: HeartPulse,
-    color: "#FF6B9D",
-    maturity: "SHIPPING",
-    description: "Billing Agent AI + Ambient Scribe. 78% documentation time reduction. Full X12 RCM claims processing. $4M+ pipeline in 180 days. HIPAA-native with ML denial prediction.",
-    cost: "$3.5M–$5.5M",
-    comparable: "Abridge — $758M raised; Ambience — $313M",
-    url: "https://www.clinixagent.com",
-  },
-  {
-    name: "MoleculeAI / Antiquant",
-    slug: "molecule",
-    tagline: "Quantum Drug Discovery",
-    icon: FlaskConical,
-    color: "#A855F7",
-    maturity: "R&D",
-    description: "Quantum-classical hybrid drug discovery using SMILES notation, XGBoost, and VQE. TAM: $85B+. Democratizing pharmaceutical R&D.",
-    cost: "$2.5M–$4M",
-    comparable: "XtalPi — $1.6B; Xaira — $1.0B",
-    url: "https://antiquant.vercel.app/",
-  },
-  {
-    name: "Vidzee",
-    slug: "vidzee",
-    tagline: "AI Real Estate Intelligence",
-    icon: Video,
-    color: "#F59E0B",
-    maturity: "LIMITED BETA",
-    description: "AI-powered real estate intelligence tool designed to facilitate fast property sales through intelligent matching, visual AI analysis, and automated workflows.",
-    cost: "$0.5M–$1M",
-    comparable: "Matterport — $1.6B acquisition",
-    url: "https://www.vidzee.ai",
-  },
-  {
     name: "ATOM Red Team",
     slug: "atom-red-team",
     tagline: "Automated AI security & adversarial testing",
@@ -427,14 +399,11 @@ const TAM_MARKETS = [
   { name: "AI Sales Automation", now: 19.6, future: 100, cagr: "23.7%", product: "ΔTOM Sales Dominator", color: "#00e6d3" },
   { name: "Gaming Console Hardware", now: 34.07, future: 51.15, cagr: "7.6%", product: "ΔTOM Game Console (HW)", color: "#74c0fc" },
   { name: "AI in Gaming", now: 4.4, future: 66.84, cagr: "34%", product: "ΔTOM Game Console (AI)", color: "#b987ff" },
-  { name: "Healthcare RCM", now: 72.9, future: 195.9, cagr: "11.6%", product: "ClinixAI", color: "#FF6B9D" },
   { name: "AI Red Teaming", now: 1.75, future: 18.6, cagr: "28.5%", product: "ΔTOM Red Team", color: "#ff6b8b" },
   { name: "Remote Patient Monitoring", now: 16.65, future: 47.34, cagr: "16.1%", product: "PhysioPS / HumanOS", color: "#72f2a1" },
   { name: "Digital Health & Wellness", now: 352, future: 720, cagr: "15.5%", product: "PhysioPS / HumanOS", color: "#00a89e" },
-  { name: "Stem Cell Therapy", now: 22.89, future: 97.50, cagr: "~17%", product: "RRG.bio", color: "#ffd166" },
   { name: "Agentic AI", now: 9.87, future: 52.6, cagr: "46.3%", product: "ΔTOM Enterprise + Agentic", color: "#00e6d3" },
   { name: "Enterprise AI Platforms", now: 31.5, future: 175, cagr: "37.6%", product: "ΔTOM Framework", color: "#00a7ff" },
-  { name: "Drug Discovery AI", now: 2.5, future: 12.0, cagr: "~30%", product: "MoleculeAI", color: "#A855F7" },
   { name: "Conversational AI", now: 12.06, future: 49.9, cagr: "32.7%", product: "ΔTOM Voice Agent", color: "#74c0fc" },
   { name: "Cybersecurity (Quantum)", now: 240, future: 500, cagr: "~13%", product: "ΔTOM Quantum Layer", color: "#ff6b8b" },
 ];
@@ -446,12 +415,6 @@ const ATOM_TIERS = [
   { name: "Atom Custom", price: "Custom/mo", annual: "Negotiated annually", gm: "~75% GM", desc: "Multi-tenant white-label · Revenue share · Partner ecosystem", color: "#ffd166" },
 ];
 
-const CLINIX_TIERS = [
-  { name: "Scribe", price: "$800–$1,500/mo", gm: "Target ~85–90%", desc: "Solo/small practice, per provider", color: "#FF6B9D" },
-  { name: "Practice", price: "$3K–$6K/mo", gm: "Target ~80–85%", desc: "Group practice, 5–20 providers", color: "#00e6d3" },
-  { name: "Enterprise", price: "$10K–$20K/mo", gm: "Target ~78–82%", desc: "Multi-location, full X12 RCM", color: "#00e6d3" },
-  { name: "Health System", price: "$30K–$60K/mo", gm: "Target ~75–80%", desc: "Hospital system, ML denial prediction", color: "#A855F7" },
-];
 
 const FINANCIAL_PROJECTIONS = [
   { year: "Y1 (2026)", revLow: 25, revHigh: 45, ebitdaNote: "Approaching breakeven", gmRange: "65–72%" },
@@ -478,7 +441,7 @@ const COMP_TABLE = [
   { company: "Gong", raised: "$580M", valuation: "$4.5B", products: "1 product (revenue intelligence)" },
   { company: "Oura", raised: "$400M+", valuation: "$11B", products: "1 product (wearable)" },
   { company: "WHOOP", raised: "$575M+", valuation: "$10.1B", products: "1 product (wearable)" },
-  { company: "Nirmata Holdings", raised: "$3.2M (just closed)", valuation: "$150M–$250M ask", products: "15 products (ΔTOM platform)" },
+  { company: "Nirmata Holdings", raised: "$3.2M (just closed)", valuation: "$150M–$250M ask", products: "4 flagship + 5 supporting (ΔTOM)" },
 ];
 
 const FUNDS_ALLOCATION = [
@@ -492,7 +455,7 @@ const FUNDS_ALLOCATION = [
 const MILESTONES = [
   { month: "Q1 2026 (NOW)", target: "Just closed $3.2M. 2 deals at $25K/mo ATOM Professional closing. Hundreds of deals in pipeline.", icon: Rocket, color: "#00e6d3" },
   { month: "Q2–Q3 2026", target: "Series A close $25M–$50M. 50–100 ATOM Professional/Enterprise deals on 36-mo terms. ARR exits Y1 at $25M–$45M.", icon: TrendingUp, color: "#00e6d3" },
-  { month: "Year 2 (2027)", target: "Cross-sell flywheel hits — Sales Dominator + Red Team + Game Console + ClinixAI converging. ARR $75M–$130M.", icon: Crown, color: "#00D4FF" },
+  { month: "Year 2 (2027)", target: "Cross-sell flywheel hits — Sales Dominator + Red Team + PhysioPS + Game Console converging. ARR $75M–$130M.", icon: Crown, color: "#00D4FF" },
   { month: "Year 3 (2028)", target: "Unicorn threshold crossed. ARR $175M–$290M. Series B at $1B+ pre-money. International expansion (APAC, EU).", icon: Star, color: "#FFD700" },
   { month: "Year 5 (2030)", target: "$550M–$850M ARR. EBITDA-positive at 35–42% margin. IPO/strategic exit at $14B–$21B valuation.", icon: Trophy, color: "#A855F7" },
 ];
@@ -818,7 +781,7 @@ function HeroSection() {
           transition={{ delay: 0.6, duration: 0.8 }}
           className="text-white/70 text-xl md:text-2xl font-['Satoshi'] mb-2"
         >
-          <TypeWriter text="ΔTOM platform · 15 products · Series A · $150M–$250M Pre-Money" delay={800} speed={45} />
+          <TypeWriter text="4 Flagship Products · 9 Total · Series A · $150M–$250M Pre-Money" delay={800} speed={45} />
         </motion.p>
 
         {/* Raise line */}
@@ -828,7 +791,7 @@ function HeroSection() {
           transition={{ delay: 0.75 }}
           className="text-[#00e6d3] text-base md:text-lg font-['Satoshi'] font-semibold mb-10"
         >
-          Series A &nbsp;·&nbsp; $25M–$50M Raise &nbsp;·&nbsp; $150M–$250M Pre-Money Valuation
+          Founder-Funded &nbsp;·&nbsp; $3.2M Closed &nbsp;·&nbsp; Active ARR &nbsp;·&nbsp; Seeking Strategic VC Partners
         </motion.p>
 
         {/* Stats bar */}
@@ -1009,7 +972,7 @@ function CompanySection() {
       bg: "from-[#00e6d3]/10 to-transparent",
       initials: "BO",
       bio: "Autistic systems thinker and architect of the ΔTOM platform, the 25-dimension vendor framework, and the ethical AI covenant. Holds founding vision and long-horizon strategy for Nirmata Holdings — the parent company of every product in the portfolio.",
-      shipped: ["ΔTOM platform architecture (15 products)", "ClinixAI ($4M+ pipeline in 180 days)", "Ethical AI covenant", "99+ enterprise projects"],
+      shipped: ["ΔTOM platform architecture (9 products, 4 flagship)", "AntimatterAI core platform", "Ethical AI covenant", "99+ enterprise projects"],
     },
     {
       name: "Joel Bedard",
@@ -1029,7 +992,7 @@ function CompanySection() {
       bg: "from-[#ffd166]/10 to-transparent",
       initials: "JM",
       bio: "The von Clausewitz of startup sales and growth. Josh's genius is turning complex anything — physics, AI infrastructure, agentic systems, regulated workflows — into simple, understandable, sellable, high-adoption stories that close. He architects the GTM motion that takes Nirmata from early traction to category-defining inevitability. Where most CROs sell features, Josh sells worldviews. Where most pipelines stall, his accelerate. Mic. Drop.",
-      shipped: ["Sub-90-day pipeline acceleration playbook", "Complexity→Clarity narrative engine", "Enterprise category-creation GTM", "Channel & strategic partnerships", "Revenue battle plans for all 15 products"],
+      shipped: ["Sub-90-day pipeline acceleration playbook", "Complexity→Clarity narrative engine", "Enterprise category-creation GTM", "Channel & strategic partnerships", "Revenue battle plans for all 4 flagship products"],
     },
 
   ];
@@ -1294,7 +1257,7 @@ function ProductsSection() {
             Product <span className="text-[#00e6d3]">Portfolio</span>
           </h2>
           <p className="text-white/50 text-lg max-w-2xl mx-auto font-['Satoshi']">
-            15 products across the Nirmata Holdings portfolio. One integrated ΔTOM nervous system. $95M–$165M total IP replication cost.
+            9 products across the Nirmata Holdings portfolio — 4 flagship pillars + 5 supporting. One integrated ΔTOM nervous system. $95M–$165M total IP replication cost.
           </p>
         </RevealDiv>
 
@@ -1413,7 +1376,7 @@ function MoatSection() {
             <div className="p-6 rounded-2xl border border-[#00e6d3]/20 bg-[#00e6d3]/4">
               <h3 className="font-['Satoshi'] font-bold text-[#00e6d3] text-lg mb-4">Proprietary IP (We Built)</h3>
               <div className="space-y-2">
-                {["GenUI engine — AI generates its own interfaces", "5-layer governance fabric (SOC2, HIPAA, FedRAMP)", "Deploy-anywhere runtime (cloud, VPC, on-prem, edge, air-gap)", "Agent orchestration spine (Brain-Spine-Worker)", "ClinixAI clinical stack (ambient scribe + full X12 RCM)", "Post-quantum cryptography layer"].map((item) => (
+                {["GenUI engine — AI generates its own interfaces", "5-layer governance fabric (SOC2, HIPAA, FedRAMP)", "Deploy-anywhere runtime (cloud, VPC, on-prem, edge, air-gap)", "Agent orchestration spine (Brain-Spine-Worker)", "Akamai Blackwell edge inference grid", "Post-quantum cryptography layer"].map((item) => (
                   <div key={item} className="flex items-start gap-2">
                     <Check className="text-[#00e6d3] mt-0.5 flex-shrink-0" size={14} />
                     <span className="text-white/70 text-sm font-['Satoshi']">{item}</span>
@@ -1684,7 +1647,7 @@ function GTMSection() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {[
                 "99+ enterprise projects delivered across Fortune 500 clients",
-                "ClinixAI $4M+ qualified pipeline built in just 180 days",
+                "4 flagship products with live demos and active pipeline",
                 "GenUI — unique capability no competitor has replicated",
                 "25/25 vendor framework being used as a procurement evaluation tool",
               ].map((item) => (
@@ -1826,7 +1789,7 @@ function RevenueSection() {
           <div className="max-w-3xl mx-auto mb-4 mt-4">
             <div className="p-5 rounded-xl border border-[#00e6d3]/30 bg-gradient-to-r from-[#00e6d3]/10 to-[#00a7ff]/10 text-center">
               <p className="text-white font-bold font-['Satoshi'] text-base mb-1">Combined Y1 Rule-of-78: <span className="text-[#00e6d3]">$8.19M annual recognized revenue</span></p>
-              <p className="text-white/50 text-sm font-['Satoshi']">From just 3 of 15 products. The flywheel compounds across the rest.</p>
+              <p className="text-white/50 text-sm font-['Satoshi']">From the 4 flagship pillars. The flywheel compounds across the supporting products.</p>
               <p className="text-white/40 text-[11px] font-['Satoshi'] italic mt-2">Annual figure (Y1 cumulative). Not monthly. $105K of new MRR added each month × 78 MRR-months (1+2+...+12) = $8.19M recognized revenue in Year 1.</p>
             </div>
           </div>
@@ -2188,15 +2151,14 @@ function ValuationSection() {
       midpoint: "$130M",
       color: "#00e6d3",
       icon: Layers,
-      desc: "Direct cost to rebuild the ΔTOM core platform plus 15 vertical/horizontal products, infrastructure, and accumulated know-how.",
+      desc: "Direct cost to rebuild the ΔTOM core platform plus 9 vertical/horizontal products, infrastructure, and accumulated know-how.",
       items: [
         { label: "ΔTOM core platform", value: "$15–25M" },
         { label: "ΔTOM Sales Dominator", value: "$8–12M" },
         { label: "ΔTOM Game Console", value: "$15–25M" },
         { label: "PhysioPS / HumanOS", value: "$6–10M" },
-        { label: "ClinixAI Healthcare Stack", value: "$3.5–5.5M" },
-        { label: "ΔTOM Red Team + Security", value: "$3–5M" },
-        { label: "Remaining 9 products", value: "$30–50M" },
+        { label: "ATOM Red Team + Security", value: "$3–5M" },
+        { label: "Remaining supporting products", value: "$20–35M" },
         { label: "DevOps, Testing, Integration", value: "$5–10M" },
       ],
     },
@@ -2212,7 +2174,7 @@ function ValuationSection() {
         { label: "Gong (revenue intel)", value: "$4.5B valuation" },
         { label: "Oura (wearable)", value: "$11B valuation" },
         { label: "WHOOP (wearable)", value: "$10.1B valuation" },
-        { label: "Nirmata Holdings (15 products)", value: "$150M–$250M ask" },
+        { label: "Nirmata Holdings (9 products)", value: "$150M–$250M ask" },
         { label: "Traction", value: "$3.2M closed + 2 live deals" },
       ],
     },
@@ -2222,13 +2184,13 @@ function ValuationSection() {
       midpoint: "$200M",
       color: "#00D4FF",
       icon: Globe,
-      desc: "ClinixAI $4M+ pipeline + $3.2M closed + 2 live ATOM Pro deals ($600K ARR/$1.8M TCV). 15-product platform premium across multiple verticals.",
+      desc: "$3.2M closed + 2 live ATOM Pro deals ($600K ARR/$1.8M TCV). 4-flagship + 5-supporting product platform premium across multiple verticals.",
       items: [
-        { label: "ClinixAI pipeline", value: "$4M+ qualified pipeline" },
+        { label: "Active pipeline", value: "Copious enterprise deals in close" },
         { label: "ATOM Professional (2 live)", value: "$600K ARR / $1.8M TCV" },
         { label: "Forward multiple", value: "15–25x" },
         { label: "Active revenue base", value: "$60–100M standalone" },
-        { label: "Platform premium (15 products)", value: "+$60–180M" },
+        { label: "Platform premium (9 products)", value: "+$60–180M" },
       ],
     },
   ];
@@ -2323,7 +2285,7 @@ function ValuationSection() {
           </div>
           <div className="mt-4 p-4 rounded-xl border border-[#00e6d3]/15 bg-[#00e6d3]/3">
             <p className="text-[#00e6d3] text-sm font-bold font-['Satoshi']">The asymmetric opportunity:</p>
-            <p className="text-white/60 text-sm font-['Satoshi'] mt-1">We intentionally price at a fraction of late-stage comps to align maximum upside with early investors. Entry at $60M with 15 products in portfolio vs. single-product companies at $1B–$10B+ represents asymmetric risk/reward.</p>
+            <p className="text-white/60 text-sm font-['Satoshi'] mt-1">We intentionally price at a fraction of late-stage comps to align maximum upside with early investors. Entry at $150M–$250M with 4 flagship + 5 supporting products vs. single-product companies at $1B–$10B+ represents asymmetric risk/reward.</p>
           </div>
         </RevealDiv>
       </div>
@@ -2644,10 +2606,10 @@ function EthicsSection() {
             {/* Document downloads */}
             <div className="flex flex-wrap items-center justify-center gap-3">
               {[
-                { label: "Investor Deep Dive", file: "/antimatterai_mega_document.pdf" },
-                { label: "State of Disruption", file: "/antimatterai_state_of_disruption.pdf" },
-                { label: "Investor Hype Deck", file: "/antimatterai_investor_hype.pdf" },
-                { label: "Pitch Deck (PPTX)", file: "/antimatterai_pitch_deck.pptx" },
+                { label: "The Investor Deep Dive", file: "/antimatterai_mega_document.pdf" },
+                { label: "State of Disruption Report", file: "/antimatterai_state_of_disruption.pdf" },
+                { label: "The Investor Strike Brief", file: "/antimatterai_investor_hype.pdf" },
+                { label: "Series A Pitch Deck", file: "/antimatterai_pitch_deck.pptx" },
               ].map((doc) => (
                 <a
                   key={doc.label}
@@ -2696,7 +2658,7 @@ function EthicsSection() {
 function HonestGapAnalysis() {
   const gaps = [
     { title: "Early Revenue Stage", desc: "$3.2M closed. 2 ATOM Professional deals live at $25K/mo ($600K ARR / $1.8M TCV). Hundreds of deals in pipeline. Still building first full-year cohort data.", icon: DollarSign, status: "Building" },
-    { title: "4 Products in Early Stage", desc: "ΔTOM Game Console, ΔTOM Sales Dominator, PhysioPS/HumanOS, and MoleculeAI are in LIMITED BETA or R&D. Not all 15 products are production-ready.", icon: AlertCircle, status: "In Progress" },
+    { title: "3 Products in Early Stage", desc: "ΔTOM Game Console, ΔTOM Sales Dominator, and PhysioPS/HumanOS are in LIMITED BETA or R&D. Core platform (AntimatterAI, Red Team, Voice Agent) is shipping.", icon: AlertCircle, status: "In Progress" },
     { title: "First 12-Month Cohort Data", desc: "We are building our first 12-month customer cohort data. NRR, churn, and expansion metrics will mature over the next 2–3 quarters.", icon: LineChart, status: "Building" },
     { title: "Key Hires Needed", desc: "Head of Engineering, Clinical Advisor, and Security Advisor roles are open. These are critical for scaling the next phase.", icon: Users, status: "Hiring" },
   ];
@@ -2736,7 +2698,7 @@ function HonestGapAnalysis() {
         <RevealDiv delay={0.3} className="mt-10">
           <div className="p-6 rounded-2xl border border-[#00e6d3]/20 bg-[#00e6d3]/3 text-center">
             <p className="text-white/60 text-sm font-['Satoshi']">
-              <span className="text-[#00e6d3] font-bold">Why we share this:</span> Investors who back Nirmata Holdings at $150M–$250M pre-money are buying into $3.2M closed, live ARR, hundreds of deals in pipeline, and the 15-product portfolio thesis. We believe radical transparency accelerates trust and alignment.
+              <span className="text-[#00e6d3] font-bold">Why we share this:</span> Investors who back Nirmata Holdings at $150M–$250M pre-money are buying into $3.2M closed, live ARR, hundreds of deals in pipeline, and the 4-flagship product thesis. We believe radical transparency accelerates trust and alignment.
             </p>
           </div>
         </RevealDiv>
@@ -2771,10 +2733,10 @@ function Footer() {
             <h4 className="text-white/60 text-xs font-semibold uppercase tracking-widest font-['Satoshi'] mb-4">Documents</h4>
             <div className="space-y-2">
               {[
-                { label: "Investor Deep Dive", file: "/antimatterai_mega_document.pdf" },
-                { label: "State of Disruption", file: "/antimatterai_state_of_disruption.pdf" },
-                { label: "Investor Hype Deck", file: "/antimatterai_investor_hype.pdf" },
-                { label: "Pitch Deck (PPTX)", file: "/antimatterai_pitch_deck.pptx" },
+                { label: "The Investor Deep Dive", file: "/antimatterai_mega_document.pdf" },
+                { label: "State of Disruption Report", file: "/antimatterai_state_of_disruption.pdf" },
+                { label: "The Investor Strike Brief", file: "/antimatterai_investor_hype.pdf" },
+                { label: "Series A Pitch Deck", file: "/antimatterai_pitch_deck.pptx" },
               ].map((doc) => (
                 <a
                   key={doc.label}
@@ -2839,6 +2801,57 @@ function CursorGlow() {
 }
 
 /* ══════════════════════════════════════════════════════════════════
+   VC CUSTOMIZATION LAYER
+   ══════════════════════════════════════════════════════════════════ */
+
+const VC_CONFIG: Record<string, { name: string; focus: string; lead: string; color: string }> = {
+  templeton: { name: "Mark Templeton", focus: "Enterprise infrastructure DNA. Citrix + DigitalOcean + Nutanix + Proofpoint mapping.", lead: "Red Team + Sales Dominator", color: "#00e6d3" },
+  blackrock: { name: "BlackRock", focus: "AI infrastructure thesis: Aligned Data Centers + Cerebras + ElevenLabs.", lead: "AntimatterAI Core + Infrastructure Moat", color: "#00a7ff" },
+  benchmark: { name: "Benchmark Capital", focus: "Sierra precedent + agentic AI thesis.", lead: "AntimatterAI Core", color: "#b987ff" },
+  a16z: { name: "Andreessen Horowitz", focus: "American Dynamism thesis + defense/regulated industry AI.", lead: "Red Team + Infrastructure Moat", color: "#ff6b8b" },
+  sequoia: { name: "Sequoia Capital", focus: "Vertical SaaS platform thesis.", lead: "AntimatterAI Core", color: "#ffd166" },
+  founders_fund: { name: "Founders Fund", focus: "Defense + infrastructure + American sovereignty.", lead: "Red Team + Akamai Blackwell", color: "#74c0fc" },
+};
+
+function VCBanner() {
+  const [activeVC, setActiveVC] = useState<{ name: string; focus: string; lead: string; color: string } | null>(null);
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const vcKey = params.get("vc")?.toLowerCase() || "";
+    if (vcKey && VC_CONFIG[vcKey]) {
+      setActiveVC(VC_CONFIG[vcKey]);
+    }
+  }, []);
+
+  if (!activeVC) return null;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: 0.3 }}
+      className="fixed top-0 left-0 right-0 z-[60] px-4 py-3"
+      style={{ background: `linear-gradient(135deg, ${activeVC.color}15 0%, black 100%)`, borderBottom: `1px solid ${activeVC.color}30` }}
+    >
+      <div className="max-w-7xl mx-auto flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: activeVC.color }} />
+          <span className="text-white/90 text-sm font-['Satoshi'] font-semibold">
+            Prepared for <span style={{ color: activeVC.color }}>{activeVC.name}</span>
+          </span>
+        </div>
+        <div className="hidden md:flex items-center gap-4">
+          <span className="text-white/40 text-xs font-['Satoshi']">{activeVC.focus}</span>
+          <span className="text-xs px-2 py-1 rounded-full font-['Satoshi'] font-semibold" style={{ background: `${activeVC.color}20`, color: activeVC.color }}>
+            {activeVC.lead}
+          </span>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════════════
    MAIN HOME COMPONENT
    ══════════════════════════════════════════════════════════════════ */
 
@@ -2850,17 +2863,24 @@ export default function Home() {
       <StickyNav />
       <CursorGlow />
 
+      {/* VC Personalization Banner */}
+      <VCBanner />
+
       {/* All sections */}
       <HeroSection />
+      <FourPillars />
       <QuantumSection />
       <CompanySection />
       <VendorMatrixSection />
       <ProductsSection />
       <DeltaDoctrine />
+      <InfrastructureMoatSection />
       <MoatSection />
       <FortressMoat />
+      <InstitutionalTailwind />
       <MarketSection />
       <GTMSection />
+      <DemandCurve />
       <InvasionPlan />
       <RevenueSection />
       <FinancialsSection />

@@ -243,13 +243,13 @@ const tenReasons = [
   },
   {
     num: "07",
-    title: "Healthcare Expertise with Clinix AI",
-    detail: "78% reduction in clinical documentation time. Healthcare AI market growing at 48% CAGR. Clinix AI targets 1,000+ providers, proving Atom's vertical depth.",
+    title: "4-Flagship Product Portfolio = Multi-Product Premium",
+    detail: "AntimatterAI Core, ATOM Sales Dominator, ATOM Red Team, PhysioPS/HumanOS — each targeting $10B+ markets. 4 flagship + 5 supporting products under one parent company. $95M–$165M IP replication cost.",
   },
   {
     num: "08",
     title: "Nirmata Holdings Ecosystem = Cross-Sell Flywheel",
-    detail: "5 portfolio companies create built-in demand, production validation, reference architectures, and revenue synergies. Near-zero customer acquisition cost for initial deployments.",
+    detail: "9 products (4 flagship + 5 supporting) create built-in demand, production validation, reference architectures, and revenue synergies. Near-zero customer acquisition cost for initial deployments.",
   },
   {
     num: "09",
@@ -299,12 +299,12 @@ const gtmTimeline = [
 ];
 
 const portfolioCompanies = [
-  { name: "Nirmata Holdings", focus: "Core AI Platform", integration: "Powers all portfolio companies", icon: Brain },
-  { name: "ClinixAI", focus: "Clinical Documentation", integration: "78% reduction in documentation time", icon: Users },
-  { name: "MoleculeAI", focus: "Molecular Research", integration: "AI orchestration for molecular analysis", icon: Layers },
-  { name: "Vidzee", focus: "AI Video & PropTech", integration: "Automated listing video creation at scale", icon: Sparkles },
+  { name: "AntimatterAI Core", focus: "Core AI Platform", integration: "Powers all portfolio products", icon: Brain },
+  { name: "ATOM Sales Dominator", focus: "Voice-First AI Sales", integration: "Autonomous revenue production at machine scale", icon: Target },
+  { name: "ATOM Red Team", focus: "AI Security & Governance", integration: "EU AI Act ready, adversarial testing", icon: Layers },
+  { name: "PhysioPS / HumanOS", focus: "ANS Clinical Intelligence", integration: "Real-time HRV + photoplethysmography", icon: Users },
   { name: "ATOM Browser", focus: "AI-Native Browser", integration: "Agent capabilities baked into browsing", icon: Globe },
-  { name: "ATOM Lead Gen", focus: "AI Sales Development", integration: "Cold calls, emails, closes with AI", icon: Target },
+  { name: "ATOM Voice Agent", focus: "Empathic Voice AI", integration: "Closes deals at 3am with emotional intelligence", icon: Sparkles },
 ];
 
 const flywheelEffects = [
@@ -320,8 +320,8 @@ const keyMetrics = [
   { label: "Vendor Matrix Score", value: 25, prefix: "", suffix: "/25", decimals: 0 },
   { label: "Projects Delivered", value: 99, prefix: "", suffix: "+", decimals: 0 },
   { label: "Client Satisfaction", value: 99, prefix: "", suffix: "%+", decimals: 0 },
-  { label: "Clinix AI Impact", value: 78, prefix: "", suffix: "%", decimals: 0 },
-  { label: "Clinix AI Target", value: 1000, prefix: "", suffix: "+", decimals: 0 },
+  { label: "Flagship Products", value: 4, prefix: "", suffix: " Pillars", decimals: 0 },
+  { label: "Total Products", value: 9, prefix: "", suffix: " SKUs", decimals: 0 },
 ];
 
 const enterpriseClients = ["Lowe's", "Cognizant", "Trimble", "E2open", "Toyota", "OWASP", "Injazat"];
