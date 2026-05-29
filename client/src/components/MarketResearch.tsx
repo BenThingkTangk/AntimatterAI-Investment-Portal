@@ -148,7 +148,7 @@ function Section({
 const tamData = [
   { market: "Healthcare AI", val2024: 21.66, val2030: 110.61, cagr: 48.0, color: "#00e6d3" },
   { market: "Enterprise AI", val2024: 18.22, val2030: 94.31, cagr: 38.9, color: "#00DDa0" },
-  { market: "Agentic AI", val2024: 9.14, val2030: 139.19, cagr: 40.5, color: "#00e6d3" },
+  { market: "Agentic AI", val2024: 3.67, val2030: 24.5, cagr: 46.0, color: "#00e6d3" },
   { market: "AI Browser", val2024: 4.5, val2030: 76.8, cagr: 32.8, color: "#6c6ebd" },
 ];
 
@@ -199,8 +199,8 @@ const macroConvergence = [
   {
     icon: Shield,
     title: "Regulatory Acceleration",
-    year: "GDPR • HIPAA • EU AI Act",
-    desc: "Data sovereignty is now mandatory. Deploy-anywhere architectures become table stakes.",
+    year: "GDPR • HIPAA • EU AI Act (Aug 2026 / Dec 2027)",
+    desc: "Data sovereignty is now mandatory. EU AI Act general provisions Aug 2026; high-risk enforcement Dec 2027. Deploy-anywhere architectures become table stakes.",
   },
   {
     icon: Brain,

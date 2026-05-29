@@ -44,7 +44,7 @@ const PILLARS = [
       "Continuous prompt injection resistance testing",
       "Model hallucination detection + jailbreak resistance",
       "OWASP LLM Top 10 compliance automation",
-      "EU AI Act (Aug 2026) + NIST AI RMF readiness",
+      "EU AI Act general provisions Aug 2026; high-risk Dec 2027",
     ],
     pipeline: "Copious deals in regulated industries — defense, finance, healthcare. Demand is staggering.",
     demo: "https://dtom-red-team-command-interface.vercel.app/",

@@ -27,10 +27,15 @@ import DeltaDoctrine from "@/components/DeltaDoctrine";
 import FortressMoat from "@/components/FortressMoat";
 import InvasionPlan from "@/components/InvasionPlan";
 import TheAsk from "@/components/TheAsk";
-import FourPillars from "@/components/FourPillars";
+import ThreeGames from "@/components/ThreeGames";
 import InfrastructureMoatSection from "@/components/InfrastructureMoatSection";
 import InstitutionalTailwind from "@/components/InstitutionalTailwind";
 import DemandCurve from "@/components/DemandCurve";
+import ConvergenceDial from "@/components/ConvergenceDial";
+import AtomFiveLayers from "@/components/AtomFiveLayers";
+import FivePlays from "@/components/FivePlays";
+import HistoricalPattern from "@/components/HistoricalPattern";
+import HonestCounters from "@/components/HonestCounters";
 
 /* ══════════════════════════════════════════════════════════════════
    UTILITY HOOKS
@@ -193,7 +198,9 @@ function RevealDiv({ children, delay = 0, className = "" }: { children: React.Re
 
 const NAV_SECTIONS = [
   { id: "hero", label: "Overview" },
-  { id: "pillars", label: "4 Pillars" },
+  { id: "convergence", label: "Convergence" },
+  { id: "pillars", label: "3 Games" },
+  { id: "atom-layers", label: "ATOM Layers" },
   { id: "quantum", label: "Vision" },
   { id: "company", label: "Company" },
   { id: "matrix", label: "25/25" },
@@ -203,9 +210,11 @@ const NAV_SECTIONS = [
   { id: "moat", label: "Moat" },
   { id: "fortress", label: "Fortress" },
   { id: "tailwind", label: "Tailwind" },
+  { id: "historical", label: "Patterns" },
   { id: "market", label: "Market" },
   { id: "gtm", label: "GTM" },
   { id: "demand", label: "Demand" },
+  { id: "five-plays", label: "5 Plays" },
   { id: "invasion", label: "Invasion" },
   { id: "revenue", label: "Revenue" },
   { id: "financials", label: "Financials" },
@@ -213,6 +222,7 @@ const NAV_SECTIONS = [
   { id: "investment", label: "Investment" },
   { id: "ask", label: "The Ask" },
   { id: "disruption", label: "Disruption" },
+  { id: "counters", label: "Counters" },
   { id: "ethics", label: "Ethics" },
   { id: "gaps", label: "Gaps" },
 ];
@@ -227,7 +237,7 @@ const PRODUCTS = [
     maturity: "SHIPPING",
     description: "5-layer enterprise intelligence framework with SOC2, HIPAA, post-quantum cryptography, VPC deployment. The infrastructure Fortune 500 CISOs require.",
     cost: "$5M–$8M",
-    comparable: "Sierra AI — $635M raised",
+    comparable: "Sierra AI — $15.8B (Series E, May 2026)",
     url: "https://www.nirmataholdings.com/enterprise-ai",
   },
   {
@@ -263,7 +273,7 @@ const PRODUCTS = [
     maturity: "SHIPPING",
     description: "Buyer intent scoring and behavioral prediction. 6-Step Discovery Framework that understands what customers need before they articulate it.",
     cost: "$1M–$1.5M",
-    comparable: "Gong — $7.2B valuation",
+    comparable: "Gong — $7.25B ($500M ARR)",
     url: "https://www.nirmataholdings.com/atom-intentiq",
   },
   {
@@ -310,7 +320,7 @@ const PRODUCTS = [
     icon: Shield,
     color: "#ff6b8b",
     maturity: "SHIPPING",
-    description: "Continuous AI red teaming: prompt injection resistance, model hallucination detection, jailbreak resistance, OWASP LLM Top 10 compliance. Built for the EU AI Act (Aug 2026) and NIST AI RMF. Cisco acquired comparable Robust Intelligence for ~$350-400M.",
+    description: "Continuous AI red teaming: prompt injection resistance, model hallucination detection, jailbreak resistance, OWASP LLM Top 10 compliance. EU AI Act general provisions begin Aug 2026; high-risk system enforcement Dec 2027. Cisco acquired Robust Intelligence for ~$350-400M.",
     cost: "$3M–$5M",
     comparable: "Robust Intelligence (Cisco $350M), HiddenLayer $50M Series A",
     url: "https://atom-red-team-investor-pitch-zp6c.vercel.app",
@@ -326,10 +336,10 @@ const PRODUCTS = [
     maturity: "SHIPPING",
     description: "Voice-first AI sales platform that runs on Akamai Inference Cloud + NVIDIA Blackwell GPUs. Real-time call coaching, intent detection, conversation intelligence, and autonomous outbound at human speed. Combined TAM $25–30B in 2026 → $100B+ by 2033.",
     cost: "$8M–$12M",
-    comparable: "Gong $4.5B, Outreach $4.4B, Apollo.io $1.6B",
+    comparable: "Gong $7.25B ($500M ARR), Outreach $4.4B, Apollo.io $1.6B",
     url: "https://atom-sales-dominator-ai.vercel.app",
     marketSize: "$30B TAM (sales engagement + AI sales + RevOps)",
-    growthRate: "23.7% CAGR through 2035",
+    growthRate: "AI Sales/RevOps blended TAM",
   },
   {
     name: "PhysioPS / HumanOS",
@@ -342,7 +352,7 @@ const PRODUCTS = [
     cost: "$6M–$10M",
     comparable: "Oura $11B, WHOOP $10.1B, Welltory",
     url: "https://humanos-ans-diagnostic.vercel.app",
-    marketSize: "RPM $16.65B (2026) → $47.34B (2033)",
+    marketSize: "RPM $36.29B (2026) → $71.68B (2030) per MarketsandMarkets",
     growthRate: "16.1% CAGR",
   },
   {
@@ -396,13 +406,13 @@ const MOAT_LAYERS = [
 ];
 
 const TAM_MARKETS = [
-  { name: "AI Sales Automation", now: 19.6, future: 100, cagr: "23.7%", product: "ΔTOM Sales Dominator", color: "#00e6d3" },
+  { name: "AI Sales / RevOps", now: 19.6, future: 100, cagr: "23.7%", product: "ΔTOM Sales Dominator", color: "#00e6d3" },
   { name: "Gaming Console Hardware", now: 34.07, future: 51.15, cagr: "7.6%", product: "ΔTOM Game Console (HW)", color: "#74c0fc" },
   { name: "AI in Gaming", now: 4.4, future: 66.84, cagr: "34%", product: "ΔTOM Game Console (AI)", color: "#b987ff" },
   { name: "AI Red Teaming", now: 1.75, future: 18.6, cagr: "28.5%", product: "ΔTOM Red Team", color: "#ff6b8b" },
-  { name: "Remote Patient Monitoring", now: 16.65, future: 47.34, cagr: "16.1%", product: "PhysioPS / HumanOS", color: "#72f2a1" },
+  { name: "Remote Patient Monitoring", now: 36.29, future: 71.68, cagr: "14.6%", product: "PhysioPS / HumanOS", color: "#72f2a1" },
   { name: "Digital Health & Wellness", now: 352, future: 720, cagr: "15.5%", product: "PhysioPS / HumanOS", color: "#00a89e" },
-  { name: "Agentic AI", now: 9.87, future: 52.6, cagr: "46.3%", product: "ΔTOM Enterprise + Agentic", color: "#00e6d3" },
+  { name: "Agentic AI", now: 5.1, future: 47, cagr: "~45%", product: "ΔTOM Enterprise + Agentic", color: "#00e6d3" },
   { name: "Enterprise AI Platforms", now: 31.5, future: 175, cagr: "37.6%", product: "ΔTOM Framework", color: "#00a7ff" },
   { name: "Conversational AI", now: 12.06, future: 49.9, cagr: "32.7%", product: "ΔTOM Voice Agent", color: "#74c0fc" },
   { name: "Cybersecurity (Quantum)", now: 240, future: 500, cagr: "~13%", product: "ΔTOM Quantum Layer", color: "#ff6b8b" },
@@ -435,13 +445,14 @@ const RADAR_DATA = [
 ];
 
 const COMP_TABLE = [
-  { company: "Sierra AI", raised: "$635M", valuation: "$10B", products: "1 product (CX)" },
+  { company: "Cognition AI (Devin)", raised: "$1.5B+", valuation: "$26B", products: "1 product (AI coding)" },
+  { company: "Sierra AI", raised: "$635M", valuation: "$15.8B", products: "1 product (CX)" },
   { company: "Harvey AI", raised: "$3B", valuation: "$11B", products: "1 product (legal AI)" },
-  { company: "Distyl AI", raised: "$175M", valuation: "$1.8B", products: "Multi-product AI" },
-  { company: "Gong", raised: "$580M", valuation: "$4.5B", products: "1 product (revenue intelligence)" },
+  { company: "Cohere", raised: "$1.2B+", valuation: "$6.8B", products: "1 product (enterprise LLM)" },
+  { company: "Gong", raised: "$580M", valuation: "$7.25B", products: "1 product ($500M ARR, revenue intel)" },
   { company: "Oura", raised: "$400M+", valuation: "$11B", products: "1 product (wearable)" },
   { company: "WHOOP", raised: "$575M+", valuation: "$10.1B", products: "1 product (wearable)" },
-  { company: "Nirmata Holdings", raised: "$3.2M (just closed)", valuation: "$150M–$250M ask", products: "4 flagship + 5 supporting (ΔTOM)" },
+  { company: "Nirmata Holdings", raised: "$3.2M (just closed)", valuation: "$150M–$250M ask", products: "3 companies, 9 products (ΔTOM)" },
 ];
 
 const FUNDS_ALLOCATION = [
@@ -803,7 +814,7 @@ function HeroSection() {
         >
           <StatCounter value={250} prefix="$" suffix="M" label="Pre-Money (Up To)" />
           <div className="w-px h-8 bg-white/10 hidden md:block" />
-          <StatCounter value={15} label="Products in Portfolio" />
+          <StatCounter value={9} label="Products (4 Flagship)" />
           <div className="w-px h-8 bg-white/10 hidden md:block" />
           <StatCounter value={99} suffix="+" label="Projects Delivered" />
           <div className="w-px h-8 bg-white/10 hidden md:block" />
@@ -1689,7 +1700,7 @@ function GTMSection() {
           <div className="mt-4 flex gap-6 flex-wrap">
             <div className="text-sm font-['Satoshi']"><span className="text-[#00e6d3] font-bold">Blended Gross Margin:</span> <span className="text-white/60">67% (Software trio: 83%)</span></div>
             <div className="text-sm font-['Satoshi']"><span className="text-[#00e6d3] font-bold">3-Year LTV per Enterprise:</span> <span className="text-white/60">$3M–$5M (36-mo terms)</span></div>
-            <div className="text-sm font-['Satoshi']"><span className="text-[#00e6d3] font-bold">Target LTV:CAC:</span> <span className="text-white/60">22.5x (Sales Dominator), blended 12–15x</span></div>
+            <div className="text-sm font-['Satoshi']"><span className="text-[#00e6d3] font-bold">Target LTV:CAC:</span> <span className="text-white/60">22.5x target (internal model), blended 12–15x</span></div>
             <div className="text-sm font-['Satoshi']"><span className="text-[#00e6d3] font-bold">Target NRR:</span> <span className="text-white/60">130–150%+</span></div>
           </div>
         </RevealDiv>
@@ -1721,7 +1732,7 @@ function RevenueSection() {
 
   // 3 flagship products driving the Y1 Rule of 78
   const flywheelProducts = [
-    { name: "ΔTOM Sales Dominator", color: "#00e6d3", mrrAdd: 50, badge: "22.5x LTV:CAC • $36K ACV", icon: Megaphone },
+    { name: "ΔTOM Sales Dominator", color: "#00e6d3", mrrAdd: 50, badge: "−42% deal velocity • $36K ACV", icon: Megaphone },
     { name: "Red Team ΔTOM", color: "#ff6b8b", mrrAdd: 30, badge: "SOC2 / FedRAMP / EU AI Act", icon: Shield },
     { name: "ΔTOM Game Console", color: "#74c0fc", mrrAdd: 25, badge: "$799-$1099 HW + $19.99/mo AI", icon: Gamepad2 },
   ];
@@ -1773,7 +1784,7 @@ function RevenueSection() {
             <div className="p-4 rounded-xl border border-[#00e6d3]/20 bg-[#00e6d3]/5 text-center">
               <p className="text-[#00e6d3] font-bold font-['Satoshi'] text-sm mb-1">ΔTOM Sales Dominator</p>
               <p className="text-white/70 font-['Satoshi'] text-xs">$50K/mo new MRR × 12 = <span className="text-[#00e6d3] font-bold">$3.9M Y1</span> (not $600K)</p>
-              <p className="text-white/40 text-[10px] font-['Satoshi'] mt-1 italic">22.5x LTV:CAC • $36K ACV</p>
+              <p className="text-white/40 text-[10px] font-['Satoshi'] mt-1 italic">−42% deal velocity • 3.6× coverage • ~300ms TTFB</p>
             </div>
             <div className="p-4 rounded-xl border border-[#ff6b8b]/20 bg-[#ff6b8b]/5 text-center">
               <p className="text-[#ff6b8b] font-bold font-['Satoshi'] text-sm mb-1">Red Team ΔTOM</p>
@@ -2171,7 +2182,7 @@ function ValuationSection() {
       desc: "Median AI Series A pre-money 2025-2026: $90M (PitchBook). $3.2M closed + live deals command multi-product premium over single-product comps at $1B+.",
       items: [
         { label: "Distyl AI (multi-product)", value: "$1.8B valuation" },
-        { label: "Gong (revenue intel)", value: "$4.5B valuation" },
+        { label: "Gong ($500M ARR)", value: "$7.25B valuation" },
         { label: "Oura (wearable)", value: "$11B valuation" },
         { label: "WHOOP (wearable)", value: "$10.1B valuation" },
         { label: "Nirmata Holdings (9 products)", value: "$150M–$250M ask" },
@@ -2609,7 +2620,7 @@ function EthicsSection() {
                 { label: "The Investor Deep Dive", file: "/antimatterai_mega_document.pdf" },
                 { label: "State of Disruption Report", file: "/antimatterai_state_of_disruption.pdf" },
                 { label: "The Investor Strike Brief", file: "/antimatterai_investor_hype.pdf" },
-                { label: "Series A Pitch Deck", file: "/antimatterai_pitch_deck.pptx" },
+                { label: "Series A Pitch Deck", file: "/antimatterai_pitch_deck.pdf" },
               ].map((doc) => (
                 <a
                   key={doc.label}
@@ -2736,7 +2747,7 @@ function Footer() {
                 { label: "The Investor Deep Dive", file: "/antimatterai_mega_document.pdf" },
                 { label: "State of Disruption Report", file: "/antimatterai_state_of_disruption.pdf" },
                 { label: "The Investor Strike Brief", file: "/antimatterai_investor_hype.pdf" },
-                { label: "Series A Pitch Deck", file: "/antimatterai_pitch_deck.pptx" },
+                { label: "Series A Pitch Deck", file: "/antimatterai_pitch_deck.pdf" },
               ].map((doc) => (
                 <a
                   key={doc.label}
@@ -2868,7 +2879,9 @@ export default function Home() {
 
       {/* All sections */}
       <HeroSection />
-      <FourPillars />
+      <ConvergenceDial />
+      <ThreeGames />
+      <AtomFiveLayers />
       <QuantumSection />
       <CompanySection />
       <VendorMatrixSection />
@@ -2878,9 +2891,11 @@ export default function Home() {
       <MoatSection />
       <FortressMoat />
       <InstitutionalTailwind />
+      <HistoricalPattern />
       <MarketSection />
       <GTMSection />
       <DemandCurve />
+      <FivePlays />
       <InvasionPlan />
       <RevenueSection />
       <FinancialsSection />
@@ -2888,6 +2903,7 @@ export default function Home() {
       <InvestmentSection />
       <TheAsk />
       <StateOfDisruption />
+      <HonestCounters />
       <EthicsSection />
       <HonestGapAnalysis />
 

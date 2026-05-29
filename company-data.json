@@ -3,12 +3,12 @@
   "tagline": "The Nervous System That Powers AI",
   "subtag": "Every AI brain needs a body. We built the nervous system.",
   "location": "Orlando, FL",
-  "founded": "Self-Funded, 2024",
+  "founded": "Founder-Funded + $3.2M Closed, 2024",
   "valuation": "$10.5B Liquid Valuation",
   "heroStats": [
-    { "value": 8, "label": "Live Products", "suffix": "" },
+    { "value": 9, "label": "Products (4 Flagship)", "suffix": "" },
     { "value": 700, "label": "Combined TAM", "prefix": "$", "suffix": "B" },
-    { "value": 100, "label": "Self-Funded", "suffix": "%" },
+    { "value": 3.2, "label": "Capital Closed", "prefix": "$", "suffix": "M" },
     { "value": 100, "label": "Compute Margin", "prefix": "~", "suffix": "%" }
   ],
   "round": {
@@ -18,7 +18,7 @@
     "useOfProceeds": {
       "ATOM Platform & Sales": 40,
       "Antimatter Center": 25,
-      "ClinixAI & Lead Gen GTM": 20,
+      "PhysioPS & Red Team GTM": 20,
       "LLM & Red Team": 15
     }
   },
@@ -32,31 +32,7 @@
       "icon": "brain"
     },
     {
-      "name": "ClinixAI",
-      "type": "MRR",
-      "desc": "AI Billing Agent — per-claim revenue, automated medical coding & RCM. $45.4B TAM.",
-      "tam": "$45.4B",
-      "cagr": "25.4%",
-      "icon": "heart-pulse"
-    },
-    {
-      "name": "MoleculeAI",
-      "type": "Acquisition",
-      "desc": "Quantum drug discovery — VQE, ADMET profiling. Built to sell to Big Pharma for 8-9 figures.",
-      "tam": "$160B",
-      "cagr": "23.2%",
-      "icon": "atom"
-    },
-    {
-      "name": "Vidzee",
-      "type": "Acquisition",
-      "desc": "AI video software for real estate — automates listing video creation at scale.",
-      "tam": "$185B",
-      "cagr": "16.4%",
-      "icon": "video"
-    },
-    {
-      "name": "ATOM Lead Gen",
+      "name": "ATOM Sales Dominator",
       "type": "MRR",
       "desc": "AI SDR agent — cold calls, emails, closes with real-time sentiment analysis.",
       "tam": "$37.5B",
@@ -72,12 +48,20 @@
       "icon": "globe"
     },
     {
-      "name": "Red Team ATOM",
+      "name": "ATOM Red Team",
       "type": "MRR",
-      "desc": "Adversarial AI security testing. SOC2 compliant, post-quantum cryptography.",
+      "desc": "Adversarial AI security testing. SOC2 compliant, post-quantum cryptography. EU AI Act ready.",
       "tam": "$15.2B",
       "cagr": "36.7%",
       "icon": "shield"
+    },
+    {
+      "name": "PhysioPS / HumanOS",
+      "type": "MRR",
+      "desc": "Clinical-grade ANS intelligence via HRV. Veteran wellness, enterprise performance, therapeutic licensing.",
+      "tam": "$23B+",
+      "cagr": "22.1%",
+      "icon": "heart-pulse"
     },
     {
       "name": "ATOM LLM",
@@ -163,8 +147,8 @@
     }
   ],
   "revenueArchitecture": {
-    "recurring": { "pct": 55, "label": "Monthly Recurring", "items": ["AntimatterAI SaaS", "ClinixAI Per-Claim", "ATOM Lead Gen", "Red Team Contracts"] },
-    "acquisition": { "pct": 25, "label": "Acquisition & Licensing", "items": ["MoleculeAI → Big Pharma", "Vidzee → PropTech", "IP Licensing"] },
+    "recurring": { "pct": 55, "label": "Monthly Recurring", "items": ["AntimatterAI SaaS", "ATOM Sales Dominator", "ATOM Red Team Contracts", "PhysioPS Clinical"] },
+    "acquisition": { "pct": 25, "label": "Acquisition & Licensing", "items": ["Enterprise Licensing", "IP Licensing", "PhysioPS Therapeutic"] },
     "platform": { "pct": 20, "label": "Platform + Compute", "items": ["Nervous System Licensing", "Per-User Compute", "ATOM LLM API", "Akamai ~100% Margin"] }
   },
   "exitPaths": [
@@ -179,7 +163,7 @@
     { "title": "Demand-Driven", "desc": "Every product came from a paying customer request" },
     { "title": "~100% Compute Margin", "desc": "Akamai Cloud partnership vs 40-60% industry standard" },
     { "title": "Model Agnostic", "desc": "Plugs into GPT-5, Claude, Grok, Llama, or custom LLMs" },
-    { "title": "100% Self-Funded", "desc": "Zero VC dependency — choosing partners, not begging" },
+    { "title": "$3.2M Closed", "desc": "Founder-funded + strategic capital — choosing partners, not begging" },
     { "title": "ATOM Stack", "desc": "Eliminates 80% of build time — ships in days, not quarters" },
     { "title": "Network Effect", "desc": "Every deployment makes the ATOM LLM smarter" }
   ]

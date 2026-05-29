@@ -16,13 +16,13 @@ const MOAT_LAYERS = [
     icon: Database,
   },
   {
-    name: "Vertical Integration at 15 Layers",
+    name: "Vertical Integration at 9 Layers",
     description: "$50.3B enterprise AI platform market by 2030. Nirmata doesn't compete for a slice — it occupies the stack. Customer never leaves without losing the entire intelligence loop.",
     icon: Layers,
   },
   {
-    name: "The Navy SEAL Doctrine of Build",
-    description: "Mission-critical execution standards. Every product designed to 'lives depend on this.' Zero-failure tolerance no VC-backed Silicon Valley competitor can replicate through capital.",
+    name: "The Founder Execution Doctrine",
+    description: "Mission-critical engineering discipline. Every product designed to 'lives depend on this.' Zero-failure tolerance no VC-backed Silicon Valley competitor can replicate through capital.",
     icon: Shield,
   },
   {
@@ -37,7 +37,7 @@ const MOAT_LAYERS = [
   },
   {
     name: "The Founder as Unfair Advantage",
-    description: "A former Navy SEAL building AI products for enterprise, defense, and consumer markets. 207 AI unicorns minted since 2024 — none with this story. The founder is the moat.",
+    description: "A battle-tested operator building AI products for enterprise, defense, and consumer markets. 207 AI unicorns minted since 2024 — none with this execution DNA. The founder is the moat.",
     icon: User,
   },
 ];

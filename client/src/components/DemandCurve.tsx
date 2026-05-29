@@ -23,7 +23,7 @@ const COLUMNS = [
     lines: [
       "Copious deals in regulated industries",
       "Defense, finance, healthcare verticals active",
-      "EU AI Act enforcement begins August 2026",
+      "EU AI Act general provisions Aug 2026; high-risk enforcement Dec 2027",
       "Buyers are racing the clock — compliance is non-optional",
     ],
   },

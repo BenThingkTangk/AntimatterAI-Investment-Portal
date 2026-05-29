@@ -658,7 +658,7 @@ export default function TermSheet({ vehicle, onClose }: TermSheetProps) {
                   { icon: Rocket, label: "$4M+ Pipeline", sub: "Converting now", color: "#00e6d3" },
                   { icon: Clock, label: "90-Day Sprint", sub: "$1M pipeline velocity", color: "#00D4FF" },
                   { icon: Building2, label: "Fortune 500", sub: "Production clients", color: "#00e6d3" },
-                  { icon: Zap, label: "15 Products", sub: "Shipped & live", color: "#FFD700" },
+                  { icon: Zap, label: "9 Products", sub: "3 companies", color: "#FFD700" },
                 ].map((item) => {
                   const Icon = item.icon;
                   return (

@@ -132,15 +132,15 @@ const ARR_SPEED = [
 ];
 
 const FIVE_FORCES = [
-  { icon: Cpu, title: "Agentic AI Inflection", stat: "$9.87B (2026)", desc: "33% agentic adoption by 2028. The biggest shift in enterprise AI since cloud migration.", color: "#00e6d3" },
-  { icon: Shield, title: "EU AI Act Enforcement", stat: "Aug 2026", desc: "EU AI Act enforcement creates mandatory compliance demand. ΔTOM Red Team is purpose-built.", color: "#ff6b8b" },
-  { icon: DollarSign, title: "Capital Market Flood", stat: "$805B Capex", desc: "$2.52T global AI spend, $805B Big Tech capex (Morgan Stanley). Capital at unprecedented scale.", color: "#FFD700" },
+  { icon: Cpu, title: "Agentic AI Inflection", stat: "$3.67B→$24.5B", desc: "Agentic AI $3.67B (2025) → $24.5B (2030) per Grand View. Capgemini projects $47B+ by 2030.", color: "#00e6d3" },
+  { icon: Shield, title: "EU AI Act Enforcement", stat: "Aug 2026 / Dec 2027", desc: "General provisions Aug 2026; high-risk system enforcement Dec 2027. Buyers racing the compliance clock.", color: "#ff6b8b" },
+  { icon: DollarSign, title: "Capital Market Flood", stat: "$805B Capex", desc: "$2.59T global AI spend (Gartner May 2026, +47% YoY), $805B Big Tech capex (Morgan Stanley Q1 2026).", color: "#FFD700" },
   { icon: Lock, title: "Data Sovereignty Wave", stat: "75% Top-3", desc: "Data sovereignty is now a top-3 buying criterion. Regulated industries demand on-prem/VPC.", color: "#00e6d3" },
   { icon: Sparkles, title: "Multi-Product Premium", stat: "Distyl $1.8B", desc: "Multi-product platforms command premium valuations vs single-product. Distyl: $1.8B Series B.", color: "#00D4FF" },
 ];
 
 const COMPETITORS = [
-  { name: "Sierra", weakness: "Single-product CX, no on-prem, no GenUI", valuation: "$10B", products: 1, color: "#00e6d3" },
+  { name: "Sierra", weakness: "Single-product CX, no on-prem, no GenUI", valuation: "$15.8B", products: 1, color: "#00e6d3" },
   { name: "Beam AI", weakness: "Multi-tenant SaaS focus, limited compliance", valuation: "~$200M", products: 2, color: "#A855F7" },
   { name: "LangChain", weakness: "Developer tool, no governance layer, no enterprise deploy", valuation: "~$300M", products: 1, color: "#FFD700" },
   { name: "AutoGen", weakness: "Azure-first, limited compliance, no VPC/air-gap", valuation: "Open-source", products: 1, color: "#00D4FF" },
